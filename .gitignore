@@ -1,0 +1,22 @@
+# OstoraVivi gitignore
+
+# Build outputs
+/bin/
+/obj/
+
+# BepInEx
+BepInEx/plugins/OstoraVivi.dll
+BepInEx/config/ostora.vivi.cfg
+
+# Runtime
+*.json
+*.jsonc
+
+# Visual Studio
+*.suo
+*.user
+*.sln.files
+.vs/
+
+# Temporary
+*.temp

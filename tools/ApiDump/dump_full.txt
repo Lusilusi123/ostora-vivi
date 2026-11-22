@@ -1,0 +1,4778 @@
+﻿
+=== EOSManager/_CoUpdateInventoryOrValidateReceipts_d__118 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P EOSManager __4__this get/set
+  P CloudPlayerPrefs _prefs_5__2 get/set
+  P UInt32 _platformFlag_5__3 get/set
+  P CompletionToken`1 _validateSpecialItems_5__4 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== EOSManager/_UpdateFriendCodeAndInventory_d__116 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P EOSManager __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager : DestroyableSingleton`1<InventoryManager> ===
+  P InventoryInterface inventoryInterface get/set
+  P String InventoryName get/set
+  P String PlayerXpPath get/set
+  P String PlayerRequiredXpPath get/set
+  P String PlayerLevelPath get/set
+  P String PodsFolder get/set
+  P String StarsPath get/set
+  P String StarsSwitchPath get/set
+  P String BeansPath get/set
+  P RedeemCosmeticPopup redeemPopup get/set
+  P Il2CppStringArray AllItemContainers get/set
+  P Dictionary`2 podCounts get/set
+  P Logger logger get/set
+  P UpdateState _InventoryLoadState_k__BackingField get/set
+  P Int32 _UnusedBeans_k__BackingField get/set
+  P Int32 _UnusedStars_k__BackingField get/set
+  P List`1 outsideStarPurchases get/set
+  P UpdateState InventoryLoadState get/set
+  P Int32 UnusedBeans get/set
+  P Int32 UnusedStars get/set
+  M Void RefreshAll(PlatformInterface platformInterface)
+  M Void OnInventoryOpenCallback(OnOpenCompleteCallbackInfo& data)
+  M IEnumerator CheckForNewUnlockables()
+  M Void CheckBeans(InventoryItem rootItem)
+  M Void CheckStars(InventoryItem rootItem)
+  M Void CheckExpAndLevel(InventoryItem rootItem)
+  M Void CheckPods(InventoryItem rootItem)
+  M Void CheckUnlockedItems(InventoryItem rootItem, String path)
+  M Boolean TryFollowPath(InventoryItem rootHandle, String path, InventoryItem& targetHandle)
+  M Int32 GetPodCount(String podType)
+  M Int32 ChangePodCount(String podType, Int32 podDelta)
+  M IEnumerator WaitForInventoryLoad()
+  M Void ResetInventory()
+  M Void CheckEquipped()
+  M Void UpdateStarCount(Int32 starsToAdd)
+  M Void AddOutsideStarPurchase(String starPurchase)
+  M IEnumerator CoPurchaseItem(String productId, CurrencyTypes currency, Action`2 resultCallback)
+  M Void UnlockCubeItem(String productId, String cubeName, Action`2 resultCallback)
+  M IEnumerator RequestPurchaseCo(Request`1 requestData, Action`2 resultCallback, String productId)
+  M Void ValidatePreviousReceipts()
+  M Void WaitForRedemptionCompletion(CompletionToken`1 completionToken)
+  M IEnumerator CoWaitForRedemptionCompletion(CompletionToken`1 completionToken)
+  M Void ValidateIapReceipt(String receiptData, CompletionToken`1 queryDone, Action starPurchaseCallback)
+  M Void ValidateIapReceipt(List`1 receiptData, CompletionToken`1 queryDone)
+  M Void ValidateDlcReceipt(String receiptData, CompletionToken`1 queryDone)
+  M Void ValidateDlcReceipt(List`1 receiptData, CompletionToken`1 queryDone)
+  M Void ValidateInnerslothReceipt(String receiptData, CompletionToken`1 queryDone)
+  M IEnumerator CoValidateTrustedReceipt(Il2CppStringArray productIds, CompletionToken`1 queryDone)
+  M Void ValidateReceiptCall(Request`1 requestData, CompletionToken`1 queryDone)
+  M Void ValidateReceiptCall(Request`1 requestData, CompletionToken`1 queryDone, Action starPurchaseCallback)
+  M IEnumerator CoValidateReceipt(String requestJson, String requestEndpoint, CompletionToken`1 queryDone, Action starPurchaseCallback)
+  M Void InitSteamMicroTxn(Request`1 initTxn, CompletionToken`1 queryDone)
+  M Void FinalizeSteamMicroTxn(Request`1 finTxn, CompletionToken`1 queryDone)
+  M IEnumerator CoSteamPurchaseStars(String requestJson, String requestEndpoint, CompletionToken`1 queryDone)
+  M Void .ctor()
+  M Void _OnInventoryOpenCallback_b__26_0(OnCloseCompleteCallbackInfo& info)
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__27_0 get/set
+  P Func`2 __9__27_1 get/set
+  P Func`2 __9__27_2 get/set
+  P Func`2 __9__27_3 get/set
+  P Func`2 __9__27_4 get/set
+  P Func`2 __9__27_5 get/set
+  P Func`2 __9__27_6 get/set
+  P Func`2 __9__27_7 get/set
+  P Func`2 __9__44_0 get/set
+  P Func`2 __9__59_0 get/set
+  M Void .ctor()
+  M Boolean _CheckForNewUnlockables_b__27_0(HatData x)
+  M Boolean _CheckForNewUnlockables_b__27_1(PetData x)
+  M Boolean _CheckForNewUnlockables_b__27_2(SkinData x)
+  M Boolean _CheckForNewUnlockables_b__27_3(VisorData x)
+  M Boolean _CheckForNewUnlockables_b__27_4(NamePlateData x)
+  M Boolean _CheckForNewUnlockables_b__27_5(CosmeticData x)
+  M Boolean _CheckForNewUnlockables_b__27_6(CosmeticData x)
+  M Boolean _CheckForNewUnlockables_b__27_7(CosmeticData x)
+  M String _RequestPurchaseCo_b__44_0(ResponseError s)
+  M String _CoSteamPurchaseStars_b__59_0(ResponseError s)
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/__c__DisplayClass27_0 : Il2CppSystem.Object ===
+  P CompletionToken`1 validateSpecialItems get/set
+  M Void .ctor()
+  M Void _CheckForNewUnlockables_b__8(ResponseState state, Response`1 response)
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/__c__DisplayClass43_0 : Il2CppSystem.Object ===
+  P Action`2 resultCallback get/set
+  P String productId get/set
+  M Void .ctor()
+  M Void _UnlockCubeItem_b__0(ResponseState cb, Response`1 response)
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CheckForNewUnlockables_d__27 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InventoryManager __4__this get/set
+  P __c__DisplayClass27_0 __8__1 get/set
+  P Enumerator __7__wrap1 get/set
+  P CosmeticData _unlockable_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void __m__Finally1()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CoPurchaseItem_d__42 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InventoryManager __4__this get/set
+  P String productId get/set
+  P CurrencyTypes currency get/set
+  P Action`2 resultCallback get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CoSteamPurchaseStars_d__59 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InventoryManager __4__this get/set
+  P String requestEndpoint get/set
+  P String requestJson get/set
+  P CompletionToken`1 queryDone get/set
+  P UnityWebRequest _request_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CoValidateReceipt_d__56 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P String requestEndpoint get/set
+  P String requestJson get/set
+  P InventoryManager __4__this get/set
+  P CompletionToken`1 queryDone get/set
+  P Action starPurchaseCallback get/set
+  P UnityWebRequest _request_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CoValidateTrustedReceipt_d__53 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Il2CppStringArray productIds get/set
+  P InventoryManager __4__this get/set
+  P CompletionToken`1 queryDone get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_CoWaitForRedemptionCompletion_d__47 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InventoryManager __4__this get/set
+  P CompletionToken`1 completionToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_RequestPurchaseCo_d__44 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Request`1 requestData get/set
+  P InventoryManager __4__this get/set
+  P Action`2 resultCallback get/set
+  P String productId get/set
+  P UnityWebRequest _request_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryManager/_WaitForInventoryLoad_d__36 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InventoryManager __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipStatus : ShipStatus ===
+  P SpawnInMinigame SpawnInGame get/set
+  P MovingPlatformBehaviour GapPlatform get/set
+  P ParticleSystem ShowerParticles get/set
+  P Il2CppReferenceArray`1 LightAffectors get/set
+  P GameObject outOfOrderPlat get/set
+  M Void OnEnable()
+  M Void RepairCriticalSabotages()
+  M Single CalculateLightRadius(NetworkedPlayerInfo player)
+  M Void OnMeetingCalled()
+  M Void SpawnPlayer(PlayerControl player, Int32 numPlayers, Boolean initialSpawn)
+  M IEnumerator PrespawnStep()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipStatus/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__5_0 get/set
+  M Void .ctor()
+  M Boolean _OnEnable_b__5_0(ISystemType i)
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipStatus/_PrespawnStep_d__10 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AirshipStatus __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HeliSabotageSystem/ActiveConsoleData : System.ValueType ===
+  F Byte PlayerId
+  F Byte ConsoleId
+  M Void .ctor(Byte playerId, Byte consoleId)
+  M Object BoxIl2CppObject()
+
+=== AirshipExileController : ExileController ===
+  P SpriteRenderer ForegroundCloud get/set
+  P SpriteRenderer BackgroundCloud get/set
+  P SpriteRenderer Cloud1 get/set
+  P SpriteRenderer Cloud2 get/set
+  P SpriteRenderer Cloud3 get/set
+  P SpriteRenderer HandSlot get/set
+  P AudioClip Stinger get/set
+  P Single CloudSlowMo get/set
+  P Single PlayerSlowMo get/set
+  M IEnumerator Animate()
+  M IEnumerator SlowMoSlide2D(Transform target, Vector2 source, Vector2 dest, Single duration)
+  M IEnumerator WrapUpAndSpawn()
+  M IEnumerator HandleText(Single firstWaitTime, Single animDuration)
+  M IEnumerator PlayerFall()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipExileController/_Animate_d__9 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AirshipExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipExileController/_HandleText_d__12 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Single firstWaitTime get/set
+  P AirshipExileController __4__this get/set
+  P Single _newDur_5__2 get/set
+  P Single _t_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipExileController/_PlayerFall_d__13 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AirshipExileController __4__this get/set
+  P Vector2 _sourcePos_5__2 get/set
+  P Vector2 _targetPos_5__3 get/set
+  P Vector2 _anchor_5__4 get/set
+  P Single _d_5__5 get/set
+  P Single _t_5__6 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipExileController/_SlowMoSlide2D_d__10 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Transform target get/set
+  P Single duration get/set
+  P Vector2 source get/set
+  P Vector2 dest get/set
+  P AirshipExileController __4__this get/set
+  P Vector3 _temp_5__2 get/set
+  P Single _time_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AirshipExileController/_WrapUpAndSpawn_d__11 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AirshipExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== ExileController : UnityEngine.MonoBehaviour ===
+  P ExileController Instance get/set
+  P TextMeshPro ImpostorText get/set
+  P TextMeshPro Text get/set
+  P PoolablePlayer Player get/set
+  P AnimationCurve LerpCurve get/set
+  P Single Duration get/set
+  P AudioClip TextSound get/set
+  P AudioClip EjectSound get/set
+  P Boolean useIdleAnim get/set
+  P Vector3 exileHatPosition get/set
+  P Vector3 exileVisorPosition get/set
+  P String completeString get/set
+  P Boolean wasOverruled get/set
+  P TextMeshPro judgeText get/set
+  P InitProperties initData get/set
+  P SpecialInputHandler specialInputHandler get/set
+  P Action OnCompleteEvent get/set
+  M Void add_OnCompleteEvent(Action value)
+  M Void remove_OnCompleteEvent(Action value)
+  M Void Awake()
+  M IEnumerator Animate()
+  M IEnumerator HandleText(Single firstWaitTime, Single animDuration)
+  M Void BeginForTesting(PlayerOutfit outfit, Boolean voteTie, Boolean isImpostor, Boolean confirmImpostor, Int32 totalImpostorCount, Int32 remainingImpostorCount)
+  M Void BeginForGameplay(NetworkedPlayerInfo player, Boolean voteTie, Boolean wasOverruled)
+  M Void Begin(InitProperties init)
+  M Void WrapUp()
+  M Void ReEnableGameplay()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ExileController/InitProperties : Il2CppSystem.Object ===
+  P PlayerOutfit outfit get/set
+  P NetworkedPlayerInfo networkedPlayer get/set
+  P Boolean voteTie get/set
+  P Boolean wasOverruled get/set
+  P Boolean isImpostor get/set
+  P Boolean confirmImpostor get/set
+  P Int32 totalImpostorCount get/set
+  P Int32 remainingImpostorCount get/set
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ExileController/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__23_0 get/set
+  P Func`2 __9__23_1 get/set
+  M Void .ctor()
+  M Boolean _BeginForGameplay_b__23_0(NetworkedPlayerInfo p)
+  M Boolean _BeginForGameplay_b__23_1(NetworkedPlayerInfo p)
+  M Void .ctor(IntPtr pointer)
+
+=== ExileController/__c__DisplayClass24_0 : Il2CppSystem.Object ===
+  P ExileController __4__this get/set
+  P InitProperties init get/set
+  M Void .ctor()
+  M Void _Begin_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== ExileController/_HandleText_d__21 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Single firstWaitTime get/set
+  P Single animDuration get/set
+  P ExileController __4__this get/set
+  P Single _t_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== MiraExileController : ExileController ===
+  P Transform BackgroundClouds get/set
+  P Transform ForegroundClouds get/set
+  M IEnumerator Animate()
+  M IEnumerator PlayerSpin()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== MiraExileController/_Animate_d__2 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MiraExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== MiraExileController/_PlayerSpin_d__3 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MiraExileController __4__this get/set
+  P Vector2 _top_5__2 get/set
+  P Vector2 _bottom_5__3 get/set
+  P Single _t_5__4 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController : ExileController ===
+  P Single BOTTOM_Y get/set
+  P Single PADDED_BOTTOM_Y get/set
+  P SpriteRenderer HandSlot get/set
+  P Sprite BadHand get/set
+  P Sprite GoodHand get/set
+  P AudioClip SplashSound get/set
+  P SpriteAnim Sploosher get/set
+  P AnimationClip Sploosh get/set
+  P IEnumerator finalSinkCoroutine get/set
+  M IEnumerator Animate()
+  M IEnumerator PlayerFall()
+  M IEnumerator PlayerSpin()
+  M IEnumerator CoFinalSink()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController/__c__DisplayClass11_0 : Il2CppSystem.Object ===
+  P PbExileController __4__this get/set
+  P Vector2 bottom get/set
+  P Vector2 top get/set
+  M Void .ctor()
+  M Void _PlayerSpin_b__0(Single p)
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController/_Animate_d__9 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PbExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController/_CoFinalSink_d__12 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PbExileController __4__this get/set
+  P Vector2 _bottom_5__2 get/set
+  P Vector2 _paddedBottom_5__3 get/set
+  P Single _d4_5__4 get/set
+  P Single _t_5__5 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController/_PlayerFall_d__10 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PbExileController __4__this get/set
+  P Vector2 _top_5__2 get/set
+  P Vector2 _bottom_5__3 get/set
+  P Boolean _started_5__4 get/set
+  P Single _d1_5__5 get/set
+  P Single _t_5__6 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PbExileController/_PlayerSpin_d__11 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PbExileController __4__this get/set
+  P __c__DisplayClass11_0 __8__1 get/set
+  P Single _d1_5__2 get/set
+  P Single _d3_5__3 get/set
+  P Single _t_5__4 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== SkeldExileController : ExileController ===
+  M IEnumerator Animate()
+  M IEnumerator PlayerSpin(Vector2 left, Vector2 right)
+  M Void SoundDynamics(AudioSource source, Single dt)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== SkeldExileController/_Animate_d__0 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P SkeldExileController __4__this get/set
+  P Vector2 _left_5__2 get/set
+  P Vector2 _right_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== SkeldExileController/_PlayerSpin_d__1 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P SkeldExileController __4__this get/set
+  P Vector2 left get/set
+  P Vector2 right get/set
+  P Single _t_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== FollowerCamera : UnityEngine.MonoBehaviour ===
+  P MonoBehaviour Target get/set
+  P Vector2 Offset get/set
+  P Boolean Locked get/set
+  P Single shakeAmount get/set
+  P Single shakePeriod get/set
+  P Boolean OverrideScreenShakeEnabled get/set
+  P Vector2 centerPosition get/set
+  M Void Update()
+  M Void ShakeScreen(Single duration, Single severity)
+  M IEnumerator CoShakeScreen(Single duration, Single severity)
+  M Void SetTarget(MonoBehaviour target)
+  M Void SnapToTarget()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== FollowerCamera/_CoShakeScreen_d__9 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Single duration get/set
+  P FollowerCamera __4__this get/set
+  P Single severity get/set
+  P WaitForFixedUpdate _wait_5__2 get/set
+  P Single _t_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== FungleExileController : ExileController ===
+  P Single FADE_BLACK_PLAYER_DURATION get/set
+  P Single WAIT_TIME_FADE_BLACK_RAFT get/set
+  P Single WAIT_TIME_TEXT_START get/set
+  P Single TEXT_ANIM_DURATION get/set
+  P Single WAIT_TIME_FINISH_CUTSCENE get/set
+  P Single WAIT_TIME_START_CUTSCENE get/set
+  P String BEACH_AMB get/set
+  P String FIRE_SFX get/set
+  P Single VIBRATION_INTENSITY get/set
+  P SpriteRenderer raftSprite get/set
+  P GameObject raftAnimation get/set
+  P GameObject fire get/set
+  P AudioClip ambience get/set
+  P AudioClip fireSound get/set
+  M IEnumerator Animate()
+  M IEnumerator FadeBlackRaftAndPlayer()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== FungleExileController/_Animate_d__14 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P FungleExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== FungleExileController/_FadeBlackRaftAndPlayer_d__15 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P FungleExileController __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== FungleShipStatus : ShipStatus ===
+  P Dictionary`2 sporeMushrooms get/set
+  P MushroomMixupSabotageSystem specialSabotage get/set
+  P Il2CppReferenceArray`1 startAMBSounds get/set
+  P AssetReference staticWavesAsset get/set
+  P AssetReference animatedWavesAsset get/set
+  P ZiplineBehaviour _Zipline_k__BackingField get/set
+  P Vector2 _LastBinocularPos_k__BackingField get/set
+  P ZiplineBehaviour Zipline get/set
+  P Vector2 LastBinocularPos get/set
+  M Void OnEnable()
+  M Void LoadWavesAsync(AssetReference waveAsset)
+  M Void StartSFX()
+  M Void OnMeetingCalled()
+  M Void TriggerSporesFromMushroom(Int32 mushroomId)
+  M Mushroom GetMushroomFromId(Int32 mushroomId)
+  M Boolean IsMushroomMixupActive()
+  M Void .ctor()
+  M Void _LoadWavesAsync_b__14_0(GameObject prefab)
+  M Void .ctor(IntPtr pointer)
+
+=== FungleShipStatus/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__13_0 get/set
+  M Void .ctor()
+  M Boolean _OnEnable_b__13_0(ISystemType i)
+  M Void .ctor(IntPtr pointer)
+
+=== ZiplineConsole : UnityEngine.MonoBehaviour ===
+  P Single usableDistance get/set
+  P SpriteRenderer image get/set
+  P ZiplineBehaviour zipline get/set
+  P Boolean atTop get/set
+  P ZiplineConsole destination get/set
+  P Single _CoolDown_k__BackingField get/set
+  P Single UsableDistance get
+  P Single PercentCool get
+  P ImageNames UseIcon get
+  P Single CoolDown get/set
+  P Single MaxCoolDown get
+  M Boolean IsCoolingDown()
+  M Void Update()
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void Use()
+  M Void SetDestinationCooldown()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== GameData : UnityEngine.MonoBehaviour ===
+  P GameData Instance get/set
+  P Single TimeGameStarted get/set
+  P Single TimeLastMeetingStarted get/set
+  P Int32 MeetingCount get/set
+  P Int32 RoundsPlayedInSession get/set
+  P DeathReason LastDeathReason get/set
+  P List`1 AllPlayers get/set
+  P List`1 PlayerQueue get/set
+  P Int32 TotalTasks get/set
+  P Int32 CompletedTasks get/set
+  P RoleBehaviour DefaultRole get/set
+  P NetworkedPlayerInfo PlayerInfoPrefab get/set
+  P Byte InvalidPlayerId get/set
+  P Byte DisconnectedPlayerId get/set
+  P Int32 PlayerCount get
+  P Boolean IsPersistent get
+  M static Void DestroyInstance()
+  M static Void OnMeetingStart()
+  M static Void OnGameEnd()
+  M static Void OnDisconnected()
+  M Void Awake()
+  M NetworkedPlayerInfo GetHost()
+  M Boolean HasPlayer(ClientData client)
+  M SByte GetPlayerIdFromClient(ClientData client)
+  M SByte GetAvailableId()
+  M NetworkedPlayerInfo GetPlayerByClient(ClientData client)
+  M NetworkedPlayerInfo GetPlayerById(Byte id)
+  M NetworkedPlayerInfo AddDummy(PlayerControl pc)
+  M NetworkedPlayerInfo AddPlayer(PlayerControl pc, ClientData client)
+  M Boolean IsProcessingInfo(NetworkedPlayerInfo info)
+  M Void DirtyAllData()
+  M Void AddPlayerInfo(NetworkedPlayerInfo info)
+  M Boolean RemovePlayer(Byte playerId)
+  M Void RecomputeTaskCounts()
+  M Void TutOnlyRemoveTask(Byte playerId, UInt32 taskId)
+  M UInt32 TutOnlyAddTask(Byte playerId)
+  M Void CompleteTask(PlayerControl pc, UInt32 taskId)
+  M Void RemoveDisconnectedPlayers()
+  M Void HandleDisconnect(PlayerControl player, DisconnectReasons reason)
+  M Void ShowNotification(String playerName, DisconnectReasons reason)
+  M Void HandleDisconnect()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== GameData/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__37_0 get/set
+  M Void .ctor()
+  M UInt32 _TutOnlyAddTask_b__37_0(TaskInfo d)
+  M Void .ctor(IntPtr pointer)
+
+=== GameData/__c__DisplayClass26_0 : Il2CppSystem.Object ===
+  P SByte i get/set
+  M Void .ctor()
+  M Boolean _GetAvailableId_b__0(NetworkedPlayerInfo p)
+  M Boolean _GetAvailableId_b__1(NetworkedPlayerInfo p)
+  M Void .ctor(IntPtr pointer)
+
+=== GameData/__c__DisplayClass33_0 : Il2CppSystem.Object ===
+  P GameData __4__this get/set
+  P NetworkedPlayerInfo info get/set
+  M Void .ctor()
+  M Void _AddPlayerInfo_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo : InnerNet.InnerNetObject ===
+  P Int32 MAX_NETOBJECT_INIT_ATTEMPTS get/set
+  P Single NETOBJECT_INIT_ATTEMPT_WAIT_SECONDS get/set
+  P Byte PlayerId get/set
+  P Int32 ClientId get/set
+  P String FriendCode get/set
+  P String Puid get/set
+  P RoleTypes RoleType get/set
+  P Nullable`1 RoleWhenAlive get/set
+  P Dictionary`2 Outfits get/set
+  P UInt32 PlayerLevel get/set
+  P Boolean Disconnected get/set
+  P RoleBehaviour Role get/set
+  P List`1 Tasks get/set
+  P Boolean IsDead get/set
+  P Boolean WasEjected get/set
+  P PlayerControl _object get/set
+  P Boolean IsIncomplete get
+  P PlayerControl Object get
+  P PlayerOutfit DefaultOutfit get
+  P String PlayerName get/set
+  P Color Color get
+  P Color ShadowColor get
+  P String ColorName get
+  M Void Init(PlayerControl pc, Int32 clientId)
+  M Void MarkDirty()
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M String GetPlayerName(PlayerOutfitType outfitType)
+  M Void CensorNameAsync(Action callback)
+  M IEnumerator CoCensorNameAsync(Action callback)
+  M String GetPlayerColorString(PlayerOutfitType outfitType)
+  M TaskInfo FindTaskById(UInt32 taskId)
+  M Void SetOutfit(PlayerOutfitType outfitType, PlayerOutfit outfit)
+  M Void UpdateNamePlate(String namePlate)
+  M Void UpdateVisor(String visor)
+  M Void UpdateSkin(String skin)
+  M Void UpdatePet(String petId)
+  M Void UpdateHat(String hat)
+  M Void UpdateColor(Int32 colorId)
+  M IEnumerator CoUpdateColor(Int32 colorId)
+  M Void UpdateHostPanelImage()
+  M Void UpdateLevel(UInt32 level)
+  M Void UpdateName(String playerName, ClientData client)
+  M Void OnGameStart()
+  M Void OnGameEnd()
+  M Void SetTasks(Il2CppStructArray`1 taskTypeIds)
+  M Void RpcSetTasks(Il2CppStructArray`1 taskTypeIds)
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void .ctor()
+  M Boolean _get_Object_b__19_0(PlayerControl p)
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo/TaskInfo : Il2CppSystem.Object ===
+  P UInt32 Id get/set
+  P Byte TypeId get/set
+  P Boolean Complete get/set
+  M Void .ctor()
+  M Void .ctor(Byte typeId, UInt32 id)
+  M Void Serialize(MessageWriter writer)
+  M Void Deserialize(MessageReader reader)
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo/PlayerOutfit : Il2CppSystem.Object ===
+  P String MISSING_COSMETIC_ID get/set
+  P Int32 ColorId get/set
+  P String HatId get/set
+  P String PetId get/set
+  P String SkinId get/set
+  P String VisorId get/set
+  P String NamePlateId get/set
+  P String PlayerName get/set
+  P Byte HatSequenceId get/set
+  P Byte PetSequenceId get/set
+  P Byte SkinSequenceId get/set
+  P Byte VisorSequenceId get/set
+  P Byte NamePlateSequenceId get/set
+  P Boolean IsIncomplete get
+  M String ToString()
+  M Void Serialize(MessageWriter writer)
+  M Void Deserialize(MessageReader reader)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__14_0 get/set
+  M Void .ctor()
+  M Boolean _get_IsIncomplete_b__14_0(PlayerOutfit outfit)
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo/_CoCensorNameAsync_d__38 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P NetworkedPlayerInfo __4__this get/set
+  P Action callback get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== NetworkedPlayerInfo/_CoUpdateColor_d__48 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P NetworkedPlayerInfo __4__this get/set
+  P Int32 colorId get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== GameStartManager : DestroyableSingleton`1<GameStartManager> ===
+  P List`1 AllMapIcons get/set
+  P IGameOptions cachedData get/set
+  P Single CountdownDuration get/set
+  P Int32 MinPlayers get/set
+  P TextMeshPro PlayerCounter get/set
+  P Int32 LastPlayerCount get/set
+  P GameObject GameSizePopup get/set
+  P GameObject GameRoomButton get/set
+  P GameObject RoomCodeHeader get/set
+  P GameObject LocalLabel get/set
+  P TextMeshPro GameRoomNameCode get/set
+  P SpriteRenderer MapImage get/set
+  P LobbyBehaviour LobbyPrefab get/set
+  P GameObject GameStartTextParent get/set
+  P TextMeshPro GameStartText get/set
+  P SpriteRenderer StartButtonClient get/set
+  P TextMeshPro GameStartTextClient get/set
+  P ActionMapGlyphDisplay StartButtonGlyph get/set
+  P GameObject StartButtonGlyphContainer get/set
+  P TextMeshPro RulesPresetText get/set
+  P GameObject HostInfoPanelButtons get/set
+  P GameObject ClientInfoPanelButtons get/set
+  P TextMeshPro privatePublicPanelText get/set
+  P SpriteRenderer ShareOnDiscordButton get/set
+  P GameObject InviteFriendsButton get/set
+  P StartingStates startState get/set
+  P Single countDownTimer get/set
+  P PassiveButton StartButton get/set
+  P GameObject RulesViewPanel get/set
+  P GameObject RulesEditPanel get/set
+  P HostInfoPanel HostInfoPanel get/set
+  P PassiveButton EditButton get/set
+  P Vector3 GameOptionsPosition get/set
+  P GameObject PlayerOptionsMenu get/set
+  P GameObject HostPrivacyButtons get/set
+  P PassiveButton HostPublicButton get/set
+  P PassiveButton HostPrivateButton get/set
+  P GameObject ClientPrivacyValue get/set
+  P LobbyInfoPane LobbyInfoPane get/set
+  P AudioClip lobbyViewPanelOpenSound get/set
+  P AudioClip lobbyViewPanelCloseSound get/set
+  P AudioClip gameStartSound get/set
+  P PassiveButton HostViewButton get/set
+  P PassiveButton ClientViewButton get/set
+  P Boolean IsPersistent get
+  M Void Start()
+  M Void DoHostSetup()
+  M Void OnDestroy()
+  M Void ClickEdit()
+  M Void UpdateStreamerModeUI()
+  M Void MakePublic()
+  M Void ShareGameInvite()
+  M Int32 GetRoleRateChange(IGameOptions cachedOpts, Int32& roleStringName, Int32& chance, Int32& count, RoleTeamTypes& team)
+  M Void CheckSettingsDiffs()
+  M Void Update()
+  M Void ResetStartState()
+  M Void SetStartCounter(SByte sec)
+  M Void BeginGame()
+  M Void ReallyBegin(Boolean neverShow)
+  M Void FinallyBegin()
+  M Void HandleDisconnect(PlayerControl pc, DisconnectReasons reason)
+  M Void HandleDisconnect()
+  M Void ShowInviteMenu()
+  M Void ToggleButtonGlyphs(Boolean enabled)
+  M Void UpdateMapImage(MapNames map)
+  M Void ToggleViewPane()
+  M Void SelectViewButton(Boolean selected)
+  M Void UpdateHostPanelImage(NetworkedPlayerInfo player)
+  M Void CloseGameOptionsMenus()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== GameStartManager/StartingStates : System.Enum ===
+  F Int32 value__
+  F static StartingStates NotStarting
+  F static StartingStates Countdown
+  F static StartingStates Starting
+
+=== GameStartManager/__c__DisplayClass66_0 : Il2CppSystem.Object ===
+  P MapNames map get/set
+  M Void .ctor()
+  M Boolean _UpdateMapImage_b__0(MapIconByName m)
+  M Void .ctor(IntPtr pointer)
+
+=== MiraShipStatus : ShipStatus ===
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== HowToPlaySceneMovementPageDummyConsole : UnityEngine.MonoBehaviour ===
+  P Int32 ConsoleId get/set
+  P Il2CppReferenceArray`1 Players get/set
+  P Single UseDistance get/set
+  P SpriteRenderer rend get/set
+  M Void Start()
+  M Void FixedUpdate()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== VoteBanSystem : InnerNet.InnerNetObject ===
+  P VoteBanSystem Instance get/set
+  P Dictionary`2 Votes get/set
+  M Void Awake()
+  M Void CmdAddVote(Int32 clientIdToVoteBan)
+  M Void AddVote(Int32 srcClient, Int32 clientId)
+  M Boolean HasMyVote(Int32 clientId)
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ActionButton : UnityEngine.MonoBehaviour ===
+  P SpriteRenderer graphic get/set
+  P SpriteRenderer usesRemainingSprite get/set
+  P TextMeshPro usesRemainingText get/set
+  P TextMeshPro buttonLabelText get/set
+  P TextMeshPro cooldownTimerText get/set
+  P ActionMapGlyphDisplay glyph get/set
+  P Boolean isCoolingDown get/set
+  P Logger logger get/set
+  P Boolean canInteract get/set
+  P Vector3 position get/set
+  P Action originalAction get/set
+  P Boolean IsOnCooldown get
+  M Void Start()
+  M Void SetCustomGlyph(Action newAction)
+  M Void RestoreGlyph()
+  M Void DoClick()
+  M Boolean CanInteract()
+  M Void SetCoolDown(Single timer, Single maxTimer)
+  M Void SetUsesRemaining(Int32 num)
+  M Void SetInfiniteUses()
+  M Void SetFillUp(Single timer, Single maxTimer)
+  M Void SetEnabled()
+  M Void SetDisabled()
+  M Void ToggleVisible(Boolean visible)
+  M Void Hide()
+  M Void Show()
+  M Void SetCooldownFill(Single percentCool)
+  M Void OverrideText(String text)
+  M Void OverrideColor(Color color)
+  M Void ResetCoolDown()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== VentButton : ActionButton ===
+  P Vent currentTarget get/set
+  M Void SetTarget(Vent target)
+  M Void DoClick()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ConsoleHUDObjectsShifter : UnityEngine.MonoBehaviour ===
+  P Camera cam get/set
+  P Vector2 screenBounds get/set
+  P Int32 instanceCount get/set
+  M Void OnEnable()
+  M Void OnDisable()
+  M Void Update()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager : DestroyableSingleton`1<HudManager> ===
+  P FollowerCamera PlayerCam get/set
+  P Camera UICamera get/set
+  P MeetingHud MeetingPrefab get/set
+  P KillButton KillButton get/set
+  P AdminButton AdminButton get/set
+  P SabotageButton SabotageButton get/set
+  P VentButton ImpostorVentButton get/set
+  P UseButton UseButton get/set
+  P PetButton PetButton get/set
+  P AbilityButton AbilityButton get/set
+  P SecondaryAbilityButton SecondaryAbilityButton get/set
+  P ReportButton ReportButton get/set
+  P GameObject TaskStuff get/set
+  P TaskPanelBehaviour TaskPanel get/set
+  P CrewmatesKilledTracker CrewmatesKilled get/set
+  P ChatController Chat get/set
+  P DialogueBox Dialogue get/set
+  P Transform TaskCompleteOverlay get/set
+  P Single taskDirtyTimer get/set
+  P MeshRenderer ShadowQuad get/set
+  P SpriteRenderer FullScreen get/set
+  P Coroutine _ReactorFlash_k__BackingField get/set
+  P Coroutine _OxyFlash_k__BackingField get/set
+  P PassiveButton MapButton get/set
+  P GameObject MapButtonGlyph get/set
+  P PassiveButton MatchInfoButton get/set
+  P GameObject MatchInfoButtonGlyph get/set
+  P KillOverlay KillOverlay get/set
+  P IVirtualJoystick joystick get/set
+  P VirtualJoystick joystickR get/set
+  P Il2CppReferenceArray`1 Joysticks get/set
+  P MonoBehaviour RightVJoystick get/set
+  P Collider2D LeftStickDeadZone get/set
+  P Collider2D RightStickDeadZone get/set
+  P DiscussBehaviour discussEmblem get/set
+  P ShhhBehaviour shhhEmblem get/set
+  P IntroCutscene IntroPrefab get/set
+  P OptionsMenuBehaviour GameMenu get/set
+  P NotificationPopper Notifier get/set
+  P RoomTracker roomTracker get/set
+  P AudioClip TaskCompleteSound get/set
+  P AudioClip TaskUpdateSound get/set
+  P Transform consoleUIRoot get/set
+  P Il2CppReferenceArray`1 consoleUIObjects get/set
+  P GameObject menuNavigationPrompts get/set
+  P GameObject GameLoadAnimation get/set
+  P LobbyTimerExtensionUI LobbyTimerExtensionUI get/set
+  P Single consoleUIHorizontalShift get/set
+  P AlertFlash AlertFlash get/set
+  P DangerMeter DangerMeter get/set
+  P GameObject SettingsButton get/set
+  P StringBuilder tasksString get/set
+  P LightOverlayHandle lightFlashHandle get/set
+  P Boolean _IsIntroDisplayed_k__BackingField get/set
+  P Coroutine ReactorFlash get/set
+  P Coroutine OxyFlash get/set
+  P Boolean IsIntroDisplayed get/set
+  M Void Start()
+  M Void OnGameStart()
+  M Void ShowTaskComplete()
+  M IEnumerator CoTaskComplete()
+  M Void SetJoystickSize(Single size)
+  M Void SetVirtualJoystickSize(VirtualJoystick jStick, Single size, Vector2 dist)
+  M Void SetTouchType(ControlTypes type)
+  M Void InitMap()
+  M Void DeselectMapButton()
+  M Void ToggleMapVisible(MapOptions options)
+  M Void SetHudActive(PlayerControl localPlayer, RoleBehaviour role, Boolean isActive)
+  M Void UpdateVoteTimerText(StringNames key, Int32 value)
+  M Void SetHudActive(Boolean isActive)
+  M Void ToggleRightJoystick(Boolean isActive)
+  M Void ToggleMapButton(Boolean isActive)
+  M Void ToggleMapButtonGlyph(Boolean isActive)
+  M Void SetMapAndInfoButtonsEnabled(Boolean enabled)
+  M Void ToggleSettingsButton(Boolean isActive)
+  M Void Update()
+  M IEnumerator ShowEmblem(Boolean shhh)
+  M Void StartReactorFlash()
+  M Void StartOxyFlash()
+  M Void ShowPopUp(String text)
+  M Void StopReactorFlash()
+  M Void StopOxyFlash()
+  M IEnumerator CoFadeFullScreen(Color source, Color target, Single duration, Boolean showLoader)
+  M IEnumerator CoReactorFlash()
+  M IEnumerator CoShowIntro()
+  M Void HideGameLoader()
+  M Void OpenMeetingRoom(PlayerControl reporter)
+  M Void SetAlertOverlay(Boolean enabled)
+  M Void OnDestroy()
+  M Void NotifyOfDeath()
+  M Void NotifyOfDisconnect(PlayerControl pc)
+  M Void ToggleUseAndPetButton(IUsable useTarget, Boolean canPlayNormally, Boolean canPet)
+  M Void ShowLobbyTimer(Int32 timeRemainingSeconds)
+  M Void ShowLobbyTimerPopup(Int32 timeRemainingSeconds, Int32 timeGrantedSeconds)
+  M Void OnLobbyTimerExtended()
+  M Void DelayedInitTouchType()
+  M IEnumerator CoDelayedInitTouchType()
+  M Void .ctor()
+  M Void _Start_b__63_0()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__86_0 get/set
+  M Void .ctor()
+  M Boolean _StopReactorFlash_b__86_0(PlainShipRoom r)
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_CoDelayedInitTouchType_d__102 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P HudManager __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_CoFadeFullScreen_d__88 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P HudManager __4__this get/set
+  P Boolean showLoader get/set
+  P Color target get/set
+  P Color source get/set
+  P Single duration get/set
+  P Single _t_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_CoReactorFlash_d__89 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P HudManager __4__this get/set
+  P WaitForSeconds _wait_5__2 get/set
+  P Boolean _light_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_CoShowIntro_d__90 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P HudManager __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_CoTaskComplete_d__66 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P HudManager __4__this get/set
+  P Single _time_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== HudManager/_ShowEmblem_d__82 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Boolean shhh get/set
+  P HudManager __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== MapBehaviour : UnityEngine.MonoBehaviour ===
+  P MapBehaviour Instance get/set
+  P AlphaPulse ColorControl get/set
+  P SpriteRenderer HerePoint get/set
+  P SpriteRenderer TrackedHerePoint get/set
+  P MapCountOverlay countOverlay get/set
+  P InfectedOverlay infectedOverlay get/set
+  P MapTaskOverlay taskOverlay get/set
+  P GameObject fadedBackground get/set
+  P GameObject detectiveMapButtonPrefab get/set
+  P Boolean detectiveMapOpen get/set
+  P SpecialInputHandler specialInputHandler get/set
+  P Boolean countOverlayAllowsMovement get/set
+  P Nullable`1 preMeetingPosition get/set
+  P Nullable`1 trackedPreMeetingPosition get/set
+  P Int32 trackedColorID get/set
+  P Single trackedPointDelayTime get/set
+  P List`1 detectiveLocationControllerButtons get/set
+  P Boolean IsOpen get
+  P Boolean IsOpenStopped get
+  M Void SetPreMeetingPosition(Vector3 preMeetingPosition, Boolean trackedPlayer)
+  M Void Show(MapOptions opts)
+  M Void Close()
+  M Void DisableTrackerOverlays()
+  M Void Validate()
+  M Void ShowSabotageMap()
+  M Void ShowNormalMap()
+  M Void ShowDetectiveMap()
+  M Void ShowCountOverlay(Boolean allowedToMove, Boolean showLivePlayerPosition, Boolean includeDeadBodies)
+  M Void FixedUpdate()
+  M Void Awake()
+  M Void GenericShow()
+  M Void SetTrackedHerePointColor(Int32 colorID)
+  M Void UpdateTrackedPosition()
+  M Void .ctor()
+  M Void _ShowDetectiveMap_b__28_0(CounterArea area)
+  M Void .ctor(IntPtr pointer)
+
+=== MapBehaviour/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Action`1 __9__25_0 get/set
+  P Action`1 __9__25_1 get/set
+  M Void .ctor()
+  M Void _Validate_b__25_0(CounterArea area)
+  M Void _Validate_b__25_1(MapRoom area)
+  M Void .ctor(IntPtr pointer)
+
+=== MapBehaviour/__c__DisplayClass25_0 : Il2CppSystem.Object ===
+  P CounterArea area get/set
+  M Void .ctor()
+  M Boolean _Validate_b__2(PlainShipRoom r)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud : InnerNet.InnerNetObject ===
+  P Int32 NumColumns get/set
+  P Single ResultsTime get/set
+  P Single Depth get/set
+  P MeetingHud Instance get/set
+  P SpriteRenderer BlackBackground get/set
+  P Il2CppReferenceArray`1 OuterMasks get/set
+  P Il2CppReferenceArray`1 PlayerColoredParts get/set
+  P MeetingIntroAnimation MeetingIntro get/set
+  P Transform ButtonParent get/set
+  P TextMeshPro TitleText get/set
+  P Vector3 VoteOrigin get/set
+  P Vector3 VoteButtonOffsets get/set
+  P PlayerVoteArea SkipVoteButton get/set
+  P Il2CppReferenceArray`1 playerStates get/set
+  P PlayerVoteArea PlayerButtonPrefab get/set
+  P SpriteRenderer PlayerVotePrefab get/set
+  P Sprite CrackedGlass get/set
+  P SpriteRenderer Glass get/set
+  P PassiveButton ProceedButton get/set
+  P AbilityButton MeetingAbilityButton get/set
+  P AudioClip VoteSound get/set
+  P AudioClip VoteLockinSound get/set
+  P AudioClip VoteEndingSound get/set
+  P Transform meetingContents get/set
+  P MeetingStates state get/set
+  P GameObject SkippedVoting get/set
+  P SpriteRenderer HostIcon get/set
+  P NetworkedPlayerInfo exiledPlayer get/set
+  P Boolean wasTie get/set
+  P Boolean wasOverruled get/set
+  P TextMeshPro TimerText get/set
+  P Single discussionTimer get/set
+  P Byte reporterId get/set
+  P Boolean hasForegroundForDeadBeenSet get/set
+  P Single resultsStartedAt get/set
+  P Int32 lastSecond get/set
+  P List`1 judgeOverrulesQueue get/set
+  P TextMeshPro judgeUsesRemaining get/set
+  P GameObject judgeOverruleDisplay get/set
+  P GameObject judgeGavelPrefab get/set
+  P Logger logger get/set
+  P UiElement DefaultButtonSelected get/set
+  P UiElement ProceedButtonUi get/set
+  P List`1 ControllerSelectable get/set
+  P Boolean IsPersistent get
+  P MeetingStates CurrentState get
+  M Void OnDisable()
+  M Void Awake()
+  M Void Start()
+  M Void OnDestroy()
+  M Void Update()
+  M Void UpdateTimerText(StringNames key, Int32 value)
+  M Void SetMasksEnabled(Boolean enabled)
+  M IEnumerator CoIntro(NetworkedPlayerInfo reporter, NetworkedPlayerInfo reportedBody, Il2CppReferenceArray`1 deadBodies)
+  M IEnumerator CoStartCutscene()
+  M Void ServerStart(Byte reporterPlayerId)
+  M Void Close()
+  M Void VotingComplete(Il2CppStructArray`1 states, NetworkedPlayerInfo exiled, Boolean tie, Boolean wasOverruled, UInt16 overruleNonce)
+  M Boolean Select(Int32 suspectStateIdx)
+  M Void Confirm(Byte suspectStateIdx)
+  M Void HandleDisconnect(PlayerControl pc, DisconnectReasons reason)
+  M Void HandleDisconnect()
+  M Void ForceSkipAll()
+  M Void CastVote(PlayerId srcPlayerId, PlayerId suspectPlayerId)
+  M Void MarkPlayerAsHasVoted(PlayerId srcPlayerId)
+  M Void ClearVote(PlayerId voterIdToClear, Boolean isLocalPlayer)
+  M Void SetVoteComplete(Boolean complete, Boolean clearButtons)
+  M Void CheckForEndVoting()
+  M Dictionary`2 CalculateVotes()
+  M Void HandleProceed()
+  M Void SetupProceedButton()
+  M Void PopulateResults(Il2CppStructArray`1 states)
+  M Void BloopAVoteIcon(NetworkedPlayerInfo voterPlayer, Int32 index, Transform parent)
+  M Void UpdateForeground()
+  M Void PopulateButtons()
+  M Void PopulateReporter(Byte reporterPlayerId)
+  M Void SortButtons()
+  M PlayerVoteArea CreateButton(NetworkedPlayerInfo playerInfo)
+  M Boolean DidVote(Byte playerId)
+  M Int32 GetVotesRemaining()
+  M Void UpdateJudgeAbilityIndicator(Boolean hasJudgeUsageRemaining, Int32 tasksRemaining)
+  M Void ClearJudgeUsesIndicator()
+  M Void RemoveJudgeUsedLabel(PlayerId overruledPlayerId)
+  M Void HandleDisconnectedPlayerVoteArea(PlayerControl pc, DisconnectReasons reason)
+  M Void ClearJudgeOverrule()
+  M Void SetJudgeOverrule(PlayerId judgePlayerId, PlayerId targetPlayerId, UInt16 overruleNonce)
+  M Void AddOrUpdateJudgeOverrule(PlayerId judgePlayerId, PlayerId targetPlayerId, UInt16 overruleNonce)
+  M Void UpdateOverruleQueueFromDisconnection(PlayerId disconnectedPlayerId)
+  M Boolean TryGetWinningOverrule(JudgeOverrule& winningOverrule, NetworkedPlayerInfo& judgePlayerInfo, NetworkedPlayerInfo& overruledPlayerInfo)
+  M Void ShowJudgeOverrule(Boolean anotherJudgeBeatYouToIt)
+  M Void SetForegroundForDead()
+  M Void RpcClose()
+  M Void CmdCastVote(Byte playerId, Byte suspectIdx)
+  M Void CmdQueueOverruleVotes(PlayerId judgePlayerId, PlayerId targetPlayerId, UInt16 overruleNonce)
+  M Void RpcVotingComplete(Il2CppStructArray`1 states, NetworkedPlayerInfo exiled, Boolean tie, Boolean wasOverruled, UInt16 overruleNonce)
+  M Void RpcClearVote(PlayerId voterPlayerId)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/VoterState : System.ValueType ===
+  F Byte VoterId
+  F Byte VotedForId
+  P Boolean AmDead get
+  P Boolean SkippedVote get
+  M static VoterState Deserialize(MessageReader reader)
+  M Void Serialize(MessageWriter writer)
+  M Object BoxIl2CppObject()
+
+=== MeetingHud/MeetingStates : System.Enum ===
+  F Int32 value__
+  F static MeetingStates Animating
+  F static MeetingStates Discussion
+  F static MeetingStates NotVoted
+  F static MeetingStates Voted
+  F static MeetingStates Results
+  F static MeetingStates Proceeding
+
+=== MeetingHud/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__61_0 get/set
+  P Func`2 __9__71_0 get/set
+  P Func`2 __9__80_0 get/set
+  P Func`2 __9__80_1 get/set
+  P Func`2 __9__83_0 get/set
+  M Void .ctor()
+  M Boolean _VotingComplete_b__61_0(VoterState s)
+  M Boolean _CheckForEndVoting_b__71_0(PlayerVoteArea ps)
+  M Int32 _SortButtons_b__80_0(PlayerVoteArea p)
+  M Byte _SortButtons_b__80_1(PlayerVoteArea p)
+  M Boolean _GetVotesRemaining_b__83_0(PlayerVoteArea ps)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass102_0 : Il2CppSystem.Object ===
+  P MessageReader msg get/set
+  M Void .ctor()
+  M Boolean _Deserialize_b__0(PlayerVoteArea ps)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass67_0 : Il2CppSystem.Object ===
+  P PlayerId srcPlayerId get/set
+  M Void .ctor()
+  M Boolean _CastVote_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass68_0 : Il2CppSystem.Object ===
+  P PlayerId srcPlayerId get/set
+  M Void .ctor()
+  M Boolean _MarkPlayerAsHasVoted_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass69_0 : Il2CppSystem.Object ===
+  P PlayerId voterIdToClear get/set
+  M Void .ctor()
+  M Boolean _ClearVote_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass71_0 : Il2CppSystem.Object ===
+  P Boolean tie get/set
+  P KeyValuePair`2 max get/set
+  M Void .ctor()
+  M Boolean _CheckForEndVoting_b__1(NetworkedPlayerInfo v)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass79_0 : Il2CppSystem.Object ===
+  P Byte reporterPlayerId get/set
+  M Void .ctor()
+  M Boolean _PopulateReporter_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass82_0 : Il2CppSystem.Object ===
+  P Byte playerId get/set
+  M Void .ctor()
+  M Boolean _DidVote_b__0(PlayerVoteArea p)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass86_0 : Il2CppSystem.Object ===
+  P PlayerId overruledPlayerId get/set
+  M Void .ctor()
+  M Boolean _RemoveJudgeUsedLabel_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass87_0 : Il2CppSystem.Object ===
+  P PlayerControl pc get/set
+  M Void .ctor()
+  M Boolean _HandleDisconnectedPlayerVoteArea_b__0(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass89_0 : Il2CppSystem.Object ===
+  P PlayerId judgePlayerId get/set
+  P PlayerId targetPlayerId get/set
+  M Void .ctor()
+  M Boolean _SetJudgeOverrule_b__0(NetworkedPlayerInfo p)
+  M Boolean _SetJudgeOverrule_b__1(NetworkedPlayerInfo p)
+  M Boolean _SetJudgeOverrule_b__2(PlayerVoteArea pv)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/__c__DisplayClass91_0 : Il2CppSystem.Object ===
+  P JudgeOverrule judgeOverrule get/set
+  M Void .ctor()
+  M Boolean _UpdateOverruleQueueFromDisconnection_b__0(PlayerVoteArea voteState)
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/_CoIntro_d__57 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MeetingHud __4__this get/set
+  P NetworkedPlayerInfo reportedBody get/set
+  P NetworkedPlayerInfo reporter get/set
+  P Il2CppReferenceArray`1 deadBodies get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== MeetingHud/_CoStartCutscene_d__58 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MeetingHud __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerVoteArea : UnityEngine.MonoBehaviour ===
+  P MeetingHud _Parent_k__BackingField get/set
+  P Boolean _AmDead_k__BackingField get/set
+  P Boolean _DidReport_k__BackingField get/set
+  P Boolean _DidVote_k__BackingField get/set
+  P PlayerId _PlayerId_k__BackingField get/set
+  P PlayerId _VotedForId_k__BackingField get/set
+  P Boolean _VoteComplete_k__BackingField get/set
+  P Int32 _MaskLayer_k__BackingField get/set
+  P Byte HasNotVoted get/set
+  P Byte MissedVote get/set
+  P Byte SkippedVote get/set
+  P Byte DeadVote get/set
+  P GameObject Buttons get/set
+  P UiElement ConfirmButton get/set
+  P UiElement CancelButton get/set
+  P UiElement PlayerButton get/set
+  P SpriteRenderer Background get/set
+  P SpriteRenderer MaskArea get/set
+  P SpriteRenderer Flag get/set
+  P SpriteRenderer Megaphone get/set
+  P SpriteRenderer Overlay get/set
+  P SpriteRenderer XMark get/set
+  P SpriteRenderer ThumbsDown get/set
+  P SpriteRenderer HighlightedFX get/set
+  P TextMeshPro NameText get/set
+  P TextMeshPro LevelNumberText get/set
+  P TextMeshPro ColorBlindName get/set
+  P Boolean AnimateButtonsFromLeft get/set
+  P PoolablePlayer PlayerIcon get/set
+  P UiElement JudgeOverruleButton get/set
+  P GameObject JudgeOverruleButtonCommsDisable get/set
+  P GameObject JudgeUsedLabel get/set
+  P SpriteRenderer JudgeHandMaterial get/set
+  P Boolean resultsShowing get/set
+  P MeetingHud Parent get/set
+  P Boolean AmDead get/set
+  P Boolean DidReport get/set
+  P Boolean DidVote get/set
+  P PlayerId PlayerId get/set
+  P PlayerId VotedForId get/set
+  P Boolean VoteComplete get/set
+  P Int32 MaskLayer get/set
+  M Void Start()
+  M Void SetPlayerId(PlayerId playerId)
+  M Void SetMaskLayer(Int32 maskLayer)
+  M Void SetReporter()
+  M Void SetDead(Boolean isDead)
+  M Void SetDisabled()
+  M Void SetEnabled()
+  M Void ConfigureOverlay()
+  M IEnumerator CoAnimateOverlay()
+  M Void SetVote(PlayerId suspectId)
+  M Void SetHasVoted()
+  M Void SetVoteMissed()
+  M Void UnsetVote()
+  M Void UnsetHasVoted()
+  M Void ClearButtons()
+  M Void ClearForResults()
+  M Void VoteForMe()
+  M Void JudgeOverruleVote()
+  M Void RemoveJudgeUsedLabel()
+  M Void SetHighlighted(Boolean value)
+  M Void Select()
+  M Void Cancel()
+  M Void Serialize(MessageWriter writer)
+  M Void Deserialize(MessageReader reader)
+  M Void SetCosmetics(NetworkedPlayerInfo playerInfo)
+  M Void PreviewNameplate(String plateID)
+  M Void OnDestroy()
+  M Void SetColorblindText()
+  M Boolean CanBeHighlighted()
+  M static Single TriangleWave(Single t)
+  M Void .ctor()
+  M Void _PreviewNameplate_b__83_0(NamePlateViewData viewData)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerVoteArea/__c__DisplayClass78_0 : Il2CppSystem.Object ===
+  P PlayerVoteArea __4__this get/set
+  P Single startPos get/set
+  P Vector2 judgeOverruleButtonEndPosition get/set
+  M Void .ctor()
+  M Void _Select_b__0(Single t)
+  M Void _Select_b__1(Single t)
+  M Void _Select_b__2(Single t)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerVoteArea/_CoAnimateOverlay_d__66 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerVoteArea __4__this get/set
+  P Single _duration_5__2 get/set
+  P Single _time_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient : InnerNet.InnerNetClient ===
+  P Int32 MAX_CLIENT_WAIT_SECONDS get/set
+  P Single SPAWN_TESTER_WAIT_SECONDS get/set
+  P AmongUsClient Instance get/set
+  P String OnlineScene get/set
+  P String MainMenuScene get/set
+  P GameData GameDataPrefab get/set
+  P VoteBanSystem VoteBanPrefab get/set
+  P PlayerControl PlayerPrefab get/set
+  P List`1 ShipPrefabs get/set
+  P Int32 TutorialMapId get/set
+  P Single SpawnRadius get/set
+  P DiscoveryState discoverState get/set
+  P List`1 DisconnectHandlers get/set
+  P List`1 GameListHandlers get/set
+  P CrossplayPrivilegeErrorType CrossplayPrivilegeError get/set
+  P MainMenuTarget MenuTarget get/set
+  P Logger logger get/set
+  P AsyncOperationHandle`1 ShipLoadingAsyncHandle get/set
+  M Void Awake()
+  M Void StartGame()
+  M Void Update()
+  M Void ExitGame(DisconnectReasons reason)
+  M Void OnGetGameList(TotalGameData totalGames, FindGamesListFilteredResponse gamesResponse)
+  M Void OnReportedPlayer(ReportOutcome outcome, Int32 clientId, String playerName, ReportReasons reason)
+  M Void OnGameCreated(String gameIdString)
+  M Void OnWaitForHost(String gameIdString)
+  M Void AbortLoadingAssets()
+  M IEnumerator CoStartGameHost()
+  M Void KickNotJoinedPlayers()
+  M IEnumerator CoStartGameClient()
+  M IEnumerator CoWaitForDisconnect()
+  M IEnumerator CoStartGame()
+  M Void OnBecomeHost()
+  M Void OnGameEnd(EndGameResult endGameResult)
+  M IEnumerator CoEndGame()
+  M Void OnPlayerJoined(ClientData data)
+  M Void OnGameJoined(String gameIdString)
+  M Void OnPlayerLeft(ClientData data, DisconnectReasons reason)
+  M Void PreDisconnectInternal()
+  M Void OnDisconnected()
+  M Void DestroyPlayerInfoObjects()
+  M IEnumerator CoOnPlayerChangedScene(ClientData client, String currentScene)
+  M IEnumerator CreatePlayer(ClientData clientData)
+  M IEnumerator CoBroadcastManager()
+  M Void CheckOnlinePermissions(Action success, Action failure, Action loadingCallback, Boolean checkOnline)
+  M static Void InitSceneChangeListener()
+  M static Void OnActiveSceneChange(Scene from, Scene to)
+  M IEnumerator CoCreateOnlineGame()
+  M IEnumerator CoJoinOnlinePublicGame(Int32 gameId, String ipAddress, UInt16 port, MainMenuTarget targetMenu)
+  M IEnumerator CoJoinOnlineGameFromListing(GameListing game, String matchmakerToken)
+  M IEnumerator CoJoinOnlineGameFromCode(Int32 gameId, Boolean fromEnterCode)
+  M IEnumerator CoFindGameInfoFromCode(Int32 gameId, Action`2 callback)
+  M IEnumerator CoFindGameInfoFromCodeAndJoin(Int32 gameId)
+  M IEnumerator CoFindGame()
+  M IEnumerator CoConnectToGameServer(MatchMakerModes mode, String ipAddress, UInt16 port, String matchmakerToken)
+  M IEnumerator CoJoinOnlineGameDirect(Int32 gameId, String ipAddress, UInt16 port, String matchmakerToken)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/MainMenuTarget : System.Enum ===
+  F Int32 value__
+  F static MainMenuTarget None
+  F static MainMenuTarget OnlineMenu
+  F static MainMenuTarget EnterCodeMenu
+  F static MainMenuTarget FindGameMenu
+
+=== AmongUsClient/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Predicate`1 __9__34_0 get/set
+  P Action`1 __9__41_0 get/set
+  M Void .ctor()
+  M Boolean _OnGameEnd_b__34_0(IDisconnectHandler handler)
+  M Void _DestroyPlayerInfoObjects_b__41_0(GameObject gameObject)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass43_0 : Il2CppSystem.Object ===
+  P ClientData clientData get/set
+  M Void .ctor()
+  M Boolean _CreatePlayer_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass48_0 : Il2CppSystem.Object ===
+  P HostServer hostServer get/set
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoCreateOnlineGame_b__0(HostServer host, String mmToken)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass49_0 : Il2CppSystem.Object ===
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoJoinOnlinePublicGame_b__0(String token)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass51_0 : Il2CppSystem.Object ===
+  P HostServer hostServer get/set
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoJoinOnlineGameFromCode_b__0(HostServer host, String mmToken)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass52_0 : Il2CppSystem.Object ===
+  P Action`2 callback get/set
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoFindGameInfoFromCode_b__0(FindGameByCodeResponse response, String mmToken)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass53_0 : Il2CppSystem.Object ===
+  P AmongUsClient __4__this get/set
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoFindGameInfoFromCodeAndJoin_b__0(FindGameByCodeResponse response, String mmToken)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/__c__DisplayClass54_0 : Il2CppSystem.Object ===
+  P String matchmakerToken get/set
+  M Void .ctor()
+  M Void _CoFindGame_b__0(String token)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoBroadcastManager_d__44 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Int32 _lastPlayerCount_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoConnectToGameServer_d__55 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P String ipAddress get/set
+  P UInt16 port get/set
+  P MatchMakerModes mode get/set
+  P String matchmakerToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoCreateOnlineGame_d__48 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P __c__DisplayClass48_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoEndGame_d__35 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoFindGame_d__54 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P __c__DisplayClass54_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoFindGameInfoFromCode_d__52 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Action`2 callback get/set
+  P AmongUsClient __4__this get/set
+  P Int32 gameId get/set
+  P __c__DisplayClass52_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoFindGameInfoFromCodeAndJoin_d__53 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Int32 gameId get/set
+  P __c__DisplayClass53_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoJoinOnlineGameDirect_d__56 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Int32 gameId get/set
+  P String ipAddress get/set
+  P UInt16 port get/set
+  P String matchmakerToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoJoinOnlineGameFromCode_d__51 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Int32 gameId get/set
+  P __c__DisplayClass51_0 __8__1 get/set
+  P Boolean fromEnterCode get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoJoinOnlineGameFromListing_d__50 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P GameListing game get/set
+  P String matchmakerToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoJoinOnlinePublicGame_d__49 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P __c__DisplayClass49_0 __8__1 get/set
+  P AmongUsClient __4__this get/set
+  P MainMenuTarget targetMenu get/set
+  P Int32 gameId get/set
+  P String ipAddress get/set
+  P UInt16 port get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoOnPlayerChangedScene_d__42 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P ClientData client get/set
+  P AmongUsClient __4__this get/set
+  P String currentScene get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoStartGame_d__32 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoStartGameClient_d__30 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Single _timer_5__2 get/set
+  P DateTime _start_5__3 get/set
+  P DateTime _persistentStart_5__4 get/set
+  P Single _timeOut_5__5 get/set
+  P Boolean _stopWaiting_5__6 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoStartGameHost_d__28 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P DateTime _start_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CoWaitForDisconnect_d__31 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P AmongUsClient __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUsClient/_CreatePlayer_d__43 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P ClientData clientData get/set
+  P AmongUsClient __4__this get/set
+  P __c__DisplayClass43_0 __8__1 get/set
+  P Boolean _isOwnerOfPlayerData_5__2 get/set
+  P PlayerControl _pc_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InventoryTab : UnityEngine.MonoBehaviour ===
+  P ColorChip ColorTabPrefab get/set
+  P PoolablePlayer PlayerPreview get/set
+  P FloatRange XRange get/set
+  P Single YStart get/set
+  P Single YOffset get/set
+  P Int32 NumPerRow get/set
+  P Scroller scroller get/set
+  P Int32 NumRowsVisible get/set
+  P List`1 ColorChips get/set
+  P Boolean ignoreLongMode get/set
+  M Boolean HasLocalPlayer()
+  M Int32 GetDisplayColor()
+  M Int32 CurrentColorId()
+  M Void ClickEquip()
+  M Void OnEnable()
+  M Void OnDisable()
+  M ColorChip GetDefaultSelectable()
+  M Boolean IsSelectedItemEquipped()
+  M String GetCurrentProdID()
+  M Void UpdateMaterials(SpriteRenderer spriteRenderer, CosmeticData data)
+  M Void SetScrollerBounds()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== OptionsConsole : UnityEngine.MonoBehaviour ===
+  P Vector3 CustomPosition get/set
+  P Boolean HostOnly get/set
+  P GameObject MenuPrefab get/set
+  P SpriteRenderer Outline get/set
+  P ImageNames CustomUseIcon get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PolusShipStatus : ShipStatus ===
+  M Void OnEnable()
+  M Void SpawnPlayer(PlayerControl player, Int32 numPlayers, Boolean initialSpawn)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PolusShipStatus/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__0_0 get/set
+  M Void .ctor()
+  M Boolean _OnEnable_b__0_0(ISystemType i)
+  M Void .ctor(IntPtr pointer)
+
+=== DeadBody : UnityEngine.MonoBehaviour ===
+  P Boolean Reported get/set
+  P Byte ParentId get/set
+  P Collider2D myCollider get/set
+  P SpriteRenderer bloodSplatter get/set
+  P Il2CppReferenceArray`1 bodyRenderers get/set
+  P Vector2 TruePosition get
+  M Void OnClick()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerAnimations/_CoPlayEnterVentAnimation_d__32 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerAnimations __4__this get/set
+  P Int32 numFramesUntilDisappearance get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerAnimations/_CoPlayExitVentAnimation_d__33 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerAnimations __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl : InnerNet.InnerNetObject ===
+  P Int32 MAX_NETOBJECT_INIT_ATTEMPTS get/set
+  P Single NETOBJECT_INIT_ATTEMPT_WAIT_SECONDS get/set
+  P Byte PlayerId get/set
+  P String FriendCode get/set
+  P String Puid get/set
+  P Single MaxReportDistance get/set
+  P Boolean moveable get/set
+  P CosmeticsLayer cosmetics get/set
+  P Boolean ForceKillTimerContinue get/set
+  P PlayerOutfitType _CurrentOutfitType_k__BackingField get/set
+  P Boolean inVent get/set
+  P Boolean walkingToVent get/set
+  P Boolean petting get/set
+  P Boolean inMovingPlat get/set
+  P Boolean onLadder get/set
+  P Boolean protectedByGuardianThisRound get/set
+  P Boolean shapeshifting get/set
+  P Boolean waitingForShapeshiftResponse get/set
+  P Boolean isKilling get/set
+  P Single invisibilityAlpha get/set
+  P Single OFFSET_ANIM_CHARGE get/set
+  P PlayerControl LocalPlayer get/set
+  P NetworkedPlayerInfo CachedPlayerData get/set
+  P Int32 protectedByGuardianId get/set
+  P Single flashlightAngle get/set
+  P Int32 shapeshiftTargetPlayerId get/set
+  P Boolean shouldAppearInvisible get/set
+  P Boolean isTrackingPlayer get/set
+  P PlayerControl trackedPlayer get/set
+  P Int32 trackedPlayerColorID get/set
+  P AudioSource FootSteps get/set
+  P AudioClip KillSfx get/set
+  P Il2CppReferenceArray`1 KillAnimations get/set
+  P Single killTimer get/set
+  P Int32 RemainingEmergencies get/set
+  P LightSource LightPrefab get/set
+  P LightSource lightSource get/set
+  P Collider2D Collider get/set
+  P PlayerPhysics MyPhysics get/set
+  P CustomNetworkTransform NetTransform get/set
+  P Collider2D clickKillCollider get/set
+  P Vector3 defaultCosmeticsScale get/set
+  P List`1 myTasks get/set
+  P List`1 currentRoleAnimations get/set
+  P GameObject TargetFlashlight get/set
+  P Boolean isDummy get/set
+  P Boolean notRealPlayer get/set
+  P Transform socialMediumFeedTransform get/set
+  P Logger logger get/set
+  P List`1 visibilityItems get/set
+  P Il2CppReferenceArray`1 hitBuffer get/set
+  P IUsable closest get/set
+  P Boolean isNew get/set
+  P Boolean hasBeenSerialized get/set
+  P Rigidbody2D rigidbody2D get/set
+  P List`1 AllPlayerControls get/set
+  P Dictionary`2 cache get/set
+  P List`1 itemsInRange get/set
+  P List`1 newItemsInRange get/set
+  P Byte scannerCount get/set
+  P Boolean roleAssigned get/set
+  P Int32 LastStartCounter get/set
+  P Boolean CanMove get
+  P Boolean IsKillTimerEnabled get
+  P PlayerOutfit CurrentOutfit get
+  P PlayerOutfitType CurrentOutfitType get/set
+  P Transform SocialMediumFeedTransform get
+  P Single CalculatedAlpha get
+  P Single FlashlightAngle get/set
+  P Boolean PhantomFadeActive get
+  P NetworkedPlayerInfo Data get
+  P Boolean Visible get/set
+  P PlayerBodyTypes BodyType get
+  M Void SetKillTimer(Single time)
+  M Void Awake()
+  M Void OnEnable()
+  M Void OnDisable()
+  M IEnumerator AssertWithTimeout(Func`1 assertion, Action onTimeout, Single timeoutInSeconds)
+  M IEnumerator Start()
+  M IEnumerator ClientInitialize()
+  M Void OnDestroy()
+  M Void FixedUpdate()
+  M Void AnimateCustom(AnimationClip anim)
+  M Void OnGameStart()
+  M Void OnGameEnd()
+  M Void UseClosest()
+  M Void RegisterVisibilityItem(IPlayerVisibleItem obj)
+  M Void UnregisterVisibilityItem(IPlayerVisibleItem obj)
+  M Void TryPet()
+  M Void ReportClosest()
+  M Void PlayStepSound()
+  M Void SetScanner(Boolean on, Byte cnt)
+  M Vector2 GetTruePosition()
+  M Void SetTasks(List`1 tasks)
+  M IEnumerator CoSetTasks(List`1 tasks)
+  M PlayerTask AddSystemTask(SystemTypes system)
+  M Void RemoveTask(PlayerTask task)
+  M Void ClearTasks()
+  M Void Die(DeathReason reason, Boolean assignGhostRole)
+  M Void Revive()
+  M Void OnClick()
+  M Void CheckSeekerHand_AnimEvent()
+  M Void PlayAnimation(Byte animType)
+  M Void CompleteTask(UInt32 idx)
+  M Boolean AllTasksCompleted()
+  M Boolean MustCleanVent(Int32 ventId)
+  M IEnumerator CoSetRole(RoleTypes role, Boolean canOverride)
+  M Void Exiled()
+  M Void CheckName(String playerName)
+  M Void SetKinematic(Boolean b)
+  M Void SetName(String playerName)
+  M IEnumerator CoSetName(String playerName)
+  M Void CheckColor(Byte bodyColor)
+  M Void SetHatAndVisorAlpha(Single a)
+  M Void SetColor(Int32 bodyColor)
+  M IEnumerator CoSetColor(Int32 bodyColor)
+  M Void SetNamePlate(String namePlateId)
+  M Void SetVisor(String visorId, Int32 colorId)
+  M Void SetLevel(UInt32 level)
+  M IEnumerator CoSetLevel(UInt32 level)
+  M Void SetSkin(String skinId, Int32 color)
+  M Void SetHat(String hatId, Int32 colorId)
+  M Void SetPet(String petId)
+  M Void SetPet(String petId, Int32 colorId)
+  M Void SetPetPosition(Vector3 newPosition)
+  M PetBehaviour GetPet()
+  M static Void SetSkinImageAsync(SkinData skin, Int32 colorId, SpriteRenderer target)
+  M Void ReportDeadBody(NetworkedPlayerInfo target)
+  M Void CheckUseZipline(PlayerControl target, ZiplineBehaviour ziplineBehaviour, Boolean fromTop)
+  M Void CheckSporeTrigger(Mushroom mushroom)
+  M Void StartMeeting(NetworkedPlayerInfo target)
+  M Void ResetForMeeting()
+  M Void CheckMurder(PlayerControl target)
+  M Void CheckShapeshift(PlayerControl target, Boolean shouldAnimate)
+  M Boolean IsMushroomMixupActive()
+  M Boolean AreCommsAffected()
+  M Void MurderPlayer(PlayerControl target, MurderResultFlags resultFlags)
+  M Void CheckProtect(PlayerControl target)
+  M Void ProtectPlayer(PlayerControl target, Int32 colorId)
+  M Void SetPlayerMaterialColors(Renderer rend)
+  M static Void HideCursorTemporarily()
+  M Void SetAppearanceFromSaveData()
+  M Void ToggleHighlight(Boolean active, RoleTeamTypes targeterTeam)
+  M Void SetOutfit(PlayerOutfit newOutfit, PlayerOutfitType type)
+  M Void RawSetOutfit(PlayerOutfit newOutfit, PlayerOutfitType type)
+  M Void RejectShapeshift()
+  M Void Shapeshift(PlayerControl targetPlayer, Boolean animate)
+  M Int32 ShapeshiftedPlayerID()
+  M Void SetRoleInvisibility(Boolean isActive, Boolean shouldAnimate, Boolean playFullAnimation)
+  M Void LoopChargeAnim(PhantomRole phantomRole)
+  M Void ForcePhantomVisible()
+  M Void AppearOtherClients()
+  M Void ContinueVanish()
+  M Void SetInvisibility(Boolean isActive)
+  M Void StartPlayerTracking(PlayerControl playerToTrack, Int32 colorID)
+  M Void CancelPlayerTracking()
+  M Void DisableCurrentTrackers()
+  M Void MixUpOutfit(PlayerOutfit playerOutfit)
+  M IEnumerator ScalePlayer(Single targetScale, Single duration)
+  M Void CmdCheckRevertShapeshift(Boolean shouldAnimate)
+  M Void FixMixedUpOutfit()
+  M Void RawSetName(String name)
+  M Void RawSetColor(Int32 bodyColor)
+  M Void RawSetVisor(String visorId, Int32 color)
+  M Void RawSetSkin(String skinId, Int32 color)
+  M Void RawSetHat(String hatId, Int32 colorId)
+  M Void RawSetPet(String petId, Int32 colorId)
+  M Void ShowFailedMurder()
+  M Void RemoveProtection()
+  M Void TurnOnProtection(Boolean visible, Int32 colorId, Int32 guardianPlayerId)
+  M Void SetColorBlindTag()
+  M Boolean CanPet()
+  M Void AdjustLighting()
+  M Boolean IsFlashlightEnabled()
+  M Void SetFlashlightInputMethod()
+  M IEnumerator EnableRightJoystick(Boolean enabled)
+  M IEnumerator CoSetCosmetic(RpcCalls rpc, String cosmeticId, Byte sequenceId)
+  M Boolean ShouldProcessRpc(RpcCalls rpc, Byte sequenceId)
+  M Byte GetNextRpcSequenceId(RpcCalls rpc)
+  M Void RpcSetScanner(Boolean value)
+  M Void RpcUsePlatform()
+  M Void CmdCheckUseZipline(PlayerControl target, ZiplineBehaviour ziplineBehaviour, Boolean fromTop)
+  M Void CmdCheckSporeTrigger(Mushroom mushroom)
+  M Void RpcPlayAnimation(Byte animType)
+  M Void RpcSetStartCounter(Int32 secondsLeft)
+  M Void RpcCompleteTask(UInt32 idx)
+  M Void RpcSetRole(RoleTypes roleType, Boolean canOverrideRole)
+  M Void CmdCheckName(String name)
+  M Void RpcSetLevel(UInt32 level)
+  M Void RpcSetVisor(String visorId)
+  M Void RpcSetNamePlate(String namePlateId)
+  M Void RpcSetSkin(String skinId)
+  M Void RpcSetHat(String hatId)
+  M Void RpcSetPet(String petId)
+  M Void RpcSetName(String name)
+  M Void CmdCheckColor(Byte bodyColor)
+  M Void RpcSetColor(Byte bodyColor)
+  M Boolean RpcSendChat(String chatText)
+  M Boolean RpcSendQuickChat(QuickChatPhraseBuilderResult data)
+  M Void RpcSendChatNote(Byte srcPlayerId, ChatNoteTypes noteType)
+  M Void CmdReportDeadBody(NetworkedPlayerInfo target)
+  M Void RpcStartMeeting(NetworkedPlayerInfo info)
+  M Void CmdCheckMurder(PlayerControl target)
+  M Void CmdCheckProtect(PlayerControl target)
+  M Void RpcMurderPlayer(PlayerControl target, Boolean didSucceed)
+  M Void RpcUseZipline(PlayerControl target, ZiplineBehaviour ziplineBehaviour, Boolean fromTop)
+  M Void RpcTriggerSpores(Mushroom mushroom)
+  M Void RpcProtectPlayer(PlayerControl target, Int32 colorId)
+  M Void RpcShapeshift(PlayerControl target, Boolean shouldAnimate)
+  M Void CmdCheckShapeshift(PlayerControl target, Boolean shouldAnimate)
+  M Void RpcRejectShapeshift()
+  M Void RpcSyncSettings(Il2CppStructArray`1 optionsByteArray)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void HandleRoleRpc(Byte callId, MessageReader reader)
+  M Void HandleServerVanish()
+  M Void HandleServerAppear(Boolean shouldAnimate)
+  M Void CheckVanish()
+  M Void RpcVanish()
+  M Void CheckAppear(Boolean shouldAnimate)
+  M Void RpcAppear(Boolean shouldAnimate)
+  M Void CmdCheckVanish(Single maxDuration)
+  M Void CmdCheckAppear(Boolean shouldAnimate)
+  M Void .ctor()
+  M Boolean _Start_b__85_0()
+  M Boolean _Start_b__85_2()
+  M Boolean _ClientInitialize_b__86_0()
+  M Void _CoSetName_b__124_0()
+  M Void _RawSetPet_b__179_0()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/ColliderComparer : Il2CppSystem.Object ===
+  P ColliderComparer Instance get/set
+  M Boolean Equals(Collider2D x, Collider2D y)
+  M Int32 GetHashCode(Collider2D obj)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/UsableComparer : Il2CppSystem.Object ===
+  P UsableComparer Instance get/set
+  M Boolean Equals(IUsable x, IUsable y)
+  M Int32 GetHashCode(IUsable obj)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Action __9__85_1 get/set
+  P Action __9__85_3 get/set
+  P Action __9__86_1 get/set
+  P Predicate`1 __9__117_0 get/set
+  P Func`2 __9__119_0 get/set
+  P Action`1 __9__119_1 get/set
+  P Predicate`1 __9__148_0 get/set
+  P Predicate`1 __9__173_0 get/set
+  M Void .ctor()
+  M Void _Start_b__85_1()
+  M Void _Start_b__85_3()
+  M Void _ClientInitialize_b__86_1()
+  M Boolean _MustCleanVent_b__117_0(PlayerTask p)
+  M Boolean _CoSetRole_b__119_0(PlayerControl pc)
+  M Void _CoSetRole_b__119_1(PlayerControl pc)
+  M Boolean _AreCommsAffected_b__148_0(PlayerTask x)
+  M Boolean _FixMixedUpOutfit_b__173_0(PlayerTask x)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass115_0 : Il2CppSystem.Object ===
+  P UInt32 idx get/set
+  M Void .ctor()
+  M Boolean _CompleteTask_b__0(PlayerTask p)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass121_0 : Il2CppSystem.Object ===
+  P PlayerControl __4__this get/set
+  P String playerName get/set
+  M Void .ctor()
+  M Boolean _CheckName_b__0(NetworkedPlayerInfo i)
+  M Void _CheckName_b__1()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass125_0 : Il2CppSystem.Object ===
+  P PlayerControl __4__this get/set
+  P Byte bodyColor get/set
+  M Void .ctor()
+  M Boolean _CheckColor_b__0(NetworkedPlayerInfo p)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass139_0 : Il2CppSystem.Object ===
+  P SpriteRenderer target get/set
+  P Int32 colorId get/set
+  M Void .ctor()
+  M Void _SetSkinImageAsync_b__0(SkinViewData skinView)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass159_0 : Il2CppSystem.Object ===
+  P NetworkedPlayerInfo targetPlayerInfo get/set
+  P PlayerControl __4__this get/set
+  P PlayerOutfit newOutfit get/set
+  P PlayerControl targetPlayer get/set
+  P Action changeOutfit get/set
+  M Void .ctor()
+  M Void _Shapeshift_b__0()
+  M Void _Shapeshift_b__1()
+  M Void _Shapeshift_b__2()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass161_0 : Il2CppSystem.Object ===
+  P PhantomRole phantomRole get/set
+  P Boolean playFullAnimation get/set
+  P PlayerControl __4__this get/set
+  P Action __9__2 get/set
+  M Void .ctor()
+  M Void _SetRoleInvisibility_b__0()
+  M Void _SetRoleInvisibility_b__1()
+  M Void _SetRoleInvisibility_b__2()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass162_0 : Il2CppSystem.Object ===
+  P PhantomRole phantomRole get/set
+  P PlayerControl __4__this get/set
+  M Void .ctor()
+  M Void _LoopChargeAnim_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass164_0 : Il2CppSystem.Object ===
+  P PhantomRole phantomRole get/set
+  P PlayerControl __4__this get/set
+  P Action __9__1 get/set
+  M Void .ctor()
+  M Void _AppearOtherClients_b__0()
+  M Void _AppearOtherClients_b__1()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass165_0 : Il2CppSystem.Object ===
+  P PlayerControl __4__this get/set
+  P PhantomRole phantomRole get/set
+  P Action __9__1 get/set
+  M Void .ctor()
+  M Void _ContinueVanish_b__0()
+  M Void _ContinueVanish_b__1()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/__c__DisplayClass92_0 : Il2CppSystem.Object ===
+  P IUsable item get/set
+  M Void .ctor()
+  M Boolean _FixedUpdate_b__0(IUsable j)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_AssertWithTimeout_d__84 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Func`1 assertion get/set
+  P Single timeoutInSeconds get/set
+  P Action onTimeout get/set
+  P Boolean _failed_5__2 get/set
+  P Single _timer_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_ClientInitialize_d__86 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetColor_d__128 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P Int32 bodyColor get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetCosmetic_d__191 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P RpcCalls rpc get/set
+  P Byte sequenceId get/set
+  P String cosmeticId get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetLevel_d__132 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P UInt32 level get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetName_d__124 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P String playerName get/set
+  P Int32 _attempts_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetRole_d__119 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P RoleTypes role get/set
+  P PlayerControl __4__this get/set
+  P Boolean canOverride get/set
+  P Boolean _ghostRole_5__2 get/set
+  P Int32 _attempts_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_CoSetTasks_d__106 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P List`1 tasks get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_EnableRightJoystick_d__190 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Boolean enabled get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_ScalePlayer_d__171 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P Single targetScale get/set
+  P Single duration get/set
+  P Single _elapsedTime_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerControl/_Start_d__85 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics : InnerNet.InnerNetObject ===
+  P AudioClip ImpostorDiscoveredSound get/set
+  P PlayerAnimations Animations get/set
+  P SpecialInputHandler inputHandler get/set
+  P Single Speed get/set
+  P Single GhostSpeed get/set
+  P Single ClimbPositionTolerance get/set
+  P Logger logger get/set
+  P Rigidbody2D body get/set
+  P PlayerControl myPlayer get/set
+  P PlayerBodyTypes bodyType get/set
+  P Coroutine petCoroutine get/set
+  P Boolean _DoingCustomAnimation_k__BackingField get/set
+  P Byte lastClimbLadderSid get/set
+  P Boolean DoingCustomAnimation get/set
+  P Single TrueSpeed get
+  P Single SpeedMod get
+  P Boolean FlipX get/set
+  P Vector2 Velocity get
+  M Void Awake()
+  M Void EnableInterpolation()
+  M Void SetBodyType(PlayerBodyTypes bodyType)
+  M Void FixedUpdate()
+  M Vector2 GetVelocity()
+  M Void SetNormalizedVelocity(Vector2 direction)
+  M Void LateUpdate()
+  M Vector3 Vec2ToPosition(Vector2 pos)
+  M Void SetSkin(String skinId, Int32 color)
+  M Void StartClimb(Boolean down)
+  M Void ClimbLadder(Ladder source, Byte climbLadderSid)
+  M Void PetPet(Vector2 pos, Vector2 petPos)
+  M IEnumerator CoClimbLadder(Ladder source, Byte climbLadderSid)
+  M Void ResetMoveState(Boolean stopCoroutines)
+  M Void ResetAnimState()
+  M Void HandleAnimation(Boolean amDead)
+  M Void AnimateCustom(AnimationClip anim)
+  M IEnumerator CoAnimateCustom(AnimationClip anim)
+  M IEnumerator CoSpawnPlayer(LobbyBehaviour lobby)
+  M Void ExitAllVents()
+  M IEnumerator CoPet(Vector2 pos, Vector2 petPos)
+  M Void CheckCancelPetting()
+  M Void CancelPet()
+  M IEnumerator CoEnterVent(Int32 id)
+  M IEnumerator CoExitVent(Int32 id)
+  M IEnumerator WalkPlayerTo(Vector2 worldPos, Single tolerance, Single speedMul, Boolean ignoreColliderOffset)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void BootFromVent(Int32 ventId)
+  M Void RpcClimbLadder(Ladder source)
+  M Void RpcEnterVent(Int32 ventId)
+  M Void RpcExitVent(Int32 ventId)
+  M Void RpcBootFromVent(Int32 ventId)
+  M Void RpcPet(Vector2 pos, Vector2 petPos)
+  M Void RpcCancelPet()
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void .ctor()
+  M Void _SetSkin_b__30_0()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Action`1 __9__47_1 get/set
+  P Action`1 __9__48_1 get/set
+  P Action`1 __9__53_0 get/set
+  M Void .ctor()
+  M Void _CoEnterVent_b__47_1(RoleEffectAnimation an)
+  M Void _CoExitVent_b__48_1(RoleEffectAnimation an)
+  M Void _BootFromVent_b__53_0(Vent v)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/__c__DisplayClass47_0 : Il2CppSystem.Object ===
+  P Int32 id get/set
+  M Void .ctor()
+  M Boolean _CoEnterVent_b__0(Vent v)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/__c__DisplayClass48_0 : Il2CppSystem.Object ===
+  P Int32 id get/set
+  M Void .ctor()
+  M Boolean _CoExitVent_b__0(Vent v)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/__c__DisplayClass61_0 : Il2CppSystem.Object ===
+  P Byte ladderId get/set
+  M Void .ctor()
+  M Boolean _HandleRpc_b__0(Ladder f)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoAnimateCustom_d__41 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerPhysics __4__this get/set
+  P AnimationClip anim get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoClimbLadder_d__34 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerPhysics __4__this get/set
+  P Ladder source get/set
+  P Single _ladderTime_5__2 get/set
+  P Single _totalTime_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoEnterVent_d__47 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Int32 id get/set
+  P PlayerPhysics __4__this get/set
+  P __c__DisplayClass47_0 __8__1 get/set
+  P Vent _vent_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoExitVent_d__48 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Int32 id get/set
+  P PlayerPhysics __4__this get/set
+  P __c__DisplayClass48_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoPet_d__44 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerPhysics __4__this get/set
+  P Vector2 petPos get/set
+  P Vector2 pos get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_CoSpawnPlayer_d__42 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P LobbyBehaviour lobby get/set
+  P PlayerPhysics __4__this get/set
+  P Int32 _spawnSeatId_5__2 get/set
+  P Vector3 _spawnPos_5__3 get/set
+  P Boolean _amFlipped_5__4 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerPhysics/_WalkPlayerTo_d__49 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Boolean ignoreColliderOffset get/set
+  P Vector2 worldPos get/set
+  P PlayerPhysics __4__this get/set
+  P Single speedMul get/set
+  P Single tolerance get/set
+  P Rigidbody2D _body_5__2 get/set
+  P Vector2 _del_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== CloseButtonConsoleBehaviour : UnityEngine.MonoBehaviour ===
+  P Boolean keepActiveOnConsoles get/set
+  M Void Start()
+  M Void SetActive(Boolean active)
+  M Void OnDestroy()
+  M Void OnInputMethodChanged()
+  M Void TryActivate()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ConsoleJoystick : UnityEngine.MonoBehaviour ===
+  P Vector2 delta get/set
+  P Vector2 deltaR get/set
+  P Player player get/set
+  P Controller controller get/set
+  P Controller prevController get/set
+  P ConsoleInputState inputState get/set
+  P ConsoleInputState oldInputState get/set
+  P Int32 highlightedVentIndex get/set
+  P Vector2 DeltaL get
+  P Vector2 DeltaR get
+  M Void ToggleVisuals(Boolean on)
+  M Void OnEnable()
+  M Void OnDisable()
+  M static Void ReapplyCurrentInputState()
+  M static Void SetMode_MenuAdditive()
+  M static Void SetMode_Gameplay()
+  M static Void SetMode_Menu()
+  M static Void SetMode_Task()
+  M static Void SetMode_Sabotage()
+  M static Void SetMode_Vent()
+  M static Void SetMode_QuickChat()
+  M static Void SetMode_None()
+  M static Void SetMapEnabled(Int32 rewiredCategoryIndex, Boolean enableMap)
+  M Void Update()
+  M Void HandleHUD()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ConsoleJoystick/ConsoleInputState : System.Enum ===
+  F Int32 value__
+  F static ConsoleInputState Gameplay
+  F static ConsoleInputState Menu
+  F static ConsoleInputState Task
+  F static ConsoleInputState Sabotage
+  F static ConsoleInputState Vent
+  F static ConsoleInputState QuickChat
+  F static ConsoleInputState None
+
+=== CrossplayChangedEvent : UnityEngine.MonoBehaviour ===
+  P Boolean onlyOnPlayStation get/set
+  P UnityEvent OnCrossplayChanged get/set
+  M Void Awake()
+  M Void OnDestroy()
+  M Void InvokeSelfCrossplayChanged()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== MouseCursorForConsole : UnityEngine.MonoBehaviour ===
+  P Single speed get/set
+  P Single acceleration get/set
+  P Vector2 screenBounds get/set
+  P Vector3 position get/set
+  P Camera cam get/set
+  P Vector2 currentPosition get/set
+  P Boolean buttonDown get/set
+  P Boolean joystickMoved get/set
+  P MouseCursorForConsole instance get/set
+  P Int32 horizontalAxis get/set
+  P Int32 verticalAxis get/set
+  P Int32 framesVisible get/set
+  P Int32 minFramesToAppear get/set
+  P SpriteRenderer sr get/set
+  P Boolean CursorActive get
+  M Void Awake()
+  M Void OnEnable()
+  M Void OnDestroy()
+  M Void Start()
+  M Void SetScreenPosition(Vector2 screenPos)
+  M Void Update()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== DetectiveDeadBodyInfo : Il2CppSystem.Object ===
+  P Byte victimID get/set
+  P Dictionary`2 PlayerLocationsAtDeath get/set
+  M Void .ctor(Byte _victimID)
+  M String GetPlayerLocation(Byte playerID)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleBehaviour : UnityEngine.MonoBehaviour ===
+  P RoleTypes Role get/set
+  P StringNames StringName get/set
+  P StringNames BlurbName get/set
+  P StringNames BlurbNameMed get/set
+  P StringNames BlurbNameLong get/set
+  P Sprite RoleIconSolid get/set
+  P Sprite RoleIconWhite get/set
+  P Sprite RoleIconColor get/set
+  P Sprite RoleScreenshot get/set
+  P Color NameColor get/set
+  P Boolean TasksCountTowardProgress get/set
+  P Boolean CanUseKillButton get/set
+  P Boolean CanBeKilled get/set
+  P Boolean CanVent get/set
+  P Boolean AffectedByLightAffectors get/set
+  P Int32 MaxCount get/set
+  P RoleTeamTypes TeamType get/set
+  P AbilityButtonSettings Ability get/set
+  P AbilityButtonSettings SecondaryAbility get/set
+  P RoleTypes DefaultGhostRole get/set
+  P AudioClip UseSound get/set
+  P AudioClip IntroSound get/set
+  P List`1 AllGameSettings get/set
+  P Il2CppReferenceArray`1 CustomKillAnimations get/set
+  P PlayerControl Player get/set
+  P AbilityButton buttonManager get/set
+  P SecondaryAbilityButton secondaryButtonManager get/set
+  P List`1 tempPlayerList get/set
+  P List`1 tempBodyList get/set
+  P Boolean IsImpostor get
+  P Boolean IsDead get
+  P String NiceName get
+  P String Blurb get
+  P String BlurbMed get
+  P String BlurbLong get
+  P Boolean IsSimpleRole get
+  P Color TeamColor get
+  P Boolean IsAffectedByComms get
+  P Boolean CommsSabotaged get
+  M static Void AppendTaskHint(RoleBehaviour role, StringBuilder taskStringBuilder)
+  M Boolean CanUse(IUsable console)
+  M Boolean DidWin(GameOverReason gameOverReason)
+  M Void Deinitialize(PlayerControl targetPlayer)
+  M Void SpawnTaskHeader(PlayerControl playerControl)
+  M Void UseAbility()
+  M Void UseSecondaryAbility()
+  M Void OnMeetingStart()
+  M Void OnVotingComplete()
+  M Void OnExileComplete()
+  M Void OnDeath(DeathReason reason)
+  M Void OnRoleSet()
+  M Void Initialize(PlayerControl player)
+  M Void SetUsableTarget(IUsable target)
+  M Void SetPlayerTarget(PlayerControl target)
+  M Void SetCooldown()
+  M Void InitializeMeetingAbilityButton()
+  M Void InitializeAbilityButton()
+  M Void InitializeSecondaryAbilityButton()
+  M Void SetAbilityUsesRemaining(Int32 num)
+  M Boolean IsValidTarget(NetworkedPlayerInfo target)
+  M PlayerControl FindClosestTarget()
+  M DeadBody FindClosestBody()
+  M Single GetAbilityDistance()
+  M static List`1 GetTempPlayerList()
+  M List`1 GetPlayersInAbilityRangeSorted(List`1 outputList)
+  M List`1 GetPlayersInAbilityRangeSorted(List`1 outputList, Boolean ignoreColliders)
+  M static List`1 GetTempBodyList()
+  M List`1 GetBodiesInAbilityRangeSorted(List`1 outputList)
+  M List`1 GetBodiesInAbilityRangeSorted(List`1 outputList, Boolean ignoreColliders)
+  M Void AdjustTasks(PlayerControl player)
+  M Void AppendTaskHint(StringBuilder taskStringBuilder)
+  M Void HandleRoleRpc(Byte callId, MessageReader reader)
+  M Void KillAnimSpecialSetup(DeadBody deadBody, PlayerControl killer, PlayerControl victim)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== RoleBehaviour/__c__DisplayClass74_0 : Il2CppSystem.Object ===
+  P Vector2 myPos get/set
+  M Void .ctor()
+  M Int32 _GetPlayersInAbilityRangeSorted_b__0(PlayerControl a, PlayerControl b)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleBehaviour/__c__DisplayClass78_0 : Il2CppSystem.Object ===
+  P Vector2 myPos get/set
+  M Void .ctor()
+  M Int32 _GetBodiesInAbilityRangeSorted_b__0(DeadBody a, DeadBody b)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager : DestroyableSingleton`1<RoleManager> ===
+  P HashSet`1 GhostRoles get/set
+  P List`1 AllRoles get/set
+  P RoleEffectAnimation shapeshiftAnim get/set
+  P RoleEffectAnimation protectAnim get/set
+  P RoleEffectAnimation protectLoopAnim get/set
+  P RoleEffectAnimation vanish_ChargeAnim get/set
+  P RoleEffectAnimation vanish_PoofAnim get/set
+  P RoleEffectAnimation appear_PoofAnim get/set
+  M Void Awake()
+  M RoleBehaviour GetRole(RoleTypes roleType)
+  M Void SetRole(PlayerControl targetPlayer, RoleTypes roleType)
+  M Void SelectRoles()
+  M Void AssignRoleOnDeath(PlayerControl player, Boolean specialRolesAllowed)
+  M Void DebugRoleAssignments(List`1 players, Int32& numImpostors)
+  M static Void TryAssignSpecialGhostRoles(PlayerControl player, Boolean impostorRoles)
+  M static Boolean IsGhostRole(RoleTypes role)
+  M static List`1 SpecialCrewmateGhostRoles()
+  M static List`1 SpecialImpostorGhostRoles()
+  M static Boolean IsImpostorRole(RoleTypes roleType)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager/RoleAssignmentData : Il2CppSystem.Object ===
+  P RoleBehaviour Role get/set
+  P Int32 Count get/set
+  P Int32 Chance get/set
+  M Void .ctor(RoleBehaviour role, Int32 count, Int32 chance)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__11_0 get/set
+  P Func`2 __9__11_1 get/set
+  P Func`2 __9__11_2 get/set
+  P Func`2 __9__11_3 get/set
+  P Func`2 __9__11_4 get/set
+  M Void .ctor()
+  M Boolean _SelectRoles_b__11_0(ClientData c)
+  M Boolean _SelectRoles_b__11_1(ClientData c)
+  M Boolean _SelectRoles_b__11_2(ClientData c)
+  M Int32 _SelectRoles_b__11_3(ClientData c)
+  M NetworkedPlayerInfo _SelectRoles_b__11_4(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager/__c__DisplayClass10_0 : Il2CppSystem.Object ===
+  P RoleTypes roleType get/set
+  M Void .ctor()
+  M Boolean _SetRole_b__0(RoleBehaviour r)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager/__c__DisplayClass14_0 : Il2CppSystem.Object ===
+  P RoleTypes specialGhostRole get/set
+  M Void .ctor()
+  M Boolean _TryAssignSpecialGhostRoles_b__0(PlayerControl p)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleManager/__c__DisplayClass18_0 : Il2CppSystem.Object ===
+  P RoleTypes roleType get/set
+  M Void .ctor()
+  M Boolean _IsImpostorRole_b__0(RoleBehaviour r)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleTeamTypes : System.Enum ===
+  F Int32 value__
+  F static RoleTeamTypes Crewmate
+  F static RoleTeamTypes Impostor
+
+=== ViperDeadBody : DeadBody ===
+  P Il2CppReferenceArray`1 dissolveAnims get/set
+  P SpriteRenderer acidRenderer get/set
+  P SpriteRenderer splashRenderer get/set
+  P SpriteAnim spriteAnim get/set
+  P AudioClip acidSplashSFX get/set
+  P Single dissolveCurrentTime get/set
+  P Single maxDissolveTime get/set
+  P Boolean victimDissolving get/set
+  P Int32 dissolveStage get/set
+  P PlayerControl myKiller get/set
+  P PlayerControl myController get/set
+  M Void SetupViperInfo(Single maxTime, PlayerControl killer, PlayerControl owner)
+  M Void FixedUpdate()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== BuildSettingsConsole : UnityEngine.ScriptableObject ===
+  P Int32 XboxOneGameCoreStreamingInstallLaunchRange get/set
+  P Int32 SeriesXGameCoreStreamingInstallLaunchRange get/set
+  P String SwitchDescFile get/set
+  P Int16 SwitchReleaseVersion get/set
+  P String SwitchOriginalRomFile get/set
+  P String SwitchPreviousRomFile get/set
+  P Boolean SwitchCreateRomFile get/set
+  P Boolean SwitchEnableDebugNpad get/set
+  P Boolean SwitchEnableHeapInspector get/set
+  P Boolean SwitchNVNDrawValidation get/set
+  P Boolean SwitchNVNGraphicsDebugger get/set
+  P Boolean SwitchNVNShaderDebugging get/set
+  P Boolean SwitchRedirectWritesToHostMount get/set
+  P String PS4PronunciationXmlPath get/set
+  P String PS4PronunciationSigPath get/set
+  P String PS4BackgroundImagePath get/set
+  P String PS4StartupImagePath get/set
+  P String PS4TrophyPackPath get/set
+  P String PS4SonyPasscode get/set
+  P Boolean PS4CompressPackage get/set
+  P String PS4VersionSiea get/set
+  P String PS4PatchPkgPathSiea get/set
+  P String PS4PatchLatestPkgPathSiea get/set
+  P String PS4PatchChangeInfoPathSiea get/set
+  P String PS4ContentIdSiea get/set
+  P String PS4TitleSecretSiea get/set
+  P String PS4TitleDatPathSiea get/set
+  P Int32 PS4AgeRatingSiea get/set
+  P String PS4ParamSfxPathSiea get/set
+  P String PS4VersionSiee get/set
+  P String PS4PatchPkgPathSiee get/set
+  P String PS4PatchLatestPkgPathSiee get/set
+  P String PS4PatchChangeInfoPathSiee get/set
+  P String PS4ContentIdSiee get/set
+  P String PS4TitleSecretSiee get/set
+  P String PS4TitleDatPathSiee get/set
+  P Int32 PS4AgeRatingSiee get/set
+  P String PS4ParamSfxPathSiee get/set
+  P String PS4VersionSiej get/set
+  P String PS4PatchPkgPathSiej get/set
+  P String PS4PatchLatestPkgPathSiej get/set
+  P String PS4PatchChangeInfoPathSiej get/set
+  P String PS4ContentIdSiej get/set
+  P String PS4TitleSecretSiej get/set
+  P String PS4TitleDatPathSiej get/set
+  P Int32 PS4AgeRatingSiej get/set
+  P String PS4ParamSfxPathSiej get/set
+  P String PS4VersionSieAsia get/set
+  P String PS4PatchPkgPathSieAsia get/set
+  P String PS4PatchLatestPkgPathSieAsia get/set
+  P String PS4PatchChangeInfoPathSieAsia get/set
+  P String PS4ContentIdSieAsia get/set
+  P String PS4TitleSecretSieAsia get/set
+  P String PS4TitleDatPathSieAsia get/set
+  P Int32 PS4AgeRatingSieAsia get/set
+  P String PS4ParamSfxPathSieAsia get/set
+  P String PS5BackgroundImagePath get/set
+  P String PS5StartupImagePath get/set
+  P String PS5StartupForegroundImagePath get/set
+  P String PS5StartupBackgroundImagePath get/set
+  P String PS5StartupImagesFolder get/set
+  P String PS5IconImagesFolder get/set
+  P String PS5BgmPath get/set
+  P String PS5SonyPasscode get/set
+  P Boolean PS5NeedSubmissionMaterials get/set
+  P String PS5UpdateReferencePackage get/set
+  M PS4Settings GetPS4Settings(PSRegion _psRegion)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== GameOptionsManager : Il2CppSystem.Object ===
+  P GameOptionsManager _Instance_k__BackingField get/set
+  P GameOptionsFactory gameOptionsFactory get/set
+  P ILogger logger get/set
+  P GameModes currentGameMode get/set
+  P IGameOptions currentGameOptions get/set
+  P NormalGameOptionsV12 currentNormalGameOptions get/set
+  P HideNSeekGameOptionsV12 currentHideNSeekGameOptions get/set
+  P IGameOptions currentHostOptions get/set
+  P NormalGameOptionsV12 normalGameHostOptions get/set
+  P HideNSeekGameOptionsV12 hideNSeekGameHostOptions get/set
+  P IGameOptions currentSearchOptions get/set
+  P NormalGameOptionsV12 normalGameSearchOptions get/set
+  P HideNSeekGameOptionsV12 hideNSeekGameSearchOptions get/set
+  P GameOptionsManager Instance get/set
+  P IGameOptions CurrentGameOptions get/set
+  P IGameOptions GameHostOptions get/set
+  P IGameOptions GameSearchOptions get/set
+  P Boolean HasOptions get
+  M Type GetGameOptions()
+  M Void .ctor(ILogger logger)
+  M Void Initialize()
+  M Void SwitchGameMode(GameModes gameMode)
+  M Void LoadOrCreateNormalGameHostOptions()
+  M Void LoadOrCreateHideNSeekGameHostOptions()
+  M Void LoadOrCreateNormalGameSearchOptions()
+  M Void LoadOrCreateHideNSeekGameSearchOptions()
+  M Boolean TryLoadLegacyOptionsFile(String filename, IGameOptions& legacyGameOptions)
+  M Void SaveNormalHostOptions()
+  M Void SaveNormalSearchOptions()
+  M Void SaveHideNSeekHostOptions()
+  M Void SaveHideNSeekSearchOptions()
+  M NormalGameOptionsV12 MigrateNormalGameOptions(IGameOptions gameOptions)
+  M HideNSeekGameOptionsV12 MigrateHideNSeekGameOptions(IGameOptions gameOptions)
+  M Void .ctor(IntPtr pointer)
+
+=== GameOptionsManagerCreator : UnityEngine.MonoBehaviour ===
+  M Void Awake()
+  M Void Start()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== AutoTaskConsole : Console ===
+  P AudioClip useSound get/set
+  M PlayerTask FindTask(PlayerControl pc)
+  M Void Use()
+  M Void AfterUse(NormalPlayerTask task)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Console : UnityEngine.MonoBehaviour ===
+  P Single usableDistance get/set
+  P Int32 ConsoleId get/set
+  P Boolean onlyFromBelow get/set
+  P Boolean onlySameRoom get/set
+  P Boolean checkWalls get/set
+  P Boolean GhostsIgnored get/set
+  P Boolean AllowImpostor get/set
+  P SystemTypes Room get/set
+  P Il2CppStructArray`1 TaskTypes get/set
+  P Il2CppReferenceArray`1 ValidTasks get/set
+  P SpriteRenderer Image get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Boolean InRoom(Vector2 truePos)
+  M PlayerTask FindTask(PlayerControl pc)
+  M Void Use()
+  M Void OnDrawGizmosSelected()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== DoorConsole : UnityEngine.MonoBehaviour ===
+  P Minigame MinigamePrefab get/set
+  P OpenableDoor MyDoor get/set
+  P SpriteRenderer Image get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Void Awake()
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== MapConsole : UnityEngine.MonoBehaviour ===
+  P ImageNames useIcon get/set
+  P Single usableDistance get/set
+  P SpriteRenderer Image get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== OpenDoorConsole : UnityEngine.MonoBehaviour ===
+  P ImageNames useIcon get/set
+  P Single usableDisance get/set
+  P OpenableDoor myDoor get/set
+  P SpriteRenderer image get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Void Awake()
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PlatformConsole : UnityEngine.MonoBehaviour ===
+  P Single usableDistance get/set
+  P SpriteRenderer Image get/set
+  P MovingPlatformBehaviour Platform get/set
+  P Single UsableDistance get
+  P Single PercentCool get
+  P ImageNames UseIcon get
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus : InnerNet.InnerNetObject ===
+  P ShipStatus Instance get/set
+  P Color CameraColor get/set
+  P Single MaxLightRadius get/set
+  P Single MinLightRadius get/set
+  P Single MapScale get/set
+  P MapBehaviour MapPrefab get/set
+  P ExileController ExileCutscenePrefab get/set
+  P MeetingCalledAnimation EmergencyOverlay get/set
+  P MeetingCalledAnimation ReportOverlay get/set
+  P Sprite MeetingBackground get/set
+  P Sprite BrokenEmergencyButton get/set
+  P SystemConsole EmergencyButton get/set
+  P Vector2 InitialSpawnCenter get/set
+  P Vector2 MeetingSpawnCenter get/set
+  P Vector2 MeetingSpawnCenter2 get/set
+  P Single SpawnRadius get/set
+  P Il2CppReferenceArray`1 CommonTasks get/set
+  P Il2CppReferenceArray`1 LongTasks get/set
+  P Il2CppReferenceArray`1 ShortTasks get/set
+  P Il2CppReferenceArray`1 SpecialTasks get/set
+  P Il2CppReferenceArray`1 DummyLocations get/set
+  P Il2CppReferenceArray`1 AllCameras get/set
+  P Il2CppReferenceArray`1 AllDoors get/set
+  P Il2CppReferenceArray`1 AllConsoles get/set
+  P Il2CppReferenceArray`1 Ladders get/set
+  P Dictionary`2 Systems get/set
+  P Il2CppStructArray`1 SystemNames get/set
+  P Il2CppStructArray`1 ExtraTaskNames get/set
+  P Il2CppReferenceArray`1 _AllStepWatchers_k__BackingField get/set
+  P Il2CppReferenceArray`1 _AllRooms_k__BackingField get/set
+  P Dictionary`2 _FastRooms_k__BackingField get/set
+  P Il2CppReferenceArray`1 _AllVents_k__BackingField get/set
+  P AudioClip SabotageSound get/set
+  P Il2CppReferenceArray`1 WeaponFires get/set
+  P SpriteAnim WeaponsImage get/set
+  P Il2CppReferenceArray`1 VentMoveSounds get/set
+  P AudioClip VentEnterSound get/set
+  P AudioClip VentExitSound get/set
+  P AnimationClip HatchActive get/set
+  P SpriteAnim Hatch get/set
+  P ParticleSystem HatchParticles get/set
+  P AnimationClip ShieldsActive get/set
+  P Il2CppReferenceArray`1 ShieldsImages get/set
+  P SpriteRenderer ShieldBorder get/set
+  P Sprite ShieldBorderOn get/set
+  P MedScannerBehaviour MedScanner get/set
+  P Int32 WeaponFireIdx get/set
+  P Single Timer get/set
+  P Single EmergencyCooldown get/set
+  P MapType Type get/set
+  P Single _HideCountdown_k__BackingField get/set
+  P CosmeticsCache _CosmeticsCache_k__BackingField get/set
+  P Logger logger get/set
+  P SocialMediumFeedSystem socialMediumFeedSystemPrefab get/set
+  P SocialMediumFeedSystem socialMediumFeedSystem get/set
+  P Int32 numScans get/set
+  P Il2CppReferenceArray`1 AllStepWatchers get/set
+  P Il2CppReferenceArray`1 AllRooms get/set
+  P Dictionary`2 FastRooms get/set
+  P Il2CppReferenceArray`1 AllVents get/set
+  P Single HideCountdown get/set
+  P CosmeticsCache CosmeticsCache get/set
+  P Boolean IsDirty get
+  M Void OnEnable()
+  M Void RepairCriticalSabotages()
+  M Void Awake()
+  M Void Start()
+  M Void OnDestroy()
+  M Void SpawnPlayer(PlayerControl player, Int32 numPlayers, Boolean initialSpawn)
+  M Void StartShields()
+  M Void FireWeapon()
+  M NormalPlayerTask GetTaskById(Byte idx)
+  M Il2CppReferenceArray`1 GetAllTasks()
+  M Boolean HasTaskType()
+  M Boolean HasTaskTypes(Il2CppReferenceArray`1 types)
+  M Void InitializeExtraTaskNames()
+  M Void OpenHatch()
+  M Void CloseDoorsOfType(SystemTypes room)
+  M Void UpdateSystem(SystemTypes systemType, PlayerControl player, Byte amount)
+  M Void UpdateSystem(SystemTypes systemType, PlayerControl player, MessageReader msgReader)
+  M Void AssignTaskIndexes()
+  M Void OnMeetingCalled()
+  M List`1 GetSocialMediumSpriteList()
+  M Void SendSpiritGuideMessage(Il2CppStructArray`1 spriteIndices, ClientId targetId)
+  M Void StartSFX()
+  M IEnumerator PrespawnStep()
+  M Void Begin()
+  M Void AddTasksFromList(Int32& start, Int32 count, List`1 tasks, HashSet`1 usedTaskTypes, List`1 unusedTasks)
+  M Void FixedUpdate()
+  M Single CalculateLightRadius(NetworkedPlayerInfo player)
+  M Void StartMeeting(PlayerControl reporter, NetworkedPlayerInfo target)
+  M PlayerTask GetSabotageTask(SystemTypes system)
+  M IEnumerator CoStartMeeting(PlayerControl reporter, NetworkedPlayerInfo target)
+  M Void BreakEmergencyButton()
+  M Void ValidateAllTasksOnShip()
+  M Void RpcCloseDoorsOfType(SystemTypes type)
+  M Void RpcUpdateSystem(SystemTypes systemType, Byte amount)
+  M Void RpcUpdateSystem(SystemTypes systemType, MessageWriter msgWriter)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void .ctor()
+  M static Boolean Method_Internal_Static_Boolean_Il2CppReferenceArray_1_PlayerTask_byref___c__DisplayClass87_0_0(Il2CppReferenceArray`1 tasks, __c__DisplayClass87_0& )
+  M Boolean HasTaskTypes(Type[] types)
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/MapType : System.Enum ===
+  F Int32 value__
+  F static MapType Ship
+  F static MapType Hq
+  F static MapType Pb
+  F static MapType Fungle
+
+=== ShipStatus/SystemTypeComparer : Il2CppSystem.Object ===
+  P SystemTypeComparer Instance get/set
+  M Boolean Equals(SystemTypes x, SystemTypes y)
+  M Int32 GetHashCode(SystemTypes obj)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__76_0 get/set
+  P Func`2 __9__78_0 get/set
+  P Func`2 __9__78_1 get/set
+  P Func`2 __9__78_2 get/set
+  P Action`1 __9__99_0 get/set
+  P Action`1 __9__99_1 get/set
+  P Action`1 __9__99_2 get/set
+  P Func`2 __9__106_0 get/set
+  M Void .ctor()
+  M Boolean _OnEnable_b__76_0(ISystemType i)
+  M Int32 _Awake_b__78_0(IStepWatcher s)
+  M Boolean _Awake_b__78_1(PlainShipRoom p)
+  M SystemTypes _Awake_b__78_2(PlainShipRoom d)
+  M Void _Begin_b__99_0(NormalPlayerTask t)
+  M Void _Begin_b__99_1(NormalPlayerTask t)
+  M Void _Begin_b__99_2(NormalPlayerTask t)
+  M NetworkedPlayerInfo _CoStartMeeting_b__106_0(Byte b)
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/__c__DisplayClass101_0 : Il2CppSystem.Object ===
+  P HashSet`1 usedTaskTypes get/set
+  P Func`2 __9__0 get/set
+  M Void .ctor()
+  M Boolean _AddTasksFromList_b__0(NormalPlayerTask t)
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/__c__DisplayClass105_0 : Il2CppSystem.Object ===
+  P TaskTypes taskTypeForSystem get/set
+  M Void .ctor()
+  M Boolean _GetSabotageTask_b__0(PlayerTask task)
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/__c__DisplayClass84_0 : Il2CppSystem.Object ===
+  P Byte idx get/set
+  M Void .ctor()
+  M Boolean _GetTaskById_b__0(NormalPlayerTask t)
+  M Boolean _GetTaskById_b__1(NormalPlayerTask t)
+  M Boolean _GetTaskById_b__2(NormalPlayerTask t)
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/__c__DisplayClass87_0 : Il2CppSystem.ValueType ===
+  P Il2CppReferenceArray`1 types get/set
+  M Void .ctor(IntPtr pointer)
+  M Void .ctor()
+
+=== ShipStatus/_CoStartMeeting_d__106 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl reporter get/set
+  P NetworkedPlayerInfo target get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/_PrespawnStep_d__98 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== ShipStatus/MethodInfoStoreGeneric_HasTaskType_Public_Boolean_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== SkeldShipStatus : ShipStatus ===
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== StoreArmsTaskConsole : Console ===
+  P AudioClip useSound get/set
+  P Il2CppReferenceArray`1 Images get/set
+  P Int32 usesPerStep get/set
+  P Int32 timesUsed get/set
+  M PlayerTask FindTask(PlayerControl pc)
+  M Void Use()
+  M Void AfterUse(NormalPlayerTask task)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== SystemConsole : UnityEngine.MonoBehaviour ===
+  P ImageNames useIcon get/set
+  P Vector2 SafePositionLocal get/set
+  P Single usableDistance get/set
+  P Boolean FreeplayOnly get/set
+  P Boolean onlyFromBelow get/set
+  P SpriteRenderer Image get/set
+  P Minigame MinigamePrefab get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  M Void Start()
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void Use()
+  M Void OnDrawGizmosSelected()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== TowelTaskConsole : AutoTaskConsole ===
+  M Void AfterUse(NormalPlayerTask task)
+  M Void .ctor()
+  M Boolean _AfterUse_b__0_0(Byte b)
+  M Void .ctor(IntPtr pointer)
+
+=== Vent : UnityEngine.MonoBehaviour ===
+  P Single VIBRATION_INTENSITY get/set
+  P Single VIBRATION_FALLOFF_DISTANCE get/set
+  P Single VIBRATION_DURATION get/set
+  P Vent currentVent get/set
+  P Int32 Id get/set
+  P Vent Left get/set
+  P Vent Right get/set
+  P Vent Center get/set
+  P Il2CppReferenceArray`1 Buttons get/set
+  P Il2CppReferenceArray`1 CleaningIndicators get/set
+  P AnimationClip EnterVentAnim get/set
+  P AnimationClip ExitVentAnim get/set
+  P Vector3 Offset get/set
+  P Single spreadAmount get/set
+  P Single spreadShift get/set
+  P SpriteRenderer myRend get/set
+  P SpriteAnim myAnim get/set
+  P Int32 numFramesUntilPlayerDisappearsOnEnter get/set
+  P Int32 numFramesUntilPlayerReappearsOnExit get/set
+  P GameObject additionalExitAnimation get/set
+  P ImageNames UseIcon get
+  P Single UsableDistance get
+  P Single PercentCool get
+  P Int32 NumFramesUntilPlayerDisappears get
+  P Il2CppReferenceArray`1 NearbyVents get
+  M Void Start()
+  M Void SetButtons(Boolean enabled)
+  M Single CanUse(NetworkedPlayerInfo pc, Boolean& canUse, Boolean& couldUse)
+  M Void SetOutline(Boolean on, Boolean mainTarget)
+  M Void ClickRight()
+  M Void ClickLeft()
+  M Void ClickCenter()
+  M Void Use()
+  M Void UpdateArrows(VentilationSystem ventSystem)
+  M Void EnterVent(PlayerControl pc)
+  M IEnumerator ExitVent(PlayerControl pc)
+  M Boolean TryMoveToVent(Vent otherVent, String& error)
+  M Void ToggleNeighborVentBeingCleaned(Boolean ventBeingCleaned, ButtonBehavior b, GameObject c)
+  M Void OnDrawGizmosSelected()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Vent/_ExitVent_d__40 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl pc get/set
+  P Vent __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== NormalPlayerTask : PlayerTask ===
+  P TaskLength Length get/set
+  P Int32 taskStep get/set
+  P Int32 MaxStep get/set
+  P Boolean ShowTaskStep get/set
+  P Boolean ShowTaskTimer get/set
+  P TimerState TimerStarted get/set
+  P Single TaskTimer get/set
+  P Il2CppStructArray`1 Data get/set
+  P ArrowBehaviour Arrow get/set
+  P Boolean useMultipleText get/set
+  P Int32 maxNumStepsStage1 get/set
+  P StringNames textStage1 get/set
+  P StringNames textStage2 get/set
+  P Boolean arrowSuspended get/set
+  P Int32 TaskStep get
+  P Boolean IsComplete get
+  M Void Initialize()
+  M Void NextStep()
+  M Void UpdateArrowAndLocation()
+  M Void FixedUpdate()
+  M Boolean ValidConsole(Console console)
+  M Void Complete()
+  M Void AppendTaskText(StringBuilder sb)
+  M Boolean ShouldYellowText()
+  M static List`1 PickRandomConsoles(TaskTypes taskType, Il2CppStructArray`1 consoleIds)
+  M static List`1 PickRandomConsoles(Int32 taskStep, TaskTypes taskType)
+  M Void .ctor()
+  M Boolean _Initialize_b__20_0(Console v)
+  M Boolean _UpdateArrowAndLocation_b__22_3(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_4(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_5(Console c)
+  M Boolean _ValidConsole_b__24_0(TaskSet set)
+  M Boolean _ValidConsole_b__24_1(TaskTypes t)
+  M Boolean _ValidConsole_b__24_2(TaskTypes t)
+  M Boolean _ValidConsole_b__24_3(TaskSet set)
+  M Boolean _ValidConsole_b__24_4(TaskTypes tt)
+  M Boolean _ValidConsole_b__24_5(TaskSet set)
+  M Boolean _ValidConsole_b__24_8(TaskTypes tt)
+  M Boolean _ValidConsole_b__24_9(TaskSet set)
+  M Void .ctor(IntPtr pointer)
+
+=== NormalPlayerTask/TaskLength : System.Enum ===
+  F Int32 value__
+  F static TaskLength None
+  F static TaskLength Common
+  F static TaskLength Short
+  F static TaskLength Long
+
+=== NormalPlayerTask/TimerState : System.Enum ===
+  F Int32 value__
+  F static TimerState NotStarted
+  F static TimerState Started
+  F static TimerState Finished
+
+=== NormalPlayerTask/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__20_1 get/set
+  P Func`2 __9__22_0 get/set
+  P Func`2 __9__22_1 get/set
+  P Predicate`1 __9__22_6 get/set
+  P Predicate`1 __9__22_7 get/set
+  P Func`2 __9__22_2 get/set
+  P Predicate`1 __9__24_10 get/set
+  P Func`2 __9__24_6 get/set
+  P Func`2 __9__24_7 get/set
+  M Void .ctor()
+  M Boolean _Initialize_b__20_1(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_0(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_1(Console console)
+  M Boolean _UpdateArrowAndLocation_b__22_6(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_7(Console c)
+  M Boolean _UpdateArrowAndLocation_b__22_2(Console c)
+  M Boolean _ValidConsole_b__24_10(Byte b)
+  M Boolean _ValidConsole_b__24_6(TaskTypes t)
+  M Boolean _ValidConsole_b__24_7(TaskTypes t)
+  M Void .ctor(IntPtr pointer)
+
+=== NormalPlayerTask/__c__DisplayClass20_0 : Il2CppSystem.Object ===
+  P Il2CppStructArray`1 consoleIds get/set
+  M Void .ctor()
+  M Boolean _Initialize_b__2(Console v)
+  M Void .ctor(IntPtr pointer)
+
+=== NormalPlayerTask/__c__DisplayClass28_0 : Il2CppSystem.Object ===
+  P TaskTypes taskType get/set
+  M Void .ctor()
+  M Boolean _PickRandomConsoles_b__0(Console t)
+  M Void .ctor(IntPtr pointer)
+
+=== NormalPlayerTask/__c__DisplayClass29_0 : Il2CppSystem.Object ===
+  P TaskTypes taskType get/set
+  P Int32 taskStep get/set
+  P Func`2 __9__1 get/set
+  M Void .ctor()
+  M Boolean _PickRandomConsoles_b__0(Console t)
+  M Boolean _PickRandomConsoles_b__1(TaskSet x)
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerTask : UnityEngine.MonoBehaviour ===
+  P Int32 _Index_k__BackingField get/set
+  P UInt32 _Id_k__BackingField get/set
+  P PlayerControl _Owner_k__BackingField get/set
+  P SystemTypes StartAt get/set
+  P TaskTypes TaskType get/set
+  P Minigame MinigamePrefab get/set
+  P Boolean HasLocation get/set
+  P Boolean LocationDirty get/set
+  P Int32 Index get/set
+  P UInt32 Id get/set
+  P PlayerControl Owner get/set
+  P Int32 TaskStep get
+  P Boolean IsComplete get
+  P List`1 Locations get
+  M Void Initialize()
+  M Void OnRemove()
+  M Boolean ValidConsole(Console console)
+  M Void Complete()
+  M Void AppendTaskText(StringBuilder sb)
+  M static Boolean TaskIsEmergency(PlayerTask arg)
+  M List`1 FindConsoles()
+  M static T GetOrCreateTask(PlayerControl localPlayer, Int32 insertAt)
+  M static Boolean DestroyTasksOfType(PlayerControl localPlayer)
+  M static Boolean TryGetTaskOfType(PlayerControl localPlayer, T& t)
+  M static Boolean PlayerHasTaskOfType(PlayerControl localPlayer)
+  M List`1 FindValidConsolesPositions()
+  M Console FindSpecialConsole(Func`2 func)
+  M Console FindObjectPos()
+  M List`1 FindConsolesPos()
+  M Minigame GetMinigamePrefab()
+  M static Boolean AllTasksCompleted(PlayerControl player)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PlayerTask/MethodInfoStoreGeneric_GetOrCreateTask_Public_Static_T_PlayerControl_Int32_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== PlayerTask/MethodInfoStoreGeneric_DestroyTasksOfType_Public_Static_Boolean_PlayerControl_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== PlayerTask/MethodInfoStoreGeneric_TryGetTaskOfType_Public_Static_Boolean_PlayerControl_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== PlayerTask/MethodInfoStoreGeneric_PlayerHasTaskOfType_Public_Static_Boolean_PlayerControl_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== VentCleaningConsole : Console ===
+  P AudioClip ImpostorDiscoveredSound get/set
+  M Void Use()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== VentCleaningMinigame : Minigame ===
+  P FloatRange XSpan get/set
+  P FloatRange YSpan get/set
+  P ObjectPoolBehavior dirtPool get/set
+  P GameObject ventLidClosed get/set
+  P GameObject ventLidOpened get/set
+  P UiElement backButton get/set
+  P AudioClip VentOpenSound get/set
+  P AudioClip ImpostorDiscoveredSound get/set
+  P AudioClip CleanedSound get/set
+  P Il2CppReferenceArray`1 SpiderWebs get/set
+  P Single cleaningDistanceThreshold get/set
+  P Transform selectorObject get/set
+  P SpriteRenderer selectorHand get/set
+  P Int32 numberOfDirts get/set
+  P Int32 numberOfDirtsCleanedUp get/set
+  P Boolean ventOpen get/set
+  P VentilationSystem ventSystem get/set
+  P Int32 VentId get
+  M Void Begin(PlayerTask task)
+  M Void Close()
+  M Void OpenVent()
+  M Void FixedUpdate()
+  M Void HandleJoystick()
+  M IEnumerator CoOpenVent()
+  M Void CleanUp(VentDirt ventDirt)
+  M Void SpawnDirt()
+  M Void .ctor()
+  M Void _CoOpenVent_b__24_0(Single t)
+  M Void .ctor(IntPtr pointer)
+
+=== VentCleaningMinigame/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Action`1 __9__19_0 get/set
+  P Action`1 __9__19_1 get/set
+  M Void .ctor()
+  M Void _Begin_b__19_0(SpriteRenderer s)
+  M Void _Begin_b__19_1(SpriteRenderer s)
+  M Void .ctor(IntPtr pointer)
+
+=== VentCleaningMinigame/__c__DisplayClass26_0 : Il2CppSystem.Object ===
+  P VentCleaningMinigame __4__this get/set
+  P VentDirt dirt get/set
+  M Void .ctor()
+  M Void _SpawnDirt_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== VentCleaningMinigame/_CoOpenVent_d__24 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P VentCleaningMinigame __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== VentDirt : PoolableBehavior ===
+  P Il2CppReferenceArray`1 DirtImages get/set
+  P ParticleSystem CleanedEffect get/set
+  P Int32 imgIdx get/set
+  M Void Reset()
+  M IEnumerator CoDisappear()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== VentDirt/__c__DisplayClass4_0 : Il2CppSystem.Object ===
+  P SpriteRenderer rend get/set
+  M Void .ctor()
+  M Void _CoDisappear_b__0(Single t)
+  M Void .ctor(IntPtr pointer)
+
+=== VentDirt/_CoDisappear_d__4 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P VentDirt __4__this get/set
+  P __c__DisplayClass4_0 __8__1 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== VentilationSystem : Il2CppSystem.Object ===
+  P UInt16 OP_ID_START get/set
+  P Dictionary`2 SeqBuffers get/set
+  P Dictionary`2 PlayersCleaningVents get/set
+  P Dictionary`2 PlayersInsideVents get/set
+  P HashSet`1 ToRemove get/set
+  P Boolean _IsDirty_k__BackingField get/set
+  P Boolean IsDirty get/set
+  M static Void Update(Operation op, Int32 ventId)
+  M Void Deteriorate(Single deltaTime)
+  M Boolean IsVentCurrentlyBeingCleaned(Int32 id)
+  M Boolean IsImpostorInsideVent(Int32 ventId)
+  M Void UpdateSystem(PlayerControl player, MessageReader msgReader)
+  M Void PerformVentOp(Byte playerId, Operation op, Byte ventId, SequenceBuffer`1 seqBuffer)
+  M Void MarkClean()
+  M Void Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void BootImpostorsFromVent(Int32 ventId)
+  M Boolean IsInvisiblePhantomOnVent(Byte playerId)
+  M Void BootImpostorFromVent(Int32 ventId, Byte playerId)
+  M Void UpdateVentArrows()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== VentilationSystem/VentMoveInfo : System.ValueType ===
+  F Operation Op
+  F Byte VentId
+  F Byte PlayerId
+  M Object BoxIl2CppObject()
+
+=== VentilationSystem/Operation : System.Enum ===
+  F Int32 value__
+  F static Operation StartCleaning
+  F static Operation StopCleaning
+  F static Operation Enter
+  F static Operation Exit
+  F static Operation Move
+  F static Operation BootImpostors
+
+=== VentilationSystem/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`1 __9__11_0 get/set
+  M Void .ctor()
+  M SequenceBuffer`1 _Update_b__11_0()
+  M Void .ctor(IntPtr pointer)
+
+=== VentilationSystem/__c__DisplayClass15_0 : Il2CppSystem.Object ===
+  P UInt16 opId get/set
+  M Void .ctor()
+  M SequenceBuffer`1 _UpdateSystem_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Integration.UnityUI.PlayerPointerEventData : UnityEngine.EventSystems.PointerEventData ===
+  P Int32 _playerId_k__BackingField get/set
+  P Int32 _inputSourceIndex_k__BackingField get/set
+  P IMouseInputSource _mouseSource_k__BackingField get/set
+  P ITouchInputSource _touchSource_k__BackingField get/set
+  P PointerEventType _sourceType_k__BackingField get/set
+  P Int32 _buttonIndex_k__BackingField get/set
+  P Int32 playerId get/set
+  P Int32 inputSourceIndex get/set
+  P IMouseInputSource mouseSource get/set
+  P ITouchInputSource touchSource get/set
+  P PointerEventType sourceType get/set
+  P Int32 buttonIndex get/set
+  M Void .ctor(EventSystem eventSystem)
+  M String ToString()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Integration.UnityUI.RewiredEventSystem : UnityEngine.EventSystems.EventSystem ===
+  P Boolean _alwaysUpdate get/set
+  P Boolean alwaysUpdate get/set
+  M Void Update()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Integration.UnityUI.RewiredPointerInputModule/MouseButtonEventData : Il2CppSystem.Object ===
+  P FramePressState buttonState get/set
+  P PlayerPointerEventData buttonData get/set
+  M Boolean PressedThisFrame()
+  M Boolean ReleasedThisFrame()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Integration.UnityUI.PointerEventType : System.Enum ===
+  F Int32 value__
+  F static PointerEventType Mouse
+  F static PointerEventType Touch
+
+=== Rewired.Glyphs.UnityUI.UnityUIPlayerControllerElementGlyph : Rewired.Glyphs.UnityUI.UnityUIPlayerControllerElementGlyphBase ===
+  P Int32 _playerId get/set
+  P String _actionName get/set
+  P Int32 _actionId get/set
+  P Boolean _actionIdCached get/set
+  P Int32 playerId get/set
+  P Int32 actionId get/set
+  P String actionName get/set
+  M Void CacheActionId()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Glyphs.UnityUI.UnityUIPlayerControllerElementGlyphBase : Rewired.Glyphs.UnityUI.UnityUIControllerElementGlyphBase ===
+  P ControllerElementGlyphSelectorOptionsSOBase _options get/set
+  P AxisRange _actionRange get/set
+  P Transform _group1 get/set
+  P Transform _group2 get/set
+  P List`1 _tempAems get/set
+  P List`1 _tempCombinedElementAems get/set
+  P List`1 _group1Objects get/set
+  P List`1 _group2Objects get/set
+  P ControllerElementGlyphSelectorOptionsSOBase options get/set
+  P Int32 playerId get/set
+  P Int32 actionId get/set
+  P AxisRange actionRange get/set
+  P Transform group1 get/set
+  P Transform group2 get/set
+  P Boolean isMousePrioritizedOverKeyboard get
+  M Boolean TryGetControllerTypeOrder(Int32 index, ControllerType& controllerType)
+  M Void Update()
+  M Void ClearObjects()
+  M Boolean ShowBinding(ActionElementMap actionElementMap)
+  M Boolean ShowSplitAxisBindings(ActionElementMap negativeAem, ActionElementMap positiveAem)
+  M Void EvaluateObjectVisibility()
+  M Int32 ShowGlyphsOrText(IList`1 bindings, Transform parent, List`1 objects)
+  M Void Hide()
+  M Transform GetObjectGroupTransform(Int32 groupIndex)
+  M ControllerElementGlyphSelectorOptions GetOptionsOrDefault()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== Rewired.Demos.PlayerPointerEventHandlerExample : UnityEngine.MonoBehaviour ===
+  P Text text get/set
+  P Int32 logLength get/set
+  P List`1 log get/set
+  M Void Log(String o)
+  M Void Update()
+  M Void OnPointerEnter(PointerEventData eventData)
+  M Void OnPointerExit(PointerEventData eventData)
+  M Void OnPointerUp(PointerEventData eventData)
+  M Void OnPointerDown(PointerEventData eventData)
+  M Void OnPointerClick(PointerEventData eventData)
+  M Void OnScroll(PointerEventData eventData)
+  M Void OnBeginDrag(PointerEventData eventData)
+  M Void OnDrag(PointerEventData eventData)
+  M Void OnEndDrag(PointerEventData eventData)
+  M static String GetSourceName(PlayerPointerEventData playerEventData)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PowerTools.SpriteAnimEventHandler : UnityEngine.MonoBehaviour ===
+  P String m_eventWithObjectMessage get/set
+  P Object m_eventWithObjectData get/set
+  M Void _Anim(String function)
+  M Void _AnimInt(String messageString)
+  M Void _AnimFloat(String messageString)
+  M Void _AnimString(String messageString)
+  M Void _AnimObjectFunc(String funcName)
+  M Void _AnimObjectData(Object data)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== PowerTools.SpriteAnimEventHandler/EventParser : Il2CppSystem.Object ===
+  P Char MESSAGE_DELIMITER get/set
+  P String MESSAGE_NOPARAM get/set
+  P String MESSAGE_INT get/set
+  P String MESSAGE_FLOAT get/set
+  P String MESSAGE_STRING get/set
+  P String MESSAGE_OBJECT_FUNCNAME get/set
+  P String MESSAGE_OBJECT_DATA get/set
+  M static Int32 ParseInt(String& messageString)
+  M static Single ParseFloat(String& messageString)
+  M static String ParseString(String& messageString)
+  M Void .ctor(IntPtr pointer)
+
+=== GameCore.HandleEvents : UnityEngine.MonoBehaviour ===
+  P HandleEvents _Instance_k__BackingField get/set
+  P SpriteRenderer FillScreen get/set
+  P HandleEvents Instance get/set
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient : UnityEngine.MonoBehaviour ===
+  P HashSet`1 DontBotherLoggingTheseDisconnectReasons get/set
+  P Int32 MaxRecentClients get/set
+  P Int32 DefaultSecondsSuspendedBeforeDisconnect get/set
+  P Int32 SecondsSuspendedBeforeDisconnect get/set
+  P Int32 NoClientId get/set
+  P Logger serverLogger get/set
+  P String networkAddress get/set
+  P Int32 networkPort get/set
+  P Boolean useDtls get/set
+  P UnityUdpClientConnection connection get/set
+  P MatchMakerModes mode get/set
+  P NetworkModes NetworkMode get/set
+  P Int32 GameId get/set
+  P Int32 HostId get/set
+  P Int32 ClientId get/set
+  P List`1 allClients get/set
+  P CircleBuffer`1 recentClients get/set
+  P DisconnectReasons LastDisconnectReason get/set
+  P String LastCustomDisconnect get/set
+  P Byte LastServerChatMode get/set
+  P MatchmakerError LastMatchmakerError get/set
+  P List`1 PreSpawnDispatcher get/set
+  P List`1 Dispatcher get/set
+  P List`1 sendInitialDataSpawnGameDataMessages get/set
+  P GameOptionsFactory gameOptionsFactory get/set
+  P Boolean _IsGamePublic_k__BackingField get/set
+  P GameStates GameState get/set
+  P Boolean isConnecting get/set
+  P Boolean platformSpecificsChecked get/set
+  P List`1 TempQueue get/set
+  P Boolean appPaused get/set
+  P Int32 BroadcastTargetClientId get/set
+  P Int32 CurrentClient get/set
+  P Int32 HostInherit get/set
+  P Int32 ServerOwned get/set
+  P Int32 MinServerID get/set
+  P Int32 MaxMessageSizeBytes get/set
+  P Single MinSendInterval get/set
+  P UInt32 NetIdCnt get/set
+  P Single timer get/set
+  P Il2CppReferenceArray`1 SpawnableObjects get/set
+  P Il2CppReferenceArray`1 NonAddressableSpawnableObjects get/set
+  P InnerNetObjectCollection allObjects get/set
+  P Boolean InOnlineScene get/set
+  P HashSet`1 DestroyedObjects get/set
+  P Queue`1 reliableMessageQueue get/set
+  P Queue`1 unreliableMessageQueue get/set
+  P Int32 numberOfConsecutiveFramesWithReliableMessages get/set
+  P Int32 numberOfConsecutiveFramesWithUnreliableMessages get/set
+  P Int32 indexForReliableStreamedUpdates get/set
+  P Int32 indexForUnreliableStreamedUpdates get/set
+  P Int32 msgNum get/set
+  P Boolean AmConnected get
+  P Int32 Ping get
+  P Int32 BytesSent get
+  P Int32 BytesGot get
+  P Int32 Resends get
+  P Boolean AmHost get
+  P Boolean AmLocalHost get
+  P Boolean AmModdedHost get
+  P Boolean AmClient get
+  P Boolean IsGamePublic get/set
+  P Boolean IsGameStarted get
+  P Boolean IsGameOver get
+  P Boolean IsInGame get
+  M Void SetEndpoint(String addr, UInt16 port, Boolean dtls)
+  M String GetNetworkAddress()
+  M Int32 GetNetworkPort()
+  M Void Start()
+  M Void SendOrDisconnect(MessageWriter msg)
+  M ClientData GetHost()
+  M ClientData GetClientFromCharacter(PlayerControl character)
+  M ClientData GetClientFromPlayerInfo(NetworkedPlayerInfo playerInfo)
+  M Int32 GetClientIdFromCharacter(PlayerControl character)
+  M Void OnDestroy()
+  M IEnumerator CoConnect(String matchmakerToken)
+  M Void Connection_DataReceivedRaw(Il2CppStructArray`1 data)
+  M Void Connection_DataSentRaw(Il2CppStructArray`1 data, Int32 length)
+  M Void Connect(MatchMakerModes mode, String matchmakerToken)
+  M IEnumerator CoConnect(MatchMakerModes mode, String matchmakerToken)
+  M IEnumerator WaitForConnectionOrFail()
+  M IEnumerator WaitWithTimeout(Func`1 success, String errorMessage, Int32 durationSeconds)
+  M Void Update()
+  M Void OnDisconnect(Object sender, DisconnectedEventArgs e)
+  M Void HandleDisconnect(DisconnectReasons reason, String stringReason)
+  M Void EnqueueDisconnect(DisconnectReasons reason, String stringReason)
+  M Void DisconnectInternal(DisconnectReasons reason, String stringReason)
+  M Void HostGame(IGameOptions settings, GameFilterOptions filterOpts)
+  M Void ReportPlayer(Int32 clientId, ReportReasons reason)
+  M Void JoinGame()
+  M Boolean CanBan()
+  M Boolean CanKick()
+  M Void KickPlayer(Int32 clientId, Boolean ban)
+  M MessageWriter StartEndGame()
+  M Void FinishEndGame(MessageWriter msg)
+  M Void SendLateRejection(Int32 targetId, DisconnectReasons reason)
+  M Void SendClientReady()
+  M Void SendStartGame()
+  M Void RequestGameList(IGameOptions settings, GameFilterOptions filterOpts)
+  M Void ChangeGamePublic(Boolean isPublic)
+  M Void SetGameSession(String session)
+  M Void SetActivePodType(String podType)
+  M Void QueryPlatformIds()
+  M Void OnQueryPlatformData(List`1 playerData)
+  M Void OnMessageReceived(DataReceivedEventArgs e)
+  M Void HandleMessage(MessageReader reader, SendOption sendOption)
+  M static String AddressToString(UInt32 address)
+  M ClientData GetOrCreateClient(ClientData client)
+  M ClientData GetClient(Int32 clientId)
+  M Void GetAllClients(List`1 buffer)
+  M Void GetRecentClients(List`1 buffer)
+  M ClientData GetRecentClient(Int32 clientId)
+  M Void RemovePlayer(Int32 playerIdThatLeft, DisconnectReasons reason)
+  M Void OnApplicationPause(Boolean pause)
+  M Void WaitToDisconnect(Object state)
+  M Void SendInitialData(Int32 clientId)
+  M Void SendGameManager(Int32 clientId, GameManager gameManager)
+  M Void OnGameCreated(String gameIdString)
+  M Void OnGameJoined(String gameIdString)
+  M Void OnWaitForHost(String gameIdString)
+  M IEnumerator CoStartGame()
+  M Void OnGameEnd(EndGameResult endGameResult)
+  M Void OnBecomeHost()
+  M Void OnPlayerJoined(ClientData client)
+  M IEnumerator CoOnPlayerChangedScene(ClientData client, String targetScene)
+  M Void OnPlayerLeft(ClientData client, DisconnectReasons reason)
+  M Void OnReportedPlayer(ReportOutcome outcome, Int32 clientId, String playerName, ReportReasons reason)
+  M Void OnDisconnected()
+  M Void PreDisconnectInternal()
+  M Void OnSetPSNSessionId(String sessionId)
+  M Void OnGetGameList(TotalGameData totalGames, FindGamesListFilteredResponse gamesResponse)
+  M Il2CppStructArray`1 GetConnectionData(Boolean useDtlsLayout, String matchmakerToken)
+  M ClientData FindClientById(Int32 id)
+  M Void FixedUpdate()
+  M Void UpdateCachedClients(ClientData clientData, PlayerControl character)
+  M Void SendAllStreamedObjects()
+  M T FindObjectByNetId(UInt32 netId)
+  M MessageWriter StartRpcImmediately(UInt32 targetNetId, Byte callId, SendOption option, Int32 targetClientId)
+  M Void FinishRpcImmediately(MessageWriter msg)
+  M Void SendXuidToAll()
+  M Void LateBroadcastReliableMessage(IGameDataMessage rpcMessage)
+  M Void LateBroadcastUnreliableMessage(IGameDataMessage rpcMessage)
+  M Void SendSceneChange(String sceneName)
+  M IEnumerator CoSendSceneChange(String sceneName)
+  M Void Spawn(InnerNetObject netObjParent, Int32 ownerId, SpawnFlags flags)
+  M SpawnGameDataMessage CreateSpawnMessage(InnerNetObject netObjParent, Int32 ownerId, SpawnFlags flags)
+  M Void Despawn(InnerNetObject objToDespawn)
+  M Boolean AddNetObject(InnerNetObject obj)
+  M Void RemoveNetObject(InnerNetObject obj)
+  M Void RemoveUnownedObjects()
+  M Void HandleGameData(MessageReader parentReader)
+  M IEnumerator HandleGameDataInner(MessageReader reader, Int32 msgNum)
+  M IEnumerator CoHandleSpawn(MessageReader reader)
+  M Void PackAndSendQueuedMessages(Queue`1 queue, SendOption sendOption, Boolean& thereAreQueuedMessagesLeft)
+  M Void PackAndSendDirtyStreamedObjects(IReadOnlyList`1 streamCollection, SendOption sendOption, Int32& trackingIndex)
+  M Void StartStreamedObjectMessage(MessageWriter& writer, SendOption option)
+  M Int32 GetMaxMessagePackingLimit()
+  M Void .ctor()
+  M Void _Start_b__60_0(Scene oldScene, Scene scene)
+  M Boolean _CoConnect_b__71_0()
+  M Boolean _CoConnect_b__71_1()
+  M Boolean _CoConnect_b__71_2()
+  M Void _HandleMessage_b__98_1()
+  M Void _HandleMessage_b__98_2()
+  M Void _HandleMessage_b__98_5()
+  M Void _HandleMessage_b__98_6()
+  M Void _HandleMessage_b__98_8()
+  M Void _HandleMessage_b__98_12()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/GameStates : System.Enum ===
+  F Int32 value__
+  F static GameStates NotJoined
+  F static GameStates Joined
+  F static GameStates Started
+  F static GameStates Ended
+
+=== InnerNet.InnerNetClient/TotalGameData : Il2CppSystem.Object ===
+  P Il2CppStructArray`1 PerMapTotals get/set
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/RecentPlayerComparer : Il2CppSystem.Object ===
+  P RecentPlayerComparer Instance get/set
+  M Int32 Compare(ClientData x, ClientData y)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__68_0 get/set
+  P Func`2 __9__69_0 get/set
+  P Action`1 __9__165_0 get/set
+  M Void .ctor()
+  M String _Connection_DataReceivedRaw_b__68_0(Byte b)
+  M String _Connection_DataSentRaw_b__69_0(Byte b)
+  M Void _RemoveUnownedObjects_b__165_0(GameObject gameObject)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass100_0 : Il2CppSystem.Object ===
+  P ClientData client get/set
+  M Void .ctor()
+  M Boolean _GetOrCreateClient_b__0(ClientData c)
+  M Boolean _GetOrCreateClient_b__1(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass101_0 : Il2CppSystem.Object ===
+  P Int32 clientId get/set
+  M Void .ctor()
+  M Boolean _GetClient_b__0(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass104_0 : Il2CppSystem.Object ===
+  P Int32 clientId get/set
+  M Void .ctor()
+  M Boolean _GetRecentClient_b__0(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass105_0 : Il2CppSystem.Object ===
+  P InnerNetClient __4__this get/set
+  P ClientData client get/set
+  P DisconnectReasons reason get/set
+  M Void .ctor()
+  M Void _RemovePlayer_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass169_0 : Il2CppSystem.Object ===
+  P UInt32 spawnId get/set
+  M Void .ctor()
+  M Boolean _CoHandleSpawn_b__0(InnerNetObject f)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass78_0 : Il2CppSystem.Object ===
+  P InnerNetClient __4__this get/set
+  P DisconnectReasons reason get/set
+  P String stringReason get/set
+  M Void .ctor()
+  M Void _EnqueueDisconnect_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_0 : Il2CppSystem.Object ===
+  P ReportOutcome outcome get/set
+  P Int32 clientId get/set
+  P String playerName get/set
+  P ReportReasons reason get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_1 : Il2CppSystem.Object ===
+  P EndGameResult endGameResult get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__3()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_2 : Il2CppSystem.Object ===
+  P List`1 received get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__4()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_3 : Il2CppSystem.Object ===
+  P ClientData client get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__7()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_4 : Il2CppSystem.Object ===
+  P MessageReader subReader get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__9()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_5 : Il2CppSystem.Object ===
+  P MessageReader subReader get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__10()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_6 : Il2CppSystem.Object ===
+  P TotalGameData totals get/set
+  P FindGamesListFilteredResponse response get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__11()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_7 : Il2CppSystem.Object ===
+  P UInt32 address get/set
+  P UInt16 port get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__13()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoConnect_d__67 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P String matchmakerToken get/set
+  P String _ipAddr_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoConnect_d__71 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P MatchMakerModes mode get/set
+  P String matchmakerToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoHandleSpawn_d__169 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MessageReader reader get/set
+  P InnerNetClient __4__this get/set
+  P __c__DisplayClass169_0 __8__1 get/set
+  P Int32 _ownerId_5__2 get/set
+  P ClientData _ownerClient_5__3 get/set
+  P Int32 _frames_5__4 get/set
+  P AsyncOperationHandle`1 _spawnPrefab_5__5 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoSendSceneChange_d__159 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P String sceneName get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_HandleGameDataInner_d__168 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MessageReader reader get/set
+  P InnerNetClient __4__this get/set
+  P Int32 msgNum get/set
+  P Int32 _cnt_5__2 get/set
+  P InnerNetObjectCollection __7__wrap2 get/set
+  P Boolean __7__wrap3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void __m__Finally1()
+  M Void __m__Finally2()
+  M Void __m__Finally3()
+  M Void __m__Finally4()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_WaitForConnectionOrFail_d__72 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_WaitWithTimeout_d__73 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Func`1 success get/set
+  P InnerNetClient __4__this get/set
+  P Int32 durationSeconds get/set
+  P String errorMessage get/set
+  P Boolean _failed_5__2 get/set
+  P Single _timer_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/MethodInfoStoreGeneric_FindObjectByNetId_Public_T_UInt32_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== GooglePlayGames.BasicApi.Events.Event : Il2CppSystem.Object ===
+  P String mId get/set
+  P String mName get/set
+  P String mDescription get/set
+  P String mImageUrl get/set
+  P UInt64 mCurrentCount get/set
+  P EventVisibility mVisibility get/set
+  P String Id get
+  P String Name get
+  P String Description get
+  P String ImageUrl get
+  P UInt64 CurrentCount get
+  P EventVisibility Visibility get
+  M Void .ctor(String id, String name, String description, String imageUrl, UInt64 currentCount, EventVisibility visibility)
+  M Void .ctor(IntPtr pointer)
+
+=== GooglePlayGames.BasicApi.Events.EventVisibility : System.Enum ===
+  F Int32 value__
+  F static EventVisibility Hidden
+  F static EventVisibility Revealed
+
+=== GooglePlayGames.BasicApi.Events.IEvent : Il2CppInterop.Runtime.InteropTypes.Il2CppObjectBase ===
+  P String Id get
+  P String Name get
+  P String Description get
+  P String ImageUrl get
+  P UInt64 CurrentCount get
+  P EventVisibility Visibility get
+  M Void .ctor(IntPtr pointer)
+
+=== Il2CppMicrosoft.Xbox.ErrorEventArgs : Il2CppSystem.EventArgs ===
+  P String _ErrorCode_k__BackingField get/set
+  P String _ErrorMessage_k__BackingField get/set
+  P String ErrorCode get/set
+  P String ErrorMessage get/set
+  M Void .ctor(String errorCode, String errorMessage)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.GameOptions.RoleTypes : System.Enum ===
+  F UInt16 value__
+  F static RoleTypes Crewmate
+  F static RoleTypes Impostor
+  F static RoleTypes Scientist
+  F static RoleTypes Engineer
+  F static RoleTypes GuardianAngel
+  F static RoleTypes Shapeshifter
+  F static RoleTypes CrewmateGhost
+  F static RoleTypes ImpostorGhost
+  F static RoleTypes Noisemaker
+  F static RoleTypes Phantom
+  F static RoleTypes Tracker
+  F static RoleTypes Detective
+  F static RoleTypes Viper
+  F static RoleTypes Judge
+  F static RoleTypes SpiritGuide
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV07/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV08/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV09/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV10/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV11/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.GameOptions.RoleOptionsCollectionV12/MethodInfoStoreGeneric_TryGetRoleOptions_Public_Boolean_RoleTypes_byref_T_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.Matchmaking.CategorizedMaxTimeInVent : System.Enum ===
+  F Int32 value__
+  F static CategorizedMaxTimeInVent Low
+  F static CategorizedMaxTimeInVent Medium
+  F static CategorizedMaxTimeInVent High
+  F static CategorizedMaxTimeInVent VeryHigh
+
+=== AmongUs.InnerNet.GameDataMessages.BaseGameDataMessage : Il2CppSystem.Object ===
+  P GameDataTypes GameDataType get
+  M Void Serialize(MessageWriter msg)
+  M Void SerializeValues(MessageWriter msg)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.BaseRpcMessage : AmongUs.InnerNet.GameDataMessages.BaseGameDataMessage ===
+  P GameDataTypes _GameDataType_k__BackingField get/set
+  P UInt32 rpcObjectNetId get/set
+  P GameDataTypes GameDataType get
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId)
+  M Void SerializeValues(MessageWriter msg)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.DespawnGameDataMessage : AmongUs.InnerNet.GameDataMessages.BaseGameDataMessage ===
+  P GameDataTypes _GameDataType_k__BackingField get/set
+  P UInt32 objToDespawnNetId get/set
+  P GameDataTypes GameDataType get
+  M Void .ctor(UInt32 objToDespawnNetId)
+  M Void SerializeValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.GameDataTypes : System.Enum ===
+  F Byte value__
+  F static GameDataTypes Invalid
+  F static GameDataTypes DataFlag
+  F static GameDataTypes RpcFlag
+  F static GameDataTypes SpawnFlag
+  F static GameDataTypes DespawnFlag
+  F static GameDataTypes SceneChangeFlag
+  F static GameDataTypes ReadyFlag
+  F static GameDataTypes ChangeSettingsFlag_Deprecated
+  F static GameDataTypes XboxDeclareXuid
+
+=== AmongUs.InnerNet.GameDataMessages.IGameDataMessage : Il2CppInterop.Runtime.InteropTypes.Il2CppObjectBase ===
+  P GameDataTypes GameDataType get
+  M Void Serialize(MessageWriter writer)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcAddVoteBanMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Int32 sourceClientId get/set
+  P Int32 clientIdToVoteBan get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Int32 sourceClientId, Int32 clientIdToVoteBan)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcBootFromVentMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Int32 ventId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Int32 ventId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcCancelPetMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcClimbLadderMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Byte ladderId get/set
+  P Byte lastClimbLadderSid get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Byte ladderId, Byte lastClimbLadderSid)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcCloseMeetingMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcCompleteTaskMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P UInt32 idx get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, UInt32 idx)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcEnterVentMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Int32 ventId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Int32 ventId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcExitVentMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Int32 ventId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Int32 ventId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcPetMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Vector2 pos get/set
+  P Vector2 petPos get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Vector2 pos, Vector2 petPos)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcPlayAnimationMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Byte animType get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Byte animType)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcReportDeadBodyMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Byte targetPlayerId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Byte targetPlayerId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSendChatMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String chatText get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String chatText)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSendChatNoteMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Byte srcPlayerId get/set
+  P ChatNoteTypes noteType get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Byte srcPlayerId, ChatNoteTypes noteType)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSendQuickChatMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P QuickChatPhraseBuilderResult quickChatData get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, QuickChatPhraseBuilderResult quickChatData)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetColorMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P UInt32 netIdToColor get/set
+  P Byte bodyColor get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, UInt32 netIdToColor, Byte bodyColor)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetHatStrMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String hatId get/set
+  P Byte rpcSequenceId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String hatId, Byte rpcSequenceId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetLevelMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P UInt32 level get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, UInt32 level)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetNameMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P UInt32 netIdOfNamed get/set
+  P String name get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, UInt32 netIdOfNamed, String name)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetNamePlateStrMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String namePlateId get/set
+  P Byte rpcSequenceId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String namePlateId, Byte rpcSequenceId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetPetStrMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String petId get/set
+  P Byte rpcSequenceId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String petId, Byte rpcSequenceId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetRoleMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P RoleTypes roleType get/set
+  P Boolean canOverrideRole get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, RoleTypes roleType, Boolean canOverrideRole)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetScannerMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Boolean value get/set
+  P Byte count get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Boolean value, Byte count)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetSkinStrMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String skinId get/set
+  P Byte rpcSequenceId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String skinId, Byte rpcSequenceId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetStartCounterMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Int32 counterId get/set
+  P SByte secondsLeft get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Int32 counterId, SByte secondsLeft)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetTasksMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Il2CppStructArray`1 taskTypeIds get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Il2CppStructArray`1 taskTypeIds)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcSetVisorStrMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P String visorId get/set
+  P Byte rpcSequenceId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, String visorId, Byte rpcSequenceId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcUsePlatformMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.RpcVotingCompleteMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Il2CppStructArray`1 voterStates get/set
+  P Byte exiledPlayerId get/set
+  P Boolean tie get/set
+  P Boolean wasOverruled get/set
+  P UInt16 overrideId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Il2CppStructArray`1 voterStates, Byte exiledPlayerId, Boolean tie, Boolean wasOverruled, UInt16 overrideId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.InnerNet.GameDataMessages.SpawnGameDataMessage : AmongUs.InnerNet.GameDataMessages.BaseGameDataMessage ===
+  P GameDataTypes _GameDataType_k__BackingField get/set
+  P Type _NetObjectType_k__BackingField get/set
+  P UInt32 spawnTypeId get/set
+  P Int32 ownerId get/set
+  P SpawnFlags flags get/set
+  P Il2CppReferenceArray`1 childNetObjects get/set
+  P GameDataTypes GameDataType get
+  P Type NetObjectType get/set
+  M Void .ctor(InnerNetObject parentNetObject, Int32 ownerId, SpawnFlags flags, Il2CppReferenceArray`1 childNetObjects)
+  M Void ClearOrDecrementChildObjectDirt()
+  M Void SerializeValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.AnimationTestScene.AnimationTestScenePlayerPage/_CoLoopEnterVent_d__34 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl view get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== AmongUs.AnimationTestScene.AnimationTestScenePlayerPage/_CoLoopExitVent_d__36 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P PlayerControl view get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== Innersloth.DebugTool.DebugUIEvents : Il2CppSystem.Object ===
+  P Action`1 OnBeforeCommandExecuted get/set
+  P Action`1 OnDetailsToggledVisible get/set
+  P Action`1 OnTabClicked get/set
+  M Void .ctor(IntPtr pointer)

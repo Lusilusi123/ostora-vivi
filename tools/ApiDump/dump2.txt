@@ -1,0 +1,524 @@
+﻿
+=== CustomNetworkTransform : InnerNet.InnerNetObject ===
+  P Single SEND_MOVEMENT_THRESHOLD get/set
+  P Single REPLAY_POSITION_THRESHOLD get/set
+  P Single NEUTRAL_BAND_MODIFIER get/set
+  P Single SMOOTHING_BAND_MODIFIER get/set
+  P Single SMOOTHING_LERP_RATE get/set
+  P Int32 QUEUE_LENGTH_FOR_SNAPPING get/set
+  P Int32 QUEUE_LENGTH_FOR_SECOND_SNAP get/set
+  P Int32 QUEUE_THRESHOLD_FOR_SMOOTHING get/set
+  P Int32 SNAP_TO_SEQUENCE_ID_BUFFER get/set
+  P PlayerControl myPlayer get/set
+  P Rigidbody2D body get/set
+  P Queue`1 sendQueue get/set
+  P Queue`1 incomingPosQueue get/set
+  P Single rubberbandModifier get/set
+  P Single idealSpeed get/set
+  P Boolean isPaused get/set
+  P UInt16 lastSequenceId get/set
+  P Vector2 lastPosition get/set
+  P Vector2 lastPosSent get/set
+  P Nullable`1 tempSnapPosition get/set
+  P ITransformGhost debugPopPositions get/set
+  P ITransformGhost debugTargetPositions get/set
+  P ITransformGhost debugTruePositions get/set
+  P INetTransformLogger debugNetLogger get/set
+  M Void Awake()
+  M Void OnDrawGizmos()
+  M Void OnEnable()
+  M Void SetPaused(Boolean isPaused)
+  M Void Halt()
+  M Void RpcSnapTo(Vector2 position)
+  M Void SnapTo(Vector2 position)
+  M Void ClearPositionQueues()
+  M Boolean IsInMiddleOfAnimationThatMakesPlayerInvisible()
+  M Void SnapTo(Vector2 position, UInt16 minSid)
+  M Void FixedUpdate()
+  M Boolean HasMoved()
+  M Void HandleRpc(Byte callId, MessageReader reader)
+  M Void ClearOrDecrementDirt()
+  M Boolean Serialize(MessageWriter writer, Boolean initialState)
+  M Void Deserialize(MessageReader reader, Boolean initialState)
+  M Void MoveTowardNextPoint()
+  M Void SkipExcessiveFrames()
+  M Boolean ShouldExtendCurrentFrame(Vector2 nextPos, Vector2 currentPos)
+  M Boolean DidPassPosition(Vector2 nextPos, Vector2 lastPos, Vector2 currentPos)
+  M Void SetMovementSmoothingModifier()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== DeadBody : UnityEngine.MonoBehaviour ===
+  P Boolean Reported get/set
+  P Byte ParentId get/set
+  P Collider2D myCollider get/set
+  P SpriteRenderer bloodSplatter get/set
+  P Il2CppReferenceArray`1 bodyRenderers get/set
+  P Vector2 TruePosition get
+  M Void OnClick()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== DeathReason : System.Enum ===
+  F Int32 value__
+  F static DeathReason Exile
+  F static DeathReason Kill
+  F static DeathReason Disconnect
+
+=== MurderResultFlags : System.Enum ===
+  F Int32 value__
+  F static MurderResultFlags NULL
+  F static MurderResultFlags Succeeded
+  F static MurderResultFlags FailedError
+  F static MurderResultFlags FailedProtected
+  F static MurderResultFlags DecisionByHost
+
+=== DetectiveDeadBodyInfo : Il2CppSystem.Object ===
+  P Byte victimID get/set
+  P Dictionary`2 PlayerLocationsAtDeath get/set
+  M Void .ctor(Byte _victimID)
+  M String GetPlayerLocation(Byte playerID)
+  M Void .ctor(IntPtr pointer)
+
+=== RoleTeamTypes : System.Enum ===
+  F Int32 value__
+  F static RoleTeamTypes Crewmate
+  F static RoleTeamTypes Impostor
+
+=== ViperDeadBody : DeadBody ===
+  P Il2CppReferenceArray`1 dissolveAnims get/set
+  P SpriteRenderer acidRenderer get/set
+  P SpriteRenderer splashRenderer get/set
+  P SpriteAnim spriteAnim get/set
+  P AudioClip acidSplashSFX get/set
+  P Single dissolveCurrentTime get/set
+  P Single maxDissolveTime get/set
+  P Boolean victimDissolving get/set
+  P Int32 dissolveStage get/set
+  P PlayerControl myKiller get/set
+  P PlayerControl myController get/set
+  M Void SetupViperInfo(Single maxTime, PlayerControl killer, PlayerControl owner)
+  M Void FixedUpdate()
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient : UnityEngine.MonoBehaviour ===
+  P HashSet`1 DontBotherLoggingTheseDisconnectReasons get/set
+  P Int32 MaxRecentClients get/set
+  P Int32 DefaultSecondsSuspendedBeforeDisconnect get/set
+  P Int32 SecondsSuspendedBeforeDisconnect get/set
+  P Int32 NoClientId get/set
+  P Logger serverLogger get/set
+  P String networkAddress get/set
+  P Int32 networkPort get/set
+  P Boolean useDtls get/set
+  P UnityUdpClientConnection connection get/set
+  P MatchMakerModes mode get/set
+  P NetworkModes NetworkMode get/set
+  P Int32 GameId get/set
+  P Int32 HostId get/set
+  P Int32 ClientId get/set
+  P List`1 allClients get/set
+  P CircleBuffer`1 recentClients get/set
+  P DisconnectReasons LastDisconnectReason get/set
+  P String LastCustomDisconnect get/set
+  P Byte LastServerChatMode get/set
+  P MatchmakerError LastMatchmakerError get/set
+  P List`1 PreSpawnDispatcher get/set
+  P List`1 Dispatcher get/set
+  P List`1 sendInitialDataSpawnGameDataMessages get/set
+  P GameOptionsFactory gameOptionsFactory get/set
+  P Boolean _IsGamePublic_k__BackingField get/set
+  P GameStates GameState get/set
+  P Boolean isConnecting get/set
+  P Boolean platformSpecificsChecked get/set
+  P List`1 TempQueue get/set
+  P Boolean appPaused get/set
+  P Int32 BroadcastTargetClientId get/set
+  P Int32 CurrentClient get/set
+  P Int32 HostInherit get/set
+  P Int32 ServerOwned get/set
+  P Int32 MinServerID get/set
+  P Int32 MaxMessageSizeBytes get/set
+  P Single MinSendInterval get/set
+  P UInt32 NetIdCnt get/set
+  P Single timer get/set
+  P Il2CppReferenceArray`1 SpawnableObjects get/set
+  P Il2CppReferenceArray`1 NonAddressableSpawnableObjects get/set
+  P InnerNetObjectCollection allObjects get/set
+  P Boolean InOnlineScene get/set
+  P HashSet`1 DestroyedObjects get/set
+  P Queue`1 reliableMessageQueue get/set
+  P Queue`1 unreliableMessageQueue get/set
+  P Int32 numberOfConsecutiveFramesWithReliableMessages get/set
+  P Int32 numberOfConsecutiveFramesWithUnreliableMessages get/set
+  P Int32 indexForReliableStreamedUpdates get/set
+  P Int32 indexForUnreliableStreamedUpdates get/set
+  P Int32 msgNum get/set
+  P Boolean AmConnected get
+  P Int32 Ping get
+  P Int32 BytesSent get
+  P Int32 BytesGot get
+  P Int32 Resends get
+  P Boolean AmHost get
+  P Boolean AmLocalHost get
+  P Boolean AmModdedHost get
+  P Boolean AmClient get
+  P Boolean IsGamePublic get/set
+  P Boolean IsGameStarted get
+  P Boolean IsGameOver get
+  P Boolean IsInGame get
+  M Void SetEndpoint(String addr, UInt16 port, Boolean dtls)
+  M String GetNetworkAddress()
+  M Int32 GetNetworkPort()
+  M Void Start()
+  M Void SendOrDisconnect(MessageWriter msg)
+  M ClientData GetHost()
+  M ClientData GetClientFromCharacter(PlayerControl character)
+  M ClientData GetClientFromPlayerInfo(NetworkedPlayerInfo playerInfo)
+  M Int32 GetClientIdFromCharacter(PlayerControl character)
+  M Void OnDestroy()
+  M IEnumerator CoConnect(String matchmakerToken)
+  M Void Connection_DataReceivedRaw(Il2CppStructArray`1 data)
+  M Void Connection_DataSentRaw(Il2CppStructArray`1 data, Int32 length)
+  M Void Connect(MatchMakerModes mode, String matchmakerToken)
+  M IEnumerator CoConnect(MatchMakerModes mode, String matchmakerToken)
+  M IEnumerator WaitForConnectionOrFail()
+  M IEnumerator WaitWithTimeout(Func`1 success, String errorMessage, Int32 durationSeconds)
+  M Void Update()
+  M Void OnDisconnect(Object sender, DisconnectedEventArgs e)
+  M Void HandleDisconnect(DisconnectReasons reason, String stringReason)
+  M Void EnqueueDisconnect(DisconnectReasons reason, String stringReason)
+  M Void DisconnectInternal(DisconnectReasons reason, String stringReason)
+  M Void HostGame(IGameOptions settings, GameFilterOptions filterOpts)
+  M Void ReportPlayer(Int32 clientId, ReportReasons reason)
+  M Void JoinGame()
+  M Boolean CanBan()
+  M Boolean CanKick()
+  M Void KickPlayer(Int32 clientId, Boolean ban)
+  M MessageWriter StartEndGame()
+  M Void FinishEndGame(MessageWriter msg)
+  M Void SendLateRejection(Int32 targetId, DisconnectReasons reason)
+  M Void SendClientReady()
+  M Void SendStartGame()
+  M Void RequestGameList(IGameOptions settings, GameFilterOptions filterOpts)
+  M Void ChangeGamePublic(Boolean isPublic)
+  M Void SetGameSession(String session)
+  M Void SetActivePodType(String podType)
+  M Void QueryPlatformIds()
+  M Void OnQueryPlatformData(List`1 playerData)
+  M Void OnMessageReceived(DataReceivedEventArgs e)
+  M Void HandleMessage(MessageReader reader, SendOption sendOption)
+  M static String AddressToString(UInt32 address)
+  M ClientData GetOrCreateClient(ClientData client)
+  M ClientData GetClient(Int32 clientId)
+  M Void GetAllClients(List`1 buffer)
+  M Void GetRecentClients(List`1 buffer)
+  M ClientData GetRecentClient(Int32 clientId)
+  M Void RemovePlayer(Int32 playerIdThatLeft, DisconnectReasons reason)
+  M Void OnApplicationPause(Boolean pause)
+  M Void WaitToDisconnect(Object state)
+  M Void SendInitialData(Int32 clientId)
+  M Void SendGameManager(Int32 clientId, GameManager gameManager)
+  M Void OnGameCreated(String gameIdString)
+  M Void OnGameJoined(String gameIdString)
+  M Void OnWaitForHost(String gameIdString)
+  M IEnumerator CoStartGame()
+  M Void OnGameEnd(EndGameResult endGameResult)
+  M Void OnBecomeHost()
+  M Void OnPlayerJoined(ClientData client)
+  M IEnumerator CoOnPlayerChangedScene(ClientData client, String targetScene)
+  M Void OnPlayerLeft(ClientData client, DisconnectReasons reason)
+  M Void OnReportedPlayer(ReportOutcome outcome, Int32 clientId, String playerName, ReportReasons reason)
+  M Void OnDisconnected()
+  M Void PreDisconnectInternal()
+  M Void OnSetPSNSessionId(String sessionId)
+  M Void OnGetGameList(TotalGameData totalGames, FindGamesListFilteredResponse gamesResponse)
+  M Il2CppStructArray`1 GetConnectionData(Boolean useDtlsLayout, String matchmakerToken)
+  M ClientData FindClientById(Int32 id)
+  M Void FixedUpdate()
+  M Void UpdateCachedClients(ClientData clientData, PlayerControl character)
+  M Void SendAllStreamedObjects()
+  M T FindObjectByNetId(UInt32 netId)
+  M MessageWriter StartRpcImmediately(UInt32 targetNetId, Byte callId, SendOption option, Int32 targetClientId)
+  M Void FinishRpcImmediately(MessageWriter msg)
+  M Void SendXuidToAll()
+  M Void LateBroadcastReliableMessage(IGameDataMessage rpcMessage)
+  M Void LateBroadcastUnreliableMessage(IGameDataMessage rpcMessage)
+  M Void SendSceneChange(String sceneName)
+  M IEnumerator CoSendSceneChange(String sceneName)
+  M Void Spawn(InnerNetObject netObjParent, Int32 ownerId, SpawnFlags flags)
+  M SpawnGameDataMessage CreateSpawnMessage(InnerNetObject netObjParent, Int32 ownerId, SpawnFlags flags)
+  M Void Despawn(InnerNetObject objToDespawn)
+  M Boolean AddNetObject(InnerNetObject obj)
+  M Void RemoveNetObject(InnerNetObject obj)
+  M Void RemoveUnownedObjects()
+  M Void HandleGameData(MessageReader parentReader)
+  M IEnumerator HandleGameDataInner(MessageReader reader, Int32 msgNum)
+  M IEnumerator CoHandleSpawn(MessageReader reader)
+  M Void PackAndSendQueuedMessages(Queue`1 queue, SendOption sendOption, Boolean& thereAreQueuedMessagesLeft)
+  M Void PackAndSendDirtyStreamedObjects(IReadOnlyList`1 streamCollection, SendOption sendOption, Int32& trackingIndex)
+  M Void StartStreamedObjectMessage(MessageWriter& writer, SendOption option)
+  M Int32 GetMaxMessagePackingLimit()
+  M Void .ctor()
+  M Void _Start_b__60_0(Scene oldScene, Scene scene)
+  M Boolean _CoConnect_b__71_0()
+  M Boolean _CoConnect_b__71_1()
+  M Boolean _CoConnect_b__71_2()
+  M Void _HandleMessage_b__98_1()
+  M Void _HandleMessage_b__98_2()
+  M Void _HandleMessage_b__98_5()
+  M Void _HandleMessage_b__98_6()
+  M Void _HandleMessage_b__98_8()
+  M Void _HandleMessage_b__98_12()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/GameStates : System.Enum ===
+  F Int32 value__
+  F static GameStates NotJoined
+  F static GameStates Joined
+  F static GameStates Started
+  F static GameStates Ended
+
+=== InnerNet.InnerNetClient/TotalGameData : Il2CppSystem.Object ===
+  P Il2CppStructArray`1 PerMapTotals get/set
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/RecentPlayerComparer : Il2CppSystem.Object ===
+  P RecentPlayerComparer Instance get/set
+  M Int32 Compare(ClientData x, ClientData y)
+  M Void .ctor()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c : Il2CppSystem.Object ===
+  P __c __9 get/set
+  P Func`2 __9__68_0 get/set
+  P Func`2 __9__69_0 get/set
+  P Action`1 __9__165_0 get/set
+  M Void .ctor()
+  M String _Connection_DataReceivedRaw_b__68_0(Byte b)
+  M String _Connection_DataSentRaw_b__69_0(Byte b)
+  M Void _RemoveUnownedObjects_b__165_0(GameObject gameObject)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass100_0 : Il2CppSystem.Object ===
+  P ClientData client get/set
+  M Void .ctor()
+  M Boolean _GetOrCreateClient_b__0(ClientData c)
+  M Boolean _GetOrCreateClient_b__1(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass101_0 : Il2CppSystem.Object ===
+  P Int32 clientId get/set
+  M Void .ctor()
+  M Boolean _GetClient_b__0(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass104_0 : Il2CppSystem.Object ===
+  P Int32 clientId get/set
+  M Void .ctor()
+  M Boolean _GetRecentClient_b__0(ClientData c)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass105_0 : Il2CppSystem.Object ===
+  P InnerNetClient __4__this get/set
+  P ClientData client get/set
+  P DisconnectReasons reason get/set
+  M Void .ctor()
+  M Void _RemovePlayer_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass169_0 : Il2CppSystem.Object ===
+  P UInt32 spawnId get/set
+  M Void .ctor()
+  M Boolean _CoHandleSpawn_b__0(InnerNetObject f)
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass78_0 : Il2CppSystem.Object ===
+  P InnerNetClient __4__this get/set
+  P DisconnectReasons reason get/set
+  P String stringReason get/set
+  M Void .ctor()
+  M Void _EnqueueDisconnect_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_0 : Il2CppSystem.Object ===
+  P ReportOutcome outcome get/set
+  P Int32 clientId get/set
+  P String playerName get/set
+  P ReportReasons reason get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__0()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_1 : Il2CppSystem.Object ===
+  P EndGameResult endGameResult get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__3()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_2 : Il2CppSystem.Object ===
+  P List`1 received get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__4()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_3 : Il2CppSystem.Object ===
+  P ClientData client get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__7()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_4 : Il2CppSystem.Object ===
+  P MessageReader subReader get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__9()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_5 : Il2CppSystem.Object ===
+  P MessageReader subReader get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__10()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_6 : Il2CppSystem.Object ===
+  P TotalGameData totals get/set
+  P FindGamesListFilteredResponse response get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__11()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/__c__DisplayClass98_7 : Il2CppSystem.Object ===
+  P UInt32 address get/set
+  P UInt16 port get/set
+  P InnerNetClient __4__this get/set
+  M Void .ctor()
+  M Void _HandleMessage_b__13()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoConnect_d__67 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P String matchmakerToken get/set
+  P String _ipAddr_5__2 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoConnect_d__71 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P MatchMakerModes mode get/set
+  P String matchmakerToken get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoHandleSpawn_d__169 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MessageReader reader get/set
+  P InnerNetClient __4__this get/set
+  P __c__DisplayClass169_0 __8__1 get/set
+  P Int32 _ownerId_5__2 get/set
+  P ClientData _ownerClient_5__3 get/set
+  P Int32 _frames_5__4 get/set
+  P AsyncOperationHandle`1 _spawnPrefab_5__5 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_CoSendSceneChange_d__159 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P String sceneName get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_HandleGameDataInner_d__168 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P MessageReader reader get/set
+  P InnerNetClient __4__this get/set
+  P Int32 msgNum get/set
+  P Int32 _cnt_5__2 get/set
+  P InnerNetObjectCollection __7__wrap2 get/set
+  P Boolean __7__wrap3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void __m__Finally1()
+  M Void __m__Finally2()
+  M Void __m__Finally3()
+  M Void __m__Finally4()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_WaitForConnectionOrFail_d__72 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P InnerNetClient __4__this get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/_WaitWithTimeout_d__73 : Il2CppSystem.Object ===
+  P Int32 __1__state get/set
+  P Object __2__current get/set
+  P Func`1 success get/set
+  P InnerNetClient __4__this get/set
+  P Int32 durationSeconds get/set
+  P String errorMessage get/set
+  P Boolean _failed_5__2 get/set
+  P Single _timer_5__3 get/set
+  P Object System.Collections.Generic.IEnumerator<System.Object>.Current get
+  P Object System.Collections.IEnumerator.Current get
+  M Void .ctor(Int32 <>1__state)
+  M Void System_IDisposable_Dispose()
+  M Boolean MoveNext()
+  M Void System_Collections_IEnumerator_Reset()
+  M Void .ctor(IntPtr pointer)
+
+=== InnerNet.InnerNetClient/MethodInfoStoreGeneric_FindObjectByNetId_Public_T_UInt32_0`1 : System.Object ===
+  F static IntPtr Pointer
+
+=== AmongUs.InnerNet.GameDataMessages.RpcReportDeadBodyMessage : AmongUs.InnerNet.GameDataMessages.BaseRpcMessage ===
+  P Byte targetPlayerId get/set
+  P RpcCalls RpcType get
+  M Void .ctor(UInt32 rpcObjectNetId, Byte targetPlayerId)
+  M Void SerializeRpcValues(MessageWriter msg)
+  M Void .ctor(IntPtr pointer)
