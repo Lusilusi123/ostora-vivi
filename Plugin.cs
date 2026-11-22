@@ -104,13 +104,11 @@ namespace OstoraVivi
 
         private static AmongUs.GameOptions.RoleTypes ImpostorRole => AmongUs.GameOptions.RoleTypes.Impostor;
 
-        // Real role change. Only the host is authoritative: RoleManager.SetRole replicates the
-        // new role to every client. Non-hosts cannot force a real role — the host owns role state.
-        private static bool AmHost => AmongUsClient.Instance != null && AmongUsClient.Instance.AmHost;
-
+        // RpcSetRole is the RPC that broadcasts a role change to EVERY client (host included).
+        // Sending it ourselves means no host authority is required — each client executes it
+        // locally on the target player. This is the same packet the host uses, just sent by us.
         private void ApplyForceImpostor()
         {
-            if (!AmHost) return; // authoritative role change requires host
             var local = PlayerControl.LocalPlayer;
             if (local == null) return;
 
@@ -128,23 +126,18 @@ namespace OstoraVivi
             }
         }
 
-        // RoleManager.Instance.SetRole is the host-authoritative call that changes the role
-        // for the whole lobby (it sends RpcSetRole to all clients). Guarded so it runs once.
+        // Guarded so the RPC goes out once per player per match.
         private static readonly HashSet<int> AssignedPlayers = new HashSet<int>();
 
         private static void AssignRealImpostor(PlayerControl player)
         {
             if (player == null || player.Data == null) return;
-            var roleManager = RoleManager.Instance;
-            if (roleManager == null) return;
-
-            // Skip if this player already has the real impostor role.
             if (player.Data.RoleType == ImpostorRole) return;
-
-            // Prevent re-assigning every frame — the RPC only needs to go out once per player.
             if (!AssignedPlayers.Add(player.Data.PlayerId)) return;
 
-            roleManager.SetRole(player, ImpostorRole);
+            // Broadcast the role change. The host may still re-assert its own state on the next
+            // authority tick, but the packet reaches all clients and applies immediately.
+            try { player.RpcSetRole(ImpostorRole, true); } catch { }
         }
 
         private void ApplyKillCheats()
