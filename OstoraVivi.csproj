@@ -4,46 +4,58 @@
     <AssemblyName>OstoraVivi</AssemblyName>
     <RootNamespace>OstoraVivi</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <!-- Bare plugin: BepInEx loads interop assemblies itself. No local copies, no deps.json. -->
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- BepInEx 6 IL2CPP assemblies -->
+    <!-- All references Private=false: never copy next to plugin (avoids Smart App Control path loads) -->
     <Reference Include="BepInEx.Core.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>false</Private>
     </Reference>
 
-    <!-- Game interop assemblies -->
     <Reference Include="Assembly-CSharp.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
-    </Reference>
-
-    <!-- UnityEngine assemblies needed for ESP/menu -->
-    <Reference Include="UnityEngine.dll">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule.dll">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule.dll">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule.dll">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI.dll">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Core.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="UnityEngine.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 
