@@ -1,5 +1,6 @@
 ﻿// language: C#, file: Plugin.cs, target: BepInEx 6 IL2CPP / Among Us (Steam)
-// Uses reflection over Il2Cpp types so no static Assembly-CSharp reference is needed at runtime.
+// Real role change happens in RoleManager.SelectRoles (game start, before spawn) via Harmony.
+// Config + friend selection live here; all game access is reflection over loaded Il2Cpp types.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using UnityEngine;
@@ -20,6 +22,7 @@ namespace OstoraVivi
         internal static ConfigEntry<bool> ForceImpostorSelf;
         internal static ConfigEntry<bool> ForceImpostorFriends;
         internal static ConfigEntry<string> FriendNames;
+        internal static ConfigEntry<bool> EspEnabled;
         internal static ConfigEntry<bool> KillNearest;
         internal static ConfigEntry<bool> KillAll;
         internal static ConfigEntry<bool> TeleportCursor;
@@ -29,20 +32,25 @@ namespace OstoraVivi
         {
             Instance = this;
             Log.LogInfo($"Loading {PluginInfo.PLUGIN_NAME} v{PluginInfo.PLUGIN_VERSION}");
-            ForceImpostorSelf = Config.Bind("General", "ForceImpostorSelf", false, "Force local player to Impostor");
-            ForceImpostorFriends = Config.Bind("General", "ForceImpostorFriends", false, "Force named friends to Impostor");
-            FriendNames = Config.Bind("General", "FriendNames", "", "Comma-separated friend names");
-            KillNearest = Config.Bind("Cheats", "KillNearest", false, "Kill nearest player to cursor");
-            KillAll = Config.Bind("Cheats", "KillAll", false, "Kill all players");
+            ForceImpostorSelf = Config.Bind("Roles", "ForceImpostorSelf", false, "Make yourself Impostor at game start");
+            ForceImpostorFriends = Config.Bind("Roles", "ForceImpostorFriends", false, "Make chosen friends Impostor at game start");
+            FriendNames = Config.Bind("Roles", "FriendNames", "", "Comma-separated names of friends to force as Impostor");
+            EspEnabled = Config.Bind("Visuals", "ESP", true, "Show role labels above players");
+            KillNearest = Config.Bind("Cheats", "KillNearest", false, "Kill player nearest to cursor");
+            KillAll = Config.Bind("Cheats", "KillAll", false, "Kill all other players");
             TeleportCursor = Config.Bind("Cheats", "TeleportCursor", false, "Teleport to cursor");
             RebuildFriendSet();
             FriendNames.SettingChanged += (_, __) => RebuildFriendSet();
+
+            var harmony = new Harmony("ostora.vivi");
+            harmony.PatchAll();
+
             ClassInjector.RegisterTypeInIl2Cpp<OstoraViviBehaviour>();
             AddComponent<OstoraViviBehaviour>();
-            Log.LogInfo("ostora vivi loaded.");
+            Log.LogInfo("ostora vivi loaded (Harmony patches active).");
         }
 
-        private static void RebuildFriendSet()
+        internal static void RebuildFriendSet()
         {
             FriendNameSet.Clear();
             if (string.IsNullOrWhiteSpace(FriendNames.Value)) return;
@@ -52,18 +60,78 @@ namespace OstoraVivi
                 if (t.Length > 0) FriendNameSet.Add(t);
             }
         }
+
+        internal static void SaveFriends()
+        {
+            // Build a comma list without string.Join over Il2Cpp HashSet (avoids unstripping).
+            string joined = "";
+            foreach (var n in FriendNameSet)
+            {
+                if (joined.Length > 0) joined += ",";
+                joined += n;
+            }
+            FriendNames.Value = joined;
+        }
+
+        internal static void LogMsg(string m)
+        {
+            try { if (Instance != null) Instance.Log.LogMessage("ov: " + m); } catch { }
+        }
     }
 
-    // All game access goes through Il2Cpp reflection so the CLR never has to resolve
-    // Assembly-CSharp by name (Smart App Control blocks that path load in this setup).
+    // PATCH: runs once at game start, right after the host assigns roles. This is the
+    // authoritative moment — before players finish spawning into the map. Setting roles
+    // here gives a real Impostor that other clients see, with no lobby RPC spam / kick.
+    [HarmonyPatch]
+    public static class SelectRolesPatch
+    {
+        static System.Reflection.MethodInfo TargetMethod()
+        {
+            var asm = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "Assembly-CSharp");
+            if (asm == null) return null;
+            var t = asm.GetType("RoleManager", false);
+            return t?.GetMethod("SelectRoles", BindingFlags.Public | BindingFlags.Instance);
+        }
+
+        static void Postfix()
+        {
+            try
+            {
+                if (!GameProbe.Ready && !GameProbe.TryInit()) return;
+
+                var local = GameProbe.LocalPlayer();
+                if (local == null) return;
+
+                if (Plugin.ForceImpostorSelf != null && Plugin.ForceImpostorSelf.Value)
+                    GameProbe.AssignRoleAuthoritative(local);
+
+                if (Plugin.ForceImpostorFriends != null && Plugin.ForceImpostorFriends.Value)
+                {
+                    foreach (var p in GameProbe.AllPlayers())
+                    {
+                        if (p == null || p.Equals(local)) continue;
+                        var name = GameProbe.PlayerName(p);
+                        if (name != null && Plugin.FriendNameSet.Contains(name))
+                            GameProbe.AssignRoleAuthoritative(p);
+                    }
+                }
+                Plugin.LogMsg("SelectRoles postfix applied impostor roles.");
+            }
+            catch (Exception e) { Plugin.LogMsg("SelectRoles patch err: " + e.GetType().Name + " " + e.Message); }
+        }
+    }
+
     public class OstoraViviBehaviour : MonoBehaviour
     {
         private const float BoxSize = 90f;
         private static readonly Color ImpostorColor = new Color(1f, 0.25f, 0.25f, 1f);
         private static readonly Color CrewmateColor = new Color(0.25f, 0.65f, 1f, 1f);
         private static readonly Color FriendColor = new Color(1f, 0.85f, 0.2f, 1f);
-        private GUIStyle labelStyle;
+
+        private bool menuOpen = true;
         private bool wasInGame;
+        private string nameInput = "";
+        private bool lastF1;
 
         private void Awake()
         {
@@ -73,51 +141,41 @@ namespace OstoraVivi
 
         private void Update()
         {
-            if (!GameProbe.TryInit()) { wasInGame = false; return; }
-            if (!GameProbe.InGame()) { wasInGame = false; return; }
-            if (!wasInGame) { GameProbe.Reset(); wasInGame = true; }
+            bool f1 = Input.GetKeyDown(KeyCode.F1);
+            if (f1 && !lastF1) menuOpen = !menuOpen;
+            lastF1 = f1;
 
-            try { ApplyForceImpostor(); } catch (Exception e) { LogErr("force", e); }
+            if (!GameProbe.Ready && !GameProbe.TryInit()) return;
+            if (!GameProbe.IsGameStarted()) { wasInGame = false; return; }
+            if (!wasInGame) { wasInGame = true; }
+
             try { ApplyKillCheats(); } catch (Exception e) { LogErr("kill", e); }
             try { ApplyTeleport(); } catch (Exception e) { LogErr("tp", e); }
         }
 
         private void OnGUI()
         {
-            if (labelStyle == null)
-                labelStyle = new GUIStyle(GUI.skin.label) { fontSize = 14 };
-            if (!GameProbe.Ready || !GameProbe.InGame()) return;
-            try { DrawEsp(); } catch (Exception e) { LogErr("esp", e); }
-            try { DrawMenu(); } catch (Exception e) { LogErr("menu", e); }
+            bool inGame = GameProbe.Ready && GameProbe.IsGameStarted();
+            if (Plugin.EspEnabled != null && Plugin.EspEnabled.Value && inGame)
+            {
+                try { DrawEsp(); } catch (Exception e) { LogErr("esp", e); }
+            }
+            if (menuOpen)
+            {
+                try { DrawMenu(); } catch (Exception e) { LogErr("menu", e); }
+            }
         }
 
+        private static readonly HashSet<string> loggedErrors = new HashSet<string>();
         private static void LogErr(string where, Exception e)
         {
-            if (Plugin.Instance != null)
-                Plugin.Instance.Log.LogWarning($"ov {where}: {e.GetType().Name}: {e.Message}");
-        }
-
-        private void ApplyForceImpostor()
-        {
-            if ((Plugin.ForceImpostorSelf == null || !Plugin.ForceImpostorSelf.Value) &&
-                (Plugin.ForceImpostorFriends == null || !Plugin.ForceImpostorFriends.Value)) return;
-
-            var local = GameProbe.LocalPlayer();
-            if (local == null) return;
-
-            if (Plugin.ForceImpostorSelf != null && Plugin.ForceImpostorSelf.Value)
-                GameProbe.SetImpostor(local);
-
-            if (Plugin.ForceImpostorFriends != null && Plugin.ForceImpostorFriends.Value)
+            try
             {
-                foreach (var p in GameProbe.AllPlayers())
-                {
-                    if (p == null || p.Equals(local)) continue;
-                    var name = GameProbe.PlayerName(p);
-                    if (name != null && Plugin.FriendNameSet.Contains(name))
-                        GameProbe.SetImpostor(p);
-                }
+                var key = where + ":" + e.GetType().Name;
+                if (Plugin.Instance != null && loggedErrors.Add(key))
+                    Plugin.Instance.Log.LogWarning($"ov {where}: {e.GetType().Name}: {e.Message}");
             }
+            catch { }
         }
 
         private void ApplyKillCheats()
@@ -132,7 +190,7 @@ namespace OstoraVivi
                 if (cam != null)
                 {
                     var cursor = cam.ScreenToWorldPoint(Input.mousePosition);
-                    object nearest = null;
+                    PlayerControlLike nearest = null;
                     var best = float.MaxValue;
                     foreach (var p in GameProbe.AllPlayers())
                     {
@@ -140,7 +198,7 @@ namespace OstoraVivi
                         var d = Vector3.Distance(GameProbe.Position(p), cursor);
                         if (d < best) { best = d; nearest = p; }
                     }
-                    if (nearest != null) GameProbe.Murder(local, nearest);
+                    if (nearest != null) GameProbe.Murder(local, nearest.control);
                 }
             }
 
@@ -149,7 +207,7 @@ namespace OstoraVivi
                 foreach (var p in GameProbe.AllPlayers())
                 {
                     if (p == null || p.Equals(local) || GameProbe.IsDead(p)) continue;
-                    GameProbe.Murder(local, p);
+                    GameProbe.Murder(local, p.control);
                 }
             }
         }
@@ -161,6 +219,7 @@ namespace OstoraVivi
             var cam = GameProbe.UiCamera();
             if (local == null || cam == null) return;
             var world = cam.ScreenToWorldPoint(Input.mousePosition);
+            world.z = GameProbe.Position(local).z;
             GameProbe.SetPosition(local, world);
         }
 
@@ -177,178 +236,215 @@ namespace OstoraVivi
                 if (screen.z < 0f) continue;
                 var x = screen.x - BoxSize / 2f;
                 var y = UnityEngine.Screen.height - screen.y - BoxSize / 2f;
+                if (x < -300f || x > UnityEngine.Screen.width + 300f) continue;
                 var imp = GameProbe.IsImpostor(p);
-                var color = imp ? ImpostorColor : (Plugin.FriendNameSet.Contains(name) ? FriendColor : CrewmateColor);
-                labelStyle.normal.textColor = color;
-                GUI.Label(new Rect(x, y - 18f, 240f, 20f), $"{name} [{(imp ? "IMP" : "CREW")}]", labelStyle);
+                var color = imp ? ImpostorColor
+                          : (Plugin.FriendNameSet.Contains(name) ? FriendColor : CrewmateColor);
+                GUI.color = color;
+                GUI.Label(new Rect(x, y - 18f, 260f, 20f), name + (imp ? " [IMP]" : " [CREW]"));
+                GUI.color = Color.white;
             }
         }
 
         private void DrawMenu()
         {
-            GUI.Box(new Rect(10f, 10f, 240f, 210f), "ostora vivi");
+            GUI.Box(new Rect(10f, 10f, 320f, 500f), "ostora vivi  (F1 hide)");
+            float y = 38f;
+
             GUI.color = Color.white;
-            if (GUI.Button(new Rect(20f, 35f, 220f, 22f), $"Force Impostor Self: {Plugin.ForceImpostorSelf.Value}"))
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "ESP: " + Plugin.EspEnabled.Value))
+                Plugin.EspEnabled.Value = !Plugin.EspEnabled.Value;
+            y += 28f;
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "Force Impostor SELF: " + Plugin.ForceImpostorSelf.Value))
                 Plugin.ForceImpostorSelf.Value = !Plugin.ForceImpostorSelf.Value;
-            if (GUI.Button(new Rect(20f, 62f, 220f, 22f), $"Force Impostor Friends: {Plugin.ForceImpostorFriends.Value}"))
+            y += 28f;
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "Force Impostor FRIENDS: " + Plugin.ForceImpostorFriends.Value))
                 Plugin.ForceImpostorFriends.Value = !Plugin.ForceImpostorFriends.Value;
-            Plugin.FriendNames.Value = GUI.TextField(new Rect(20f, 90f, 220f, 22f), Plugin.FriendNames.Value);
-            if (GUI.Button(new Rect(20f, 118f, 220f, 22f), $"Kill Nearest: {Plugin.KillNearest.Value}"))
+            y += 30f;
+
+            GUI.Label(new Rect(20f, y, 300f, 20f), "Click player to toggle IMP:");
+            y += 20f;
+            if (GameProbe.Ready)
+            {
+                var players = GameProbe.AllPlayers();
+                int shown = 0;
+                foreach (var p in players)
+                {
+                    if (shown >= 8) break;
+                    if (p == null) continue;
+                    var nm = GameProbe.PlayerName(p) ?? "?";
+                    bool selected = Plugin.FriendNameSet.Contains(nm);
+                    if (GUI.Button(new Rect(20f, y, 300f, 22f), (selected ? "[IMP] " : "[    ] ") + nm))
+                    {
+                        if (selected) Plugin.FriendNameSet.Remove(nm);
+                        else Plugin.FriendNameSet.Add(nm);
+                        Plugin.SaveFriends();
+                    }
+                    y += 24f;
+                    shown++;
+                }
+            }
+            y += 6f;
+
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "Kill Nearest: " + Plugin.KillNearest.Value))
                 Plugin.KillNearest.Value = !Plugin.KillNearest.Value;
-            if (GUI.Button(new Rect(20f, 145f, 220f, 22f), $"Kill All: {Plugin.KillAll.Value}"))
+            y += 28f;
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "Kill All: " + Plugin.KillAll.Value))
                 Plugin.KillAll.Value = !Plugin.KillAll.Value;
-            if (GUI.Button(new Rect(20f, 172f, 220f, 22f), $"Teleport To Cursor: {Plugin.TeleportCursor.Value}"))
+            y += 28f;
+            if (GUI.Button(new Rect(20f, y, 300f, 24f), "Teleport To Cursor: " + Plugin.TeleportCursor.Value))
                 Plugin.TeleportCursor.Value = !Plugin.TeleportCursor.Value;
         }
     }
 
-    // Reflection cache over Il2Cpp types. Types are found by name via the already-loaded
-    // game assemblies (no Assembly.Load by name, no path load).
+    // Reflection over loaded game assemblies — no Assembly-CSharp path load.
+    internal sealed class PlayerControlLike
+    {
+        public object control;
+        public object data;
+        public string name;
+        public bool isImpostor;
+        public bool dead;
+        public Vector3 pos;
+    }
+
     internal static class GameProbe
     {
         private static bool init;
-        private static System.Type tPlayerControl, tNetworkedInfo, tHudManager, tRoleTypes, tRoleMgr;
-        private static PropertyInfo pLocal, pAll, pData, pRoleType, pName, pIsDead, pRoleMgrInst, pUICam;
-        private static MethodInfo mRpcSetRole, mSetKillTimer, mMurder, mRpcMurder, mWorldToScreen, mScreenToWorld;
+        private static Assembly asm;
+        private static Type tPlayer, tNpi, tHud, tRoleTypes, tRoleMgr, tAmongUsClient;
+        private static PropertyInfo pLocal, pAll, pData, pRoleType, pName, pIsDead, pRoleMgrInst, pUICam, pGameState;
+        private static MethodInfo mSetRole, mKillTimer, mMurder, mRpcMurder, mSnapTo;
+        private static object impostorVal, gameStateStarted;
 
         internal static bool Ready => init;
-        private static object ImpostorVal;
 
-        private static void Log(string msg)
-        {
-            try { if (Plugin.Instance != null) Plugin.Instance.Log.LogMessage("ov: " + msg); } catch { }
-        }
+        private static void Log(string m) { try { Plugin.LogMsg(m); } catch { } }
 
         internal static bool TryInit()
         {
             if (init) return true;
             try
             {
-                Log("TryInit start");
-                // Find loaded assemblies whose names we need, without Assembly.Load.
-                Assembly asm = null;
-                foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    if (a.GetName().Name == "Assembly-CSharp") { asm = a; break; }
-                }
-                if (asm == null)
-                {
-                    Log("no Assembly-CSharp in loaded assemblies");
-                    return false;
-                }
+                asm = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "Assembly-CSharp");
+                if (asm == null) { Log("no Assembly-CSharp"); return false; }
 
-                tPlayerControl = asm.GetType("PlayerControl", false);
-                tNetworkedInfo = asm.GetType("NetworkedPlayerInfo", false);
-                tHudManager = asm.GetType("HudManager", false);
+                tPlayer = asm.GetType("PlayerControl", false);
+                tNpi = asm.GetType("NetworkedPlayerInfo", false);
+                tHud = asm.GetType("HudManager", false);
                 tRoleTypes = asm.GetType("AmongUs.GameOptions.RoleTypes", false);
                 tRoleMgr = asm.GetType("RoleManager", false);
-                Log($"types: pc={tPlayerControl != null} npi={tNetworkedInfo != null} hud={tHudManager != null} roles={tRoleTypes != null}");
-                if (tPlayerControl == null || tNetworkedInfo == null) return false;
+                tAmongUsClient = asm.GetType("AmongUsClient", false);
+                Log($"types pc={tPlayer != null} npi={tNpi != null} hud={tHud != null} roles={tRoleTypes != null} rm={tRoleMgr != null} auc={tAmongUsClient != null}");
+                if (tPlayer == null || tNpi == null || tRoleTypes == null) return false;
 
-                pLocal = tPlayerControl.GetProperty("LocalPlayer", BindingFlags.Public | BindingFlags.Static);
-                pAll = tPlayerControl.GetProperty("AllPlayerControls", BindingFlags.Public | BindingFlags.Static);
-                pData = tPlayerControl.GetProperty("Data", BindingFlags.Public | BindingFlags.Instance);
-                pName = tNetworkedInfo.GetProperty("PlayerName", BindingFlags.Public | BindingFlags.Instance);
-                pRoleType = tNetworkedInfo.GetProperty("RoleType", BindingFlags.Public | BindingFlags.Instance);
-                pIsDead = tNetworkedInfo.GetProperty("IsDead", BindingFlags.Public | BindingFlags.Instance);
-                mRpcSetRole = tPlayerControl.GetMethod("RpcSetRole", BindingFlags.Public | BindingFlags.Instance);
-                mSetKillTimer = tPlayerControl.GetMethod("SetKillTimer", BindingFlags.Public | BindingFlags.Instance);
-                mMurder = tPlayerControl.GetMethod("MurderPlayer", BindingFlags.Public | BindingFlags.Instance);
-                mRpcMurder = tPlayerControl.GetMethod("RpcMurderPlayer", BindingFlags.Public | BindingFlags.Instance);
+                pLocal = tPlayer.GetProperty("LocalPlayer", BindingFlags.Public | BindingFlags.Static);
+                pAll = tPlayer.GetProperty("AllPlayerControls", BindingFlags.Public | BindingFlags.Static);
+                pData = tPlayer.GetProperty("Data", BindingFlags.Public | BindingFlags.Instance);
+                mKillTimer = tPlayer.GetMethod("SetKillTimer", BindingFlags.Public | BindingFlags.Instance);
+                mMurder = tPlayer.GetMethod("MurderPlayer", BindingFlags.Public | BindingFlags.Instance);
+                mRpcMurder = tPlayer.GetMethod("RpcMurderPlayer", BindingFlags.Public | BindingFlags.Instance);
 
-                if (tRoleTypes != null)
-                    ImpostorVal = Enum.Parse(tRoleTypes, "Impostor");
-
-                if (tHudManager != null)
-                    pUICam = tHudManager.GetProperty("UICamera", BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+                pRoleType = tNpi.GetProperty("RoleType", BindingFlags.Public | BindingFlags.Instance);
+                pName = tNpi.GetProperty("PlayerName", BindingFlags.Public | BindingFlags.Instance);
+                pIsDead = tNpi.GetProperty("IsDead", BindingFlags.Public | BindingFlags.Instance);
 
                 if (tRoleMgr != null)
-                    pRoleMgrInst = tRoleMgr.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
-
-                var mainCam = UnityEngine.Camera.main;
-                if (mainCam != null)
                 {
-                    var tCamera = mainCam.GetType();
-                    mWorldToScreen = tCamera.GetMethod("WorldToScreenPoint");
-                    mScreenToWorld = tCamera.GetMethod("ScreenToWorldPoint");
+                    pRoleMgrInst = tRoleMgr.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
+                    mSetRole = tRoleMgr.GetMethod("SetRole", BindingFlags.Public | BindingFlags.Instance);
+                }
+                if (tHud != null)
+                    pUICam = tHud.GetProperty("UICamera", BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+
+                if (tAmongUsClient != null)
+                {
+                    var gsType = tAmongUsClient.GetProperty("GameState", BindingFlags.Public | BindingFlags.Instance)?.PropertyType;
+                    if (gsType != null)
+                    {
+                        pGameState = tAmongUsClient.GetProperty("GameState", BindingFlags.Public | BindingFlags.Instance);
+                        var startedField = gsType.GetField("Started", BindingFlags.Public | BindingFlags.Static);
+                        if (startedField != null) gameStateStarted = startedField.GetValue(null);
+                    }
                 }
 
+                impostorVal = Enum.Parse(tRoleTypes, "Impostor");
                 init = true;
-                try { if (Plugin.Instance != null) Plugin.Instance.Log.LogMessage($"ov: game types bound (players OK)"); } catch { }
+                Log("GameProbe ready");
                 return true;
             }
-            catch (Exception e)
-            {
-                try { if (Plugin.Instance != null) Plugin.Instance.Log.LogWarning($"GameProbe init FAIL: {e.GetType().Name}: {e.Message}"); } catch { }
-                return false;
-            }
+            catch (Exception e) { Log("init FAIL " + e.GetType().Name + " " + e.Message); return false; }
         }
 
-        internal static bool InGame() => LocalPlayer() != null;
-
-        internal static void Reset() { }
+        internal static bool IsGameStarted()
+        {
+            try
+            {
+                if (pGameState != null && gameStateStarted != null)
+                {
+                    var auc = asm.GetType("AmongUsClient", false)?.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
+                    if (auc != null)
+                    {
+                        var st = pGameState.GetValue(auc);
+                        return st != null && st.Equals(gameStateStarted);
+                    }
+                }
+                return LocalPlayer() != null;
+            }
+            catch { return false; }
+        }
 
         internal static object LocalPlayer()
         {
             try { return pLocal?.GetValue(null); } catch { return null; }
         }
 
-        internal static IEnumerable<object> AllPlayers()
+        internal static List<PlayerControlLike> AllPlayers()
         {
+            var result = new List<PlayerControlLike>();
             try
             {
                 var list = pAll?.GetValue(null);
-                if (list == null) return Array.Empty<object>();
-                var countProp = list.GetType().GetProperty("Count");
-                int count = countProp != null ? (int)countProp.GetValue(list) : 0;
-                var result = new List<object>(count);
+                if (list == null) return result;
+                int count = (int)list.GetType().GetProperty("Count").GetValue(list);
                 var getItem = list.GetType().GetProperty("Item");
                 for (int i = 0; i < count; i++)
-                    result.Add(getItem.GetValue(list, new object[] { i }));
-                return result;
+                {
+                    var pc = getItem.GetValue(list, new object[] { i });
+                    if (pc == null) continue;
+                    var data = pData?.GetValue(pc);
+                    result.Add(new PlayerControlLike
+                    {
+                        control = pc,
+                        data = data,
+                        name = data != null ? pName?.GetValue(data) as string : null,
+                        isImpostor = data != null && pRoleType?.GetValue(data) != null && pRoleType.GetValue(data).Equals(impostorVal),
+                        dead = data != null && pIsDead != null && (bool)pIsDead.GetValue(data),
+                        pos = Position(pc)
+                    });
+                }
             }
-            catch { return Array.Empty<object>(); }
+            catch (Exception e) { Log("AllPlayers err " + e.Message); }
+            return result;
         }
 
-        internal static string PlayerName(object p)
+        internal static string PlayerName(PlayerControlLike p) => p?.name;
+        internal static bool IsDead(PlayerControlLike p) => p != null && p.dead;
+        internal static bool IsImpostor(PlayerControlLike p) => p != null && p.isImpostor;
+        internal static Vector3 Position(PlayerControlLike p) => p != null ? p.pos : Vector3.zero;
+
+        internal static void AssignRoleAuthoritative(object playerControl)
         {
             try
             {
-                var data = pData?.GetValue(p);
-                if (data == null) return null;
-                return pName?.GetValue(data) as string;
+                var rm = pRoleMgrInst?.GetValue(null);
+                if (rm == null || mSetRole == null) { Log("no RoleManager.Instance"); return; }
+                mSetRole.Invoke(rm, new object[] { playerControl, impostorVal });
             }
-            catch { return null; }
+            catch (Exception e) { Log("AssignRole err " + e.GetType().Name + " " + e.Message); }
         }
 
-        internal static bool IsDead(object p)
-        {
-            try { var data = pData?.GetValue(p); return data != null && (bool)pIsDead.GetValue(data); }
-            catch { return false; }
-        }
-
-        internal static bool IsImpostor(object p)
-        {
-            try
-            {
-                var data = pData?.GetValue(p);
-                if (data == null || pRoleType == null || ImpostorVal == null) return false;
-                var v = pRoleType.GetValue(data);
-                return v != null && v.Equals(ImpostorVal);
-            }
-            catch { return false; }
-        }
-
-        internal static void SetImpostor(object p)
-        {
-            try { mRpcSetRole?.Invoke(p, new object[] { ImpostorVal, true }); }
-            catch (Exception e) { try { Plugin.Instance.Log.LogWarning($"rpcsetrole: {e.Message}"); } catch { } }
-        }
-
-        internal static void ZeroKillTimer(object p)
-        {
-            try { mSetKillTimer?.Invoke(p, new object[] { 0f }); } catch { }
-        }
+        internal static void ZeroKillTimer(object pc) { try { mKillTimer?.Invoke(pc, new object[] { 0f }); } catch { } }
 
         internal static void Murder(object killer, object target)
         {
@@ -357,36 +453,32 @@ namespace OstoraVivi
 
         internal static Camera UiCamera()
         {
-            try
-            {
-                if (pUICam != null)
-                {
-                    var c = pUICam.GetValue(null) as Camera;
-                    if (c != null) return c;
-                }
-                return Camera.main;
-            }
-            catch { return Camera.main; }
+            try { var c = pUICam?.GetValue(null) as Camera; if (c != null) return c; } catch { }
+            return Camera.main;
         }
 
-        internal static Vector3 Position(object p)
+        internal static Vector3 Position(object pc)
         {
             try
             {
-                var tr = p.GetType().GetProperty("transform").GetValue(p);
-                var t = tr.GetType();
-                var pos = t.GetProperty("position").GetValue(tr);
-                return (Vector3)pos;
+                var tr = pc.GetType().GetProperty("transform").GetValue(pc);
+                return (Vector3)tr.GetType().GetProperty("position").GetValue(tr);
             }
             catch { return Vector3.zero; }
         }
 
-        internal static void SetPosition(object p, Vector3 world)
+        internal static void SetPosition(object pc, Vector3 world)
         {
             try
             {
-                var tr = p.GetType().GetProperty("transform").GetValue(p);
+                var tr = pc.GetType().GetProperty("transform").GetValue(pc);
                 tr.GetType().GetProperty("position").SetValue(tr, world);
+                var nt = pc.GetType().GetProperty("NetTransform")?.GetValue(pc);
+                if (nt != null)
+                {
+                    mSnapTo = nt.GetType().GetMethod("RpcSnapTo");
+                    if (mSnapTo != null) mSnapTo.Invoke(nt, new object[] { new Vector2(world.x, world.y) });
+                }
             }
             catch { }
         }
@@ -396,6 +488,6 @@ namespace OstoraVivi
     {
         public const string PLUGIN_GUID = "ostora.vivi";
         public const string PLUGIN_NAME = "ostora vivi";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.1.0";
     }
 }

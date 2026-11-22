@@ -23,6 +23,10 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="0Harmony.dll">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
 
     <Reference Include="Assembly-CSharp.dll">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Among Us\BepInEx\interop\Assembly-CSharp.dll</HintPath>
