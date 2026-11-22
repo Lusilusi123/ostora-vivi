@@ -42,12 +42,9 @@ namespace OstoraVivi
             RebuildFriendSet();
             FriendNames.SettingChanged += (_, __) => RebuildFriendSet();
 
-            var harmony = new Harmony("ostora.vivi");
-            harmony.PatchAll();
-
             ClassInjector.RegisterTypeInIl2Cpp<OstoraViviBehaviour>();
             AddComponent<OstoraViviBehaviour>();
-            Log.LogInfo("ostora vivi loaded (Harmony patches active).");
+            Log.LogInfo("ostora vivi loaded.");
         }
 
         internal static void RebuildFriendSet()
@@ -79,48 +76,6 @@ namespace OstoraVivi
         }
     }
 
-    // PATCH: runs once at game start, right after the host assigns roles. This is the
-    // authoritative moment — before players finish spawning into the map. Setting roles
-    // here gives a real Impostor that other clients see, with no lobby RPC spam / kick.
-    [HarmonyPatch]
-    public static class SelectRolesPatch
-    {
-        static System.Reflection.MethodInfo TargetMethod()
-        {
-            var asm = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "Assembly-CSharp");
-            if (asm == null) return null;
-            var t = asm.GetType("RoleManager", false);
-            return t?.GetMethod("SelectRoles", BindingFlags.Public | BindingFlags.Instance);
-        }
-
-        static void Postfix()
-        {
-            try
-            {
-                if (!GameProbe.Ready && !GameProbe.TryInit()) return;
-
-                var local = GameProbe.LocalPlayer();
-                if (local == null) return;
-
-                if (Plugin.ForceImpostorSelf != null && Plugin.ForceImpostorSelf.Value)
-                    GameProbe.AssignRoleAuthoritative(local);
-
-                if (Plugin.ForceImpostorFriends != null && Plugin.ForceImpostorFriends.Value)
-                {
-                    foreach (var p in GameProbe.AllPlayers())
-                    {
-                        if (p == null || p.Equals(local)) continue;
-                        var name = GameProbe.PlayerName(p);
-                        if (name != null && Plugin.FriendNameSet.Contains(name))
-                            GameProbe.AssignRoleAuthoritative(p);
-                    }
-                }
-                Plugin.LogMsg("SelectRoles postfix applied impostor roles.");
-            }
-            catch (Exception e) { Plugin.LogMsg("SelectRoles patch err: " + e.GetType().Name + " " + e.Message); }
-        }
-    }
-
     public class OstoraViviBehaviour : MonoBehaviour
     {
         private const float BoxSize = 90f;
@@ -136,7 +91,8 @@ namespace OstoraVivi
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
-            GameProbe.TryInit();
+            if (GameProbe.TryInit())
+                GameProbe.InstallSelectRolesPatch();
         }
 
         private void Update()
@@ -146,8 +102,12 @@ namespace OstoraVivi
             lastF1 = f1;
 
             if (!GameProbe.Ready && !GameProbe.TryInit()) return;
-            if (!GameProbe.IsGameStarted()) { wasInGame = false; return; }
-            if (!wasInGame) { wasInGame = true; }
+            if (!GameProbe.IsGameStarted()) { wasInGame = false; GameProbe.ResetMatch(); return; }
+            if (!wasInGame)
+            {
+                wasInGame = true;
+                GameProbe.OnGameStartClient();
+            }
 
             try { ApplyKillCheats(); } catch (Exception e) { LogErr("kill", e); }
             try { ApplyTeleport(); } catch (Exception e) { LogErr("tp", e); }
@@ -313,8 +273,8 @@ namespace OstoraVivi
         private static bool init;
         private static Assembly asm;
         private static Type tPlayer, tNpi, tHud, tRoleTypes, tRoleMgr, tAmongUsClient;
-        private static PropertyInfo pLocal, pAll, pData, pRoleType, pName, pIsDead, pRoleMgrInst, pUICam, pGameState;
-        private static MethodInfo mSetRole, mKillTimer, mMurder, mRpcMurder, mSnapTo;
+        private static PropertyInfo pLocal, pAll, pData, pRoleType, pName, pIsDead, pRoleMgrInst, pUICam, pGameState, pAmHost, pAucInstance;
+        private static MethodInfo mSetRole, mKillTimer, mMurder, mRpcMurder, mSnapTo, mRpcSetRole, mStartCoroutine;
         private static object impostorVal, gameStateStarted;
 
         internal static bool Ready => init;
@@ -344,6 +304,7 @@ namespace OstoraVivi
                 mKillTimer = tPlayer.GetMethod("SetKillTimer", BindingFlags.Public | BindingFlags.Instance);
                 mMurder = tPlayer.GetMethod("MurderPlayer", BindingFlags.Public | BindingFlags.Instance);
                 mRpcMurder = tPlayer.GetMethod("RpcMurderPlayer", BindingFlags.Public | BindingFlags.Instance);
+                mRpcSetRole = tPlayer.GetMethod("RpcSetRole", BindingFlags.Public | BindingFlags.Instance);
 
                 pRoleType = tNpi.GetProperty("RoleType", BindingFlags.Public | BindingFlags.Instance);
                 pName = tNpi.GetProperty("PlayerName", BindingFlags.Public | BindingFlags.Instance);
@@ -359,6 +320,8 @@ namespace OstoraVivi
 
                 if (tAmongUsClient != null)
                 {
+                    pAucInstance = tAmongUsClient.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
+                    pAmHost = tAmongUsClient.GetProperty("AmHost", BindingFlags.Public | BindingFlags.Instance);
                     var gsType = tAmongUsClient.GetProperty("GameState", BindingFlags.Public | BindingFlags.Instance)?.PropertyType;
                     if (gsType != null)
                     {
@@ -374,6 +337,116 @@ namespace OstoraVivi
                 return true;
             }
             catch (Exception e) { Log("init FAIL " + e.GetType().Name + " " + e.Message); return false; }
+        }
+
+        private static bool patchInstalled;
+        internal static void InstallSelectRolesPatch()
+        {
+            if (patchInstalled) return;
+            try
+            {
+                var mSelect = tRoleMgr?.GetMethod("SelectRoles", BindingFlags.Public | BindingFlags.Instance);
+                if (mSelect == null) { Log("SelectRoles method NOT found - patch skipped"); return; }
+
+                var harmony = new Harmony("ostora.vivi.roles");
+                var post = typeof(GameProbe).GetMethod("OnSelectRoles", BindingFlags.Static | BindingFlags.NonPublic);
+                harmony.Patch(mSelect, postfix: new HarmonyMethod(post));
+                patchInstalled = true;
+                Log("SelectRoles patch INSTALLED on " + mSelect.Name);
+            }
+            catch (Exception e) { Log("patch install FAIL " + e.GetType().Name + " " + e.Message); }
+        }
+
+        // Postfix on RoleManager.SelectRoles — runs once at game start on the host.
+        private static void OnSelectRoles()
+        {
+            Log("SelectRoles FIRED (host path)");
+            ApplyForcedRoles(true);
+        }
+
+        private static bool rolesAppliedThisMatch;
+
+        // Called from Update() when the match transitions to Started (works for non-host too).
+        internal static void OnGameStartClient()
+        {
+            if (rolesAppliedThisMatch) return;
+            rolesAppliedThisMatch = true;
+            Log("Game Started (client trigger)");
+            ApplyForcedRoles(false);
+        }
+
+        internal static void ResetMatch()
+        {
+            rolesAppliedThisMatch = false;
+        }
+
+        private static bool IsHost()
+        {
+            try
+            {
+                var auc = pAucInstance?.GetValue(null);
+                if (auc == null || pAmHost == null) return false;
+                return (bool)pAmHost.GetValue(auc);
+            }
+            catch { return false; }
+        }
+
+        private static void ApplyForcedRoles(bool hostPatch)
+        {
+            try
+            {
+                var local = LocalPlayer();
+                if (local == null) { Log("no local player"); return; }
+                bool host = IsHost();
+                Log("ApplyForcedRoles host=" + host + " fromPatch=" + hostPatch);
+
+                if (Plugin.ForceImpostorSelf != null && Plugin.ForceImpostorSelf.Value)
+                    ForceRole(local, host);
+                if (Plugin.ForceImpostorFriends != null && Plugin.ForceImpostorFriends.Value)
+                {
+                    foreach (var p in AllPlayers())
+                    {
+                        if (p == null || p.Equals(local)) continue;
+                        var nm = PlayerName(p);
+                        if (nm != null && Plugin.FriendNameSet.Contains(nm))
+                            ForceRole(p.control, host);
+                    }
+                }
+                Log("ApplyForcedRoles done");
+            }
+            catch (Exception e) { Log("ApplyForcedRoles err " + e.GetType().Name + " " + e.Message); }
+        }
+
+        // If host: authoritative SetRole. If NOT host: send RpcSetRole once (host may relay it),
+        // and also set the local cached role so the local client accepts it immediately.
+        private static void ForceRole(object pc, bool host)
+        {
+            if (pc == null) return;
+            try
+            {
+                if (host && mSetRole != null)
+                {
+                    var rm = pRoleMgrInst?.GetValue(null);
+                    if (rm != null) { mSetRole.Invoke(rm, new object[] { pc, impostorVal }); Log("SetRole(host) applied"); return; }
+                }
+
+                // Non-host: send the RPC the host uses. In versions without strict sender checks,
+                // the host relays this to every client -> real impostor for all.
+                if (mRpcSetRole != null)
+                {
+                    mRpcSetRole.Invoke(pc, new object[] { impostorVal, true });
+                    Log("RpcSetRole sent (non-host)");
+                }
+
+                // Local desync fallback: set our own cached role so the client behaves as impostor.
+                var data = pData?.GetValue(pc);
+                if (data != null && pRoleType != null)
+                {
+                    pRoleType.SetValue(data, impostorVal, null);
+                    Log("local RoleType set");
+                }
+            }
+            catch (Exception e) { Log("ForceRole err " + e.GetType().Name + " " + e.Message); }
         }
 
         internal static bool IsGameStarted()
@@ -488,6 +561,6 @@ namespace OstoraVivi
     {
         public const string PLUGIN_GUID = "ostora.vivi";
         public const string PLUGIN_NAME = "ostora vivi";
-        public const string PLUGIN_VERSION = "1.1.0";
+        public const string PLUGIN_VERSION = "1.2.0";
     }
 }
