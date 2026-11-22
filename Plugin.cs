@@ -83,9 +83,15 @@ namespace OstoraVivi
             labelStyle = new GUIStyle(GUI.skin.label) { fontSize = 14 };
         }
 
+        private bool wasInGame;
+
         private void Update()
         {
-            if (!IsInGame()) return;
+            if (!IsInGame()) { wasInGame = false; return; }
+
+            // New match started — clear the "already assigned" set so roles apply again.
+            if (!wasInGame) { AssignedPlayers.Clear(); wasInGame = true; }
+
             ApplyForceImpostor();
             ApplyKillCheats();
             ApplyTeleport();
@@ -98,13 +104,18 @@ namespace OstoraVivi
 
         private static AmongUs.GameOptions.RoleTypes ImpostorRole => AmongUs.GameOptions.RoleTypes.Impostor;
 
+        // Real role change. Only the host is authoritative: RoleManager.SetRole replicates the
+        // new role to every client. Non-hosts cannot force a real role — the host owns role state.
+        private static bool AmHost => AmongUsClient.Instance != null && AmongUsClient.Instance.AmHost;
+
         private void ApplyForceImpostor()
         {
+            if (!AmHost) return; // authoritative role change requires host
             var local = PlayerControl.LocalPlayer;
             if (local == null) return;
 
             if (Plugin.ForceImpostorSelf != null && Plugin.ForceImpostorSelf.Value && local.Data != null)
-                SetLocalRoleVisual(local.Data, ImpostorRole);
+                AssignRealImpostor(local);
 
             if (Plugin.ForceImpostorFriends != null && Plugin.ForceImpostorFriends.Value)
             {
@@ -112,17 +123,28 @@ namespace OstoraVivi
                 {
                     if (player == null || player == local || player.Data == null) continue;
                     if (Plugin.FriendNameSet.Contains(player.Data.PlayerName))
-                        SetLocalRoleVisual(player.Data, ImpostorRole);
+                        AssignRealImpostor(player);
                 }
             }
         }
 
-        // Sets only the local client's cached role info. Host authority still governs the
-        // authoritative state — this is the local spoof the request calls for.
-        private static void SetLocalRoleVisual(NetworkedPlayerInfo data, AmongUs.GameOptions.RoleTypes role)
+        // RoleManager.Instance.SetRole is the host-authoritative call that changes the role
+        // for the whole lobby (it sends RpcSetRole to all clients). Guarded so it runs once.
+        private static readonly HashSet<int> AssignedPlayers = new HashSet<int>();
+
+        private static void AssignRealImpostor(PlayerControl player)
         {
-            data.RoleType = role;
-            data.RoleWhenAlive = new Il2CppSystem.Nullable<AmongUs.GameOptions.RoleTypes>(role);
+            if (player == null || player.Data == null) return;
+            var roleManager = RoleManager.Instance;
+            if (roleManager == null) return;
+
+            // Skip if this player already has the real impostor role.
+            if (player.Data.RoleType == ImpostorRole) return;
+
+            // Prevent re-assigning every frame — the RPC only needs to go out once per player.
+            if (!AssignedPlayers.Add(player.Data.PlayerId)) return;
+
+            roleManager.SetRole(player, ImpostorRole);
         }
 
         private void ApplyKillCheats()
